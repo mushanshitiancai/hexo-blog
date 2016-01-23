@@ -6,6 +6,7 @@ tags: [emacs,tools]
 
 ![](http://spacemacs.org/img/screenshots/ss1.png)
 
-TODO:
-- kill ring
+越折腾emacs/vim，越发现sublime好用。。。
+
+## 参考链接
 
