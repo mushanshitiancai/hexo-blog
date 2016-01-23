@@ -7,3 +7,5 @@ tags:
 阅读hexo源码的目的：
 - 如何使用hexo-cli模块，也就是如何用nodejs实现一个控制台程序
 - hexo如何使用nodejs控制git？
+- 对于组织文章，hexo有什么特别的技巧么？（笔记软件需要索引）
+
