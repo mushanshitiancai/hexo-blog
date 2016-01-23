@@ -5,5 +5,3 @@ tags:
 ---
 
 从今天开始，使用Hexo+GitHub Pages作为博客！
-
-![](/public/image/mushan.jpg)
