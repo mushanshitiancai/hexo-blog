@@ -1,7 +1,7 @@
 ---
 title: 使用HEXO+GitHub搭建博客全攻略
 date: 2016-01-21 17:28:05
-tags:
+tags: blog
 ---
 
 木杉的博客V3版迟迟没法动手。因为前缀项目Atom-note还没眉目呢。。。

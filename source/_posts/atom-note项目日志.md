@@ -1,7 +1,7 @@
 ---
 title: atom-note项目日志
 date: 2015-10-01 15:25:28
-tags:
+tags: [project]
 ---
 
 目前此项目暂停。转向fir项目。
