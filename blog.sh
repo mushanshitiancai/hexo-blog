@@ -10,5 +10,5 @@ if [ "$1" = "d" ];then
 fi
 
 if [ "$1" = "n" ];then
-        hexo n $2
+	hexo n $2
 fi
