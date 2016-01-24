@@ -77,7 +77,7 @@ if [ -d "$EXTRA_DIR" -a -f "$EXTRA_DIR/install.sh" ]; then
 fi
 ```
 
-每次安装前，dotfile仓库先更新自身。然后
+每次安装前，dotfile仓库先更新自身。然后建立基础配置文件的软连接到用户家目录下。
 
 
 [github_dotfile]: https://dotfiles.github.io/ "GitHub does dotfiles - dotfiles.github.io"
