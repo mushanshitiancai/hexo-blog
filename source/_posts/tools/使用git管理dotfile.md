@@ -10,7 +10,25 @@ tags: [tools]
 
 这里参考了文章[Getting Started With Dotfiles][get_start_with_dotfile]。
 
+```
+.
+├── git
+│ ├── .gitconfig
+│ └── .gitignore_global
+├── install.sh
+├── osxdefaults.sh
+├── runcom
+│ ├── .bash_profile
+│ └── .inputrc
+└── system
+ ├── .alias
+ ├── .env
+ ├── .function
+ ├── .path
+ └── .prompt
+```
 
+博主的dotfile仓库是这个样子的。把相关的配置写在相关的文件里。
 
 
 [github_dotfile]: https://dotfiles.github.io/ "GitHub does dotfiles - dotfiles.github.io"
