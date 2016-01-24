@@ -77,6 +77,8 @@ if [ -d "$EXTRA_DIR" -a -f "$EXTRA_DIR/install.sh" ]; then
 fi
 ```
 
+每次安装前，dotfile仓库先更新自身。然后
+
 
 [github_dotfile]: https://dotfiles.github.io/ "GitHub does dotfiles - dotfiles.github.io"
 [get_start_with_dotfile]: https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789#.vxz4mv5sx "Getting Started With Dotfiles"
