@@ -10,7 +10,7 @@ tags: [tools]
 
 这里参考了文章[Getting Started With Dotfiles][get_start_with_dotfile]。
 
-管理的最高境界就是自动化。自动化
+管理的最高境界就是自动化。自动化安装需要的软件。自动化声明alias，function等。
 
 ```
 .
