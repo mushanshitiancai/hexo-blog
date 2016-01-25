@@ -77,7 +77,14 @@ if [ -d "$EXTRA_DIR" -a -f "$EXTRA_DIR/install.sh" ]; then
 fi
 ```
 
-每次安装前，dotfile仓库先更新自身。然后建立基础配置文件的软连接到用户家目录下。
+每次安装前，dotfile仓库先更新自身。然后建立基础配置文件的软连接到用户家目录下。接着运行安装过程，安装一些必要程序。接着如果是`Darwin`系统，再额外安装写东西。接着是测试和extra install。
+
+这里我有几个问题：
+0. 核心是ln，但是参数是-sfv，也就是为强制吧现有的文件删除，这样不好。
+1. 这里一上来就是安装brew，然后都是用brew安装东西，确定如readme所说可以在`*nix`下执行？
+2. 既然都是用brew安装，为何还需要判断"Darwin"？
+
+
 
 
 [github_dotfile]: https://dotfiles.github.io/ "GitHub does dotfiles - dotfiles.github.io"
