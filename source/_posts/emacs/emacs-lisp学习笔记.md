@@ -219,10 +219,173 @@ white返回的一定是nil
 
 第二点有这些常见的用法：
 - `(interactive)`，命令不需要参数
-- `(interactive "n")`，命令需要一个数字
-- `(interactive "s")`，命令需要一个字符串
+- `(interactive "n")`，命令需要一个数字，提示字符串可以跟在n后面
+- `(interactive "s")`，命令需要一个字符串，提示字符串可以跟在s后面
 - `(interactive "r")`，命令需要2个参数，分别代表选区的开始和结束点
 
+## emacs常用函数
+编写emacs插件，除了elisp本身外，还需要使用emacs提供的许多API。API是通用称呼，emacs对外的API就是一系列的函数。
+
+### 光标位置
+
+```
+;; 获取光标位置。第一个字符的位置为1
+(point)
+
+;; 获取选区的开始结束位置
+(region-beginning)
+(region-end)
+
+;; 获取行的开始结束位置
+(line-beginning-position)
+(line-end-position)
+
+;; 获取buffer第一个字符和最后一个字符的位置
+(point-min)
+(point-max)
+```
+
+### 移动光标
+
+```
+;; 移动光标到指定位置
+(goto-char 392)
+
+;; 移动几个字符
+(forward-char n)
+(backward-char n)
+
+;; 移动到目标字符串的位置
+(search-forward myStr) ; end of myStr
+(search-backward myStr) ; beginning of myStr
+
+;; 移动到目标字符串（使用正则表达式）
+(re-search-forward myRegex)
+(re-search-backward myRegex)
+
+;; 移动光标到第一个非a-z字符
+(skip-chars-forward "a-z")
+(skip-chars-backward "a-z")
+```
+
+### 删除、插入、修改文本
+
+```
+;; 删除9个字符
+(delete-char 9)
+
+;; 删除选区中的字符
+(delete-region myStartPos myEndPos)
+
+;; 插入字符
+(insert "i ♥ cats")
+
+;; 获取选区中的字符
+(setq myStr (buffer-substring myStartPos myEndPos))
+
+;; 选区中的字符改为大写
+(capitalize-region myStartPos myEndPos)
+```
+
+### 字符串相关
+
+```
+;; 获取字符串长度
+(length "abc") ; returns 3
+
+;; 获取子串
+(substring myStr startIndex endIndex)
+
+;; 使用正则表达式修改字符串中的文本
+(replace-regexp-in-string myRegex myReplacement myStr)
+```
+
+### buffer相关
+
+```
+;; 获取buffer的名字
+(buffer-name)
+
+;; buffer打开的文件的名字
+(buffer-file-name)
+
+;; 切换buffer
+(set-buffer myBufferName)
+
+;; 保存buffer
+(save-buffer)
+
+;; 关闭buffer
+(kill-buffer myBufferName)
+
+;; 暂时地指定一个buffer为当前修改的buffer
+(with-current-buffer myBufferName
+  ;; 执行操作
+)
+```
+
+### 文件相关
+
+```
+;; 打开文件
+(find-file myPath)
+
+;; 另存为buffer。关闭原来的buffer，打开另存为的文件到新buffer中
+(write-file myPath)
+
+;; 插入文件内容到光标位置
+(insert-file-contents myPath)
+
+;; 最近选区内容到文件尾
+(append-to-file myStartPos myEndPos myPath)
+
+;; 重命名文件
+(rename-file fileName newName)
+
+;; 复制文件
+(copy-file oldName newName)
+
+;; 删除文件
+(delete-file fileName)
+
+;; 获取文件所在的目录
+(file-name-directory myFullPath)
+
+;; 获取路径文件名部分
+(file-name-nondirectory myFullPath)
+
+;; 获取扩展名部分
+(file-name-extension myFileName)
+
+;; 获取非扩展名部分
+(file-name-sans-extension myFileName)
+```
+
+## 查看函数、变量文档
+`C-h f` `describe-function` 查看函数文档
+`C-h v` `describe-variable` 查看变量文档
+
+`C-h a` `apropos-command` 查看命令说明
+`apropos-variable` 查看变量名说明？
+`apropos-value`    查看变量值说明？
+
+`elisp-index-search`
+`emacs-index-search`
+在elisp、emacs文档中搜索
+
+## elisp编程的一些配置
+默认的`Lisp Interaction`不会高亮匹配括号。可以开启`(show-paren-mode 1)`来高亮匹配的括号。
+
+```
+(setq show-paren-style 'parenthesis) ; 高亮括号
+
+(setq show-paren-style 'expression) ; 高亮真个s表达式
+
+(setq show-paren-style 'mixed) ; 如果有括号高亮括号，否则高亮整个表达式
+```
+
+
+## 参考文章
 - [Practical Emacs Lisp][Practical Emacs Lisp]
 - [GNU Emacs Lisp Reference Manual: Top](https://www.gnu.org/software/emacs/manual/html_node/elisp/)
 
