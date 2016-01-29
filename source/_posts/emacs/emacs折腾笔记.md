@@ -36,6 +36,10 @@ emacs被许多vim党嘲讽的地方就是如果插件安装多了启动速度会
 
     kill-emacs
 
+## 使用帮助
+
+查看快捷键搬说明：C-h k 然后按你想要查询的快捷键
+查看当前模式所有可用的快捷键：C-h b
 
 ## emacs在终端中无法使用鼠标滚轮
 
@@ -50,4 +54,35 @@ emacs被许多vim党嘲讽的地方就是如果插件安装多了启动速度会
                                (scroll-up 1))))
 ```
 
-[MouseTerm](https://bitheap.org/mouseterm/)
+参考：[MouseTerm](https://bitheap.org/mouseterm/)
+
+在prelude和spacemacs中，滚动都表现得非常的卡顿。这个让我非常苦恼。
+
+原生的emacs是没有这个问题的，是什么插件导致的么？
+
+## 关于难按的Ctrl
+mac上的ctrl很不好按。突发奇想，把右边的command改成ctrl了（iTerm2中可以设置）。因为右边的command和option其实基本(100%)不用，所以留着也是浪费，还不如活用。
+
+## 关闭音效
+
+## 选区操作
+
+
+## 窗口操作
+
+快捷键：
+| 按键 | 命令 | 操作 | 
+| --- | --- | --- |
+|C-x 0|delete-window|关闭窗口(emacs中成为delete)|
+|C-x 1|delete-other-windows|关闭其他窗口|
+|C-x o|other-window|切换到其他窗口|
+
+
+## 参考文章
+- [Emacs/Emacs快捷键 - 站长百科](http://www.zzbaike.com/wiki/Emacs/Emacs%E5%BF%AB%E6%8D%B7%E9%94%AE)
+
+
+
+
+
+
