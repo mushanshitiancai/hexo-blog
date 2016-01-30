@@ -76,7 +76,8 @@ driver.close()
 目标链接：`https://twitter.com/search?q=%23%24aapl%20lang%3Aen%20since%3A2015-01-01%20until%3A2015-12-31&src=typd`。
 
 
-
+TODO：如何使用proxy
+TODO：如何使用chrome
 
 
 ## 参考链接
