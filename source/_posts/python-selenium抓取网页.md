@@ -163,7 +163,7 @@ submit()
 value_of_css_property(property_name)
 ```
 
-
+获取推文的text的demo如下：
 
 ```
 driver = webdriver.Chrome(chromedriverPath)
@@ -175,7 +175,7 @@ driver.close()
 ```
 
 ## 滚动页面
-
+Twitter的页面是
 
 
 ## 参考链接
