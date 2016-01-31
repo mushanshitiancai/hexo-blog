@@ -119,8 +119,16 @@ driver.get("https://twitter.com/search?q=%23%24aapl%20lang%3Aen%20since%3A2015-0
 ## 获取页面内容
 通过Chrome开发者工具分析Twitter页面。发现推文是在`tweet-text`这个类选择器中的。在selenium中如何获取呢？
 
-```
+首先是获取元素，selenium提供了一系列的函数来获取元素：
 
+
+```
+driver = webdriver.Chrome(chromedriverPath)
+driver.get(url)
+items = driver.find_elements_by_css_selector(".tweet-text")
+for item in items:
+    print item.text
+driver.close()
 ```
 
 ## 滚动页面
