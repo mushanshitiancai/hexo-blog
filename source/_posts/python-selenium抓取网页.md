@@ -145,7 +145,10 @@ find_elements_by_css_selector
 这些函数返回`WebElement`对象。我们可以使用`WebElement`对象上属性和方法来获取信息：
 
 ```
-get_attribute(name)
+get_attribute(name)  # 获取元素的某属性
+is_displayed()       # 是否系列
+is_enabled()
+is_selected()
 ```
 
 ```
