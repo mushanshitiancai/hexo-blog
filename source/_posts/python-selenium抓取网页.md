@@ -145,6 +145,11 @@ find_elements_by_css_selector
 这些函数返回`WebElement`对象。我们可以使用`WebElement`对象上属性和方法来获取信息：
 
 ```
+属性：
+text
+tag_name
+
+方法：
 get_attribute(name)  # 获取元素的某属性
 is_displayed()       # 是否系列
 is_enabled()
@@ -155,7 +160,10 @@ click()
 screenshot(filename)
 send_keys(*value)
 submit()
+value_of_css_property(property_name)
 ```
+
+
 
 ```
 driver = webdriver.Chrome(chromedriverPath)
