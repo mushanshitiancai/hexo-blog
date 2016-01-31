@@ -189,6 +189,8 @@ driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
 
 
+
+
 ## 参考链接
 -  [Selenium with Python — Selenium Python Bindings 2 documentation](http://selenium-python.readthedocs.org/)
 - [ipython - OSX El Capitan: sudo pip install OSError: [Errno: 1] Operation not permitted - Stack Overflow](http://stackoverflow.com/questions/33004708/osx-el-capitan-sudo-pip-install-oserror-errno-1-operation-not-permitted)
