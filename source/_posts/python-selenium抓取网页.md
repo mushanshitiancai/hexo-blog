@@ -179,6 +179,8 @@ Twitter的页面是会在滚动到页面底部后自动加载的。现在由于�
 
 现在我们需要通过selenium控制页面。
 
+如果selenium对所有页面可能的操作都定义一个包装函数，可想而知，工作量是非常大的。所以
+
 
 ## 参考链接
 -  [Selenium with Python — Selenium Python Bindings 2 documentation](http://selenium-python.readthedocs.org/)
