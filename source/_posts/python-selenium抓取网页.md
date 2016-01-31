@@ -191,9 +191,74 @@ driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
 如果我直接重复上面的代码十次，是没有这个效果的。因为`execute_script`会立马返回，不会等待页面再次加载完成的。所以这个时候就需要`wait`系列函数了。
 
-## wait系列函数
+## 等待页面发生变化
+大部分操作，是会导致页面变化的，页面变化后再进行下一步操作也是最常见的做法。为了让程序可以觉察到页面发生了变化，selenium提供了一系列等待页面发生变化的函数。
 
+等待分为两种。一种是明确的等待，比如我知道点击这个按钮后，页面会多一个元素。另外一种是不明确等待，~~不明确等待因为不知道页面会发生什么变化，所以笼统地等待一定的时间。~~ 前面的这种理解是错的。不明确等待，是指本来selenium在获取页面DOM元素时，是不会等待的，没有就是没有，而如果设置了不明确等待，那么如果没有获取到页面元素，会等待一定的时间。
 
+明确等待的例子：
+
+```
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver = webdriver.Firefox()
+driver.get("http://somedomain/url_that_delays_loading")
+try:
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "myDynamicElement"))
+    )
+finally:
+    driver.quit()
+```
+
+expected_conditions中可以使用的条件有：
+
+```
+title_is
+title_contains
+presence_of_element_located
+visibility_of_element_located
+visibility_of
+presence_of_all_elements_located
+text_to_be_present_in_element
+text_to_be_present_in_element_value
+frame_to_be_available_and_switch_to_it
+invisibility_of_element_located
+element_to_be_clickable - it is Displayed and Enabled.
+staleness_of
+element_to_be_selected
+element_located_to_be_selected
+element_selection_state_to_be
+element_located_selection_state_to_be
+alert_is_present
+```
+
+不明确等待可以这么用：
+
+```
+from selenium import webdriver
+
+driver = webdriver.Firefox()
+driver.implicitly_wait(10) # seconds
+driver.get("http://somedomain/url_that_delays_loading")
+myDynamicElement = driver.find_element_by_id("myDynamicElement")
+```
+
+selenium似乎没有直接让浏览器等待几秒的做法。只能使用明确等待的系列函数。
+
+现在回到Twitter的页面逻辑上。页面在滚动到底部后，页面上啥元素也不会边，底下也不会变成“正在加载”什么的（Twitter真是偷懒啊。。。）只能通过页面中推文的个数来确定了。
+
+第一次页面会加载13个推文，之后每次都会加载13个，所以通过个数可以判断加载完成了。可以使用css的选择器，来实现这个效果。推文都是在`#stream-items-id`这个ol中的，其中的第一个li是标题，所以第2-14个是推文，如果第27个推文出现了，说明第一次的刷新成功了。
+
+"#stream-items-id >li:nth-of-type(28)"
+所以我们要在滚动在页面后，等待`stream-footer`显示后再滚动。
+
+```
+
+```
 
 
 ## 参考链接
