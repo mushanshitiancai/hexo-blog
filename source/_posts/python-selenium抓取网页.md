@@ -121,6 +121,24 @@ driver.get("https://twitter.com/search?q=%23%24aapl%20lang%3Aen%20since%3A2015-0
 
 首先是获取元素，selenium提供了一系列的函数来获取元素：
 
+```
+find_element_by_id
+find_element_by_name
+find_element_by_xpath
+find_element_by_link_text
+find_element_by_partial_link_text
+find_element_by_tag_name
+find_element_by_class_name
+find_element_by_css_selector
+
+find_elements_by_name
+find_elements_by_xpath
+find_elements_by_link_text
+find_elements_by_partial_link_text
+find_elements_by_tag_name
+find_elements_by_class_name
+find_elements_by_css_selector
+```
 
 ```
 driver = webdriver.Chrome(chromedriverPath)
