@@ -117,7 +117,11 @@ driver.get("https://twitter.com/search?q=%23%24aapl%20lang%3Aen%20since%3A2015-0
 很好，这些启动了Chrome，而且使用了系统代理，很快就打开了页面。（为什么Firefox一直打不开呢？）
 
 ## 获取页面内容
+通过Chrome开发者工具分析Twitter页面。发现推文是在`tweet-text`这个类选择器中的。在selenium中如何获取呢？
 
+```
+
+```
 
 ## 滚动页面
 
