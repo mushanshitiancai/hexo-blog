@@ -188,6 +188,7 @@ Twitter的页面是会在滚动到页面底部后自动加载的。现在由于�
 -  [Selenium with Python — Selenium Python Bindings 2 documentation](http://selenium-python.readthedocs.org/)
 - [ipython - OSX El Capitan: sudo pip install OSError: [Errno: 1] Operation not permitted - Stack Overflow](http://stackoverflow.com/questions/33004708/osx-el-capitan-sudo-pip-install-oserror-errno-1-operation-not-permitted)
 - [Virtualenv — virtualenv 14.0.3 documentation](https://virtualenv.pypa.io/en/latest/index.html)
+- [How can I scroll a web page using selenium webdriver in python? - Stack Overflow](http://stackoverflow.com/questions/20986631/how-can-i-scroll-a-web-page-using-selenium-webdriver-in-python)
 
 [virtualenv]: http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000 "virtualenv - 廖雪峰的官方网站"
 [firefox_proxy]: http://stackoverflow.com/questions/18719980/proxy-selenium-python-firefox "Proxy Selenium Python Firefox - Stack Overflow"
