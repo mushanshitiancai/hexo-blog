@@ -71,13 +71,56 @@ driver.close()
 
 成功运行。
 
-## 
+## 使用代理
+目标链接：`https://twitter.com/search?q=%23%24aapl%20lang%3Aen%20since%3A2015-01-01%20until%3A2015-12-31&src=typd`。是Twitter的一个网址。还是必须得翻墙。
 
-目标链接：`https://twitter.com/search?q=%23%24aapl%20lang%3Aen%20since%3A2015-01-01%20until%3A2015-12-31&src=typd`。
+我使用的翻墙方法是在mac下使用chrome+shadowsocks。但是mac下的Firefox似乎无法使用系统代理，导致不能像chrome那样使用系统代理翻墙，需要手工指定。
+
+而使用selenium启动的Firefox，并不会使用你正常启动的那个Firefox中的配置。需要在程序中指定([参考地址][firefox_proxy])。
+
+```
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.proxy import *
+
+myProxy = "127.0.0.1:1080"
+
+proxy = Proxy({
+    'proxyType': ProxyType.MANUAL,
+    # 'httpProxy': myProxy,
+    # 'ftpProxy': myProxy,
+    # 'sslProxy': myProxy,
+    'socksProxy': myProxy,
+    'noProxy': '' # set this value as desired
+    })
+driver = webdriver.Firefox(proxy=proxy)
+driver.get("https://twitter.com/search?q=%23%24aapl%20lang%3Aen%20since%3A2015-01-01%20until%3A2015-12-31&src=typd")
+# driver.close()
+```
+
+但是Firefox对代理的支持还是不尽如人意，通用使用代理，比chrome的速度慢了很多，而且还打不开。。。
+
+## 使用ChromeDriver
+ChromeDriver是用来控制Chrome的WebDriver。默认selenium不会提供ChromeDriver，需要自己去下载([地址][ChromeDriver])。
+
+下载后把chromedriver这个可执行文件放到一个特定目录下。使用ChromeDriver需要制定这个路径的：
+
+```
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+driver = webdriver.Chrome("/Users/mazhibin/software/chromedriver")
+driver.get("https://twitter.com/search?q=%23%24aapl%20lang%3Aen%20since%3A2015-01-01%20until%3A2015-12-31&src=typd")
+# driver.close()
+```
+
+很好，这些启动了Chrome，而且使用了系统代理，很快就打开了页面。（为什么Firefox一直打不开呢？）
+
+## 获取页面内容
 
 
-TODO：如何使用proxy
-TODO：如何使用chrome
+## 滚动页面
+
 
 
 ## 参考链接
@@ -86,4 +129,5 @@ TODO：如何使用chrome
 - [Virtualenv — virtualenv 14.0.3 documentation](https://virtualenv.pypa.io/en/latest/index.html)
 
 [virtualenv]: http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000 "virtualenv - 廖雪峰的官方网站"
-[Getting started - ChromeDriver - WebDriver for Chrome]: https://sites.google.com/a/chromium.org/chromedriver/getting-started "Getting started - ChromeDriver - WebDriver for Chrome"
+[firefox_proxy]: http://stackoverflow.com/questions/18719980/proxy-selenium-python-firefox "Proxy Selenium Python Firefox - Stack Overflow"
+[ChromeDriver]: https://sites.google.com/a/chromium.org/chromedriver/getting-started "Getting started - ChromeDriver - WebDriver for Chrome"
