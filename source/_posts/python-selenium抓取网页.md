@@ -149,6 +149,8 @@ get_attribute(name)  # 获取元素的某属性
 is_displayed()       # 是否系列
 is_enabled()
 is_selected()
+find_...             # 之前的find系列在WebElement上也可以使用，表示寻找子元素
+
 ```
 
 ```
