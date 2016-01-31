@@ -181,6 +181,11 @@ Twitter的页面是会在滚动到页面底部后自动加载的。现在由于�
 
 如果selenium对所有页面可能的操作都定义一个包装函数，可想而知，工作量是非常大的。而这些操作，可以肯定的是js一定能做到。所以selenium通过管道使用户可以在页面中注入js，使自身变得非常强大。
 
+```
+driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+```
+
+这句代码可以让页面滚动到底部。
 
 
 
