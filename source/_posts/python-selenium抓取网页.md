@@ -142,7 +142,7 @@ find_elements_by_class_name
 find_elements_by_css_selector
 ```
 
-这些函数返回
+这些函数返回`WebElement`对象。我们可以使用
 
 ```
 driver = webdriver.Chrome(chromedriverPath)
