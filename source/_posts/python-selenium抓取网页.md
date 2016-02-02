@@ -255,10 +255,84 @@ selenium似乎没有直接让浏览器等待几秒的做法。只能使用明确
 
 "#stream-items-id >li:nth-of-type(28)"
 
-所以我们要在滚动在页面后，等待`stream-footer`显示后再滚动。
+所以在页面滚动后，需要等待最新的一条推文出现，再继续滚动。最终的程序如下：
 
 ```
+# coding=utf-8
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import csv
+import codecs
+import sys  
+reload(sys)  
+sys.setdefaultencoding('utf-8')
 
+def crawl(url):
+    chromedriverPath = "/Users/mazhibin/software/chromedriver"
+
+    # twitter每次更新13条
+    eachCount = 13
+
+    # 滚动几次。滚动次数越多，采集的数据越多
+    scrollTimes = 10
+
+    # driver = webdriver.Firefox()
+    driver = webdriver.Chrome(chromedriverPath)
+    driver.get(url)
+
+    try:
+        for i in range(scrollTimes):
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        
+            lastTweetCss = "#stream-items-id >li:nth-of-type(" + str(eachCount*(i+2)+1) + ") .tweet-text"
+            print lastTweetCss
+            elem = WebDriverWait(driver,20).until(EC.visibility_of_element_located((By.CSS_SELECTOR,lastTweetCss)))
+            printTweet(driver)
+    finally:
+        driver.close()
+
+
+def printTweet(driver):
+    tweetCss = "[data-item-type=tweet]"
+    nameCss = ".fullname"
+    timeCss = "._timestamp"
+    contentCss = ".tweet-text"
+
+    items = driver.find_elements_by_css_selector(tweetCss)
+    resultArr = []
+    for i,item in enumerate(items):
+        try:
+            nameElem = item.find_element_by_css_selector(nameCss)
+            timeElem = item.find_element_by_css_selector(timeCss)
+            contentElem = item.find_element_by_css_selector(contentCss)
+
+            name = nameElem.text
+            time = timeElem.text
+            content = contentElem.text
+
+            resultArr.append([name,time,content])
+            print("%d: name=%s time=%s content=%s" % (i,name,time,content))
+        except Exception, e:
+            print("error index=%d" % (i))
+            print e
+
+    printToCsv(resultArr)
+
+
+def printToCsv(data):
+    writer = csv.writer(codecs.open('result.csv','wb','gbk'))
+    writer.writerow(['name','time','content'])
+
+    for item in data:
+        writer.writerow(item)
+
+
+if __name__ == '__main__':
+    url = "https://twitter.com/search?q=%23%24aapl%20lang%3Aen%20since%3A2015-01-01%20until%3A2015-12-31&src=typd"
+    crawl(url)
 ```
 
 
