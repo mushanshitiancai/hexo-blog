@@ -145,6 +145,10 @@ nil
 3
 ```
 
+defvar和setq的区别：
+
+> The defvar special form is similar to setq in that it sets the value of a variable. It is unlike setq in two ways: first, it only sets the value of the variable if the variable does not already have a value. If the variable already has a value, defvar does not override the existing value. Second, defvar has a documentation string.
+
 ## 条件语句
 
 ```

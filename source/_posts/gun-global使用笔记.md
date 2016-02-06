@@ -1,7 +1,10 @@
 ---
 title: gun global使用笔记
-tags: [tools]
+tags:
+  - tools
+date: 2016-02-03 16:10:52
 ---
+
 
 global是一个由一家日本公司开发的源代码tag系统。和ctags是一类的工具。不过比ctags要强大很多，具体的对比可以参考这个表格：([表格地址][global_compare])。
 
