@@ -147,9 +147,12 @@ nil
 
 defvar和setq的区别：
 1. defvar只对未赋值的变量赋值
-2. defvar有
+2. defvar可以对变量设置文档字符串
 
 > The defvar special form is similar to setq in that it sets the value of a variable. It is unlike setq in two ways: first, it only sets the value of the variable if the variable does not already have a value. If the variable already has a value, defvar does not override the existing value. Second, defvar has a documentation string.
+> [Programming in Emacs Lisp: defvar](http://www.gnu.org/software/emacs/manual/html_node/eintr/defvar.html)
+
+
 
 ## 条件语句
 
