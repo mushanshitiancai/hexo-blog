@@ -64,6 +64,18 @@ perlude包含了许多模块，但是默认并没有全部开启。模块配置�
 
 ## 源码阅读笔记
 
+load-file-name：
+load-file-name is a variable defined in `C source code'.
+Full name of file being loaded by `load'.
+
+`load-file-name`保存当前被`load`读取的文件的路径
+
+    (defvar prelude-dir (file-name-directory load-file-name)
+        "The root dir of the Emacs Prelude distribution.")
+
+这句定义了prelude的工作目录
+
+expand-file-name：
 
 
 
