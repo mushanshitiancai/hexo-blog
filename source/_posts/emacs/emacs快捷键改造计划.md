@@ -23,7 +23,8 @@ emacs中充满了二段快捷键。就连退出这么常用的都是`C-x C-c`这
 
 如果存在`C-l`这样的快捷键，如果你想要绑定`C-l C-l`，那么需要先解绑`C-l`，否则会提示：
 
-    |Warning (initialization): An error occurred while loading `/Users/mazhibin/.emacs':
+    Warning (initialization): An error occurred while loading `/Users/mazhibin/.emacs':
+    error: Key sequence C-l C-l starts with non-prefix key C-l
 
 解绑使用`global-unset-key`：
 
