@@ -104,6 +104,15 @@ M-y           在按下C-y后，按此键，切换粘贴的内容
 |C-x 1|delete-other-windows|关闭其他窗口|
 |C-x o|other-window|切换到其他窗口|
 
+## 【TODO】快捷键改进计划
+C-q 这个按钮希望弄成保存并退出
+
+C-q原本的用处：
+(quoted-insert ARG)
+
+
+[GNU Emacs Manual: Inserting Text](http://www.gnu.org/software/emacs/manual/html_node/emacs/Inserting-Text.html)
+
 
 ## 参考文章
 - [Emacs/Emacs快捷键 - 站长百科](http://www.zzbaike.com/wiki/Emacs/Emacs%E5%BF%AB%E6%8D%B7%E9%94%AE)
