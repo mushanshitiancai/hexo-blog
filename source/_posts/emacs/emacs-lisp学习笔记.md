@@ -393,6 +393,13 @@ white返回的一定是nil
 (setq show-paren-style 'mixed) ; 如果有括号高亮括号，否则高亮整个表达式
 ```
 
+## 【TODO】elisp中的特殊形式
+`'`
+
+`#'`=>`(function )`
+
+[elisp - Emacs Lisp map over a list of function names and call them all with the same arg - Stack Overflow](http://stackoverflow.com/questions/16633436/emacs-lisp-map-over-a-list-of-function-names-and-call-them-all-with-the-same-arg)
+
 
 ## 参考文章
 - [Practical Emacs Lisp][Practical Emacs Lisp]
