@@ -45,10 +45,6 @@ emacs中充满了二段快捷键。就连退出这么常用的都是`C-x C-c`这
 
 > 总结：`C-q`，插入特殊字符=>保存退出
 
-## 如何处理perifx keys
-
-> A prefix key is a key sequence whose binding is a keymap. 
-
 
 ## 参考文章
 - [GNU Emacs Lisp Reference Manual: Key Binding Commands](https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Commands.html)
