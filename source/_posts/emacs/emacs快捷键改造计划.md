@@ -46,6 +46,22 @@ emacs中充满了二段快捷键。就连退出这么常用的都是`C-x C-c`这
 > 总结：`C-q`，插入特殊字符=>保存退出
 
 
+## 完整的配置（TEMP）
+
+```
+(unless window-system
+  (xterm-mouse-mode 1)
+  (global-set-key [mouse-4] '(lambda ()
+                               (interactive)
+                               (scroll-down 1)))
+  (global-set-key [mouse-5] '(lambda ()
+                               (interactive)
+                               (scroll-up 1))))
+
+;; exit
+(global-set-key (kbd "C-q") 'save-buffers-kill-terminal)
+```
+
 ## 参考文章
 - [GNU Emacs Lisp Reference Manual: Key Binding Commands](https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Commands.html)
 - [GNU Emacs Manual: Inserting Text](http://www.gnu.org/software/emacs/manual/html_node/emacs/Inserting-Text.html)
