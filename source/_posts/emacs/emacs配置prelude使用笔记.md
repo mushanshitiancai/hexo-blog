@@ -363,6 +363,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
 ```
 
 
+`(every #'package-installed-p prelude-packages)`这里的`#`是什么效果？
 
 
 
