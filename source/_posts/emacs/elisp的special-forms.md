@@ -1,5 +1,5 @@
 ---
-title: elisp的special forms
+title: 【TODO】elisp的special forms
 date: 2016-02-15 17:24:24
 tags: [emacs]
 ---
@@ -38,6 +38,8 @@ elisp中的所有特殊形式有：
 - while
 
 common lisp的用户注意，cl和elisp的特殊形式有一些区别。`setq`,`if`,`catch`是两者都有的。`save-excursion`是elisp特有的，`throw`在cl中是特殊形式，而在elisp中是函数。
+
+## function
 
 
 
