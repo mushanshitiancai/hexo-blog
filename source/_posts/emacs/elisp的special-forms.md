@@ -41,6 +41,23 @@ common lisp的用户注意，cl和elisp的特殊形式有一些区别。`setq`,`
 
 ## function
 
+    function function-object
+
+这个特殊形式直接返回`function-object`，而不会去求值。这点很像`quote`，但是与`quote`不同的是，`function`还会通知Emacs解释器和byte-compiler，说这个`function-object`是一个函数。这样在字节编译时，编译器会吧`function-object`编译为一个函数对象字节码。
+
+`#'`是`function`简写。就像`'`是`quote`的简写。
+
+总结：使用`function`会让emacs在执行代码时加上一些特效。
+
+问题：以下的写法执行效果是一样的，那么使用`#'`是必要的么？
+
+```
+(setq a '("1" "2" "3"))
+(mapc #'print a)
+(mapc 'print a)
+```
+
+
 
 
 ## 参考文章
