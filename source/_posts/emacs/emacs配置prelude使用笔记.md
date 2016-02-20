@@ -367,6 +367,18 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
 
 `prelude-packages.el`首先安装基础的插件。然后针对不同的文件，实现了自动安装对应主模式。
 
+安装的基本代码是：
+
+```
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+
+(package-refresh-contents)
+(package-install 'color-theme-solarized)
+(load-theme 'solarized-dark t)
+```
+
 自动安装主要是通过`auto-mode-alist`这个变量实现的。这个list的每个元素的结构是`(REGEXP . FUNCTION)`。前者是用来判断后缀名的正则表达式。后者是当打开这种后缀文件时，调用的方法。
 
 prelude使用这个list，添加了很多程序代码的自动安装宏：
