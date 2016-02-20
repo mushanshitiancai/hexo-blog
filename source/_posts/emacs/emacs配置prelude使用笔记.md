@@ -379,7 +379,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
 (load-theme 'solarized-dark t)
 ```
 
-在emacs24后加入了包管理，所以大大方便了插件的安装。`(package-refresh-contents)`这句是必要的，这是通知包管理去获取插件列表。否则会保存，提示插件不存在
+在emacs24后加入了包管理，所以大大方便了插件的安装。`(package-refresh-contents)`这句是必要的，这是通知包管理去获取插件列表。如果不获取列表就进行`package-install `会保存，提示插件不存在
 
 自动安装主要是通过`auto-mode-alist`这个变量实现的。这个list的每个元素的结构是`(REGEXP . FUNCTION)`。前者是用来判断后缀名的正则表达式。后者是当打开这种后缀文件时，调用的方法。
 
