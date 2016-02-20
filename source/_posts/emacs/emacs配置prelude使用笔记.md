@@ -79,7 +79,7 @@ expand-file-name：
 
 add-to-list:如果列表中不存在该元素，添加到列表中
 
-
+### 入口文件-init.el
 `.emacs.d/init.el`是配置的入口文件：
 
 ```
@@ -187,10 +187,13 @@ by Prelude.")
 ;;; init.el ends here
 ```
 
-入口文件中，第一个require的是`prelude-packages`。
+### 安装插件模块-prelude-packages.el
+入口文件中，第一个require的是`prelude-packages`:
 
 ```
 ;;; prelude-packages.el --- Emacs Prelude: default package selection.
+;; 使用了common lisp扩展。但是这种写法不好，没有cl-前缀，官方推荐使用(require ‘cl-lib)。
+;; https://www.emacswiki.org/emacs/CommonLispForEmacs
 (require 'cl)
 (require 'package)
 
@@ -200,7 +203,7 @@ by Prelude.")
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
 (package-initialize)
 
-;; 定义需要安装的插件列表
+;; 定义需要安装的插件列表，这些插件是基础插件，在第一次启动的时候会全部装上。
 (defvar prelude-packages
   '(ace-window
     avy
@@ -265,7 +268,7 @@ Missing packages are installed automatically."
     ;; install the missing packages
     (prelude-require-packages prelude-packages)))
 
-;; run package installation
+;; 安装基础插件
 (prelude-install-packages)
 
 (defun prelude-list-foreign-packages ()
@@ -362,10 +365,175 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
 
 ```
 
+`prelude-packages.el`首先安装基础的插件。然后针对不同的文件，实现了自动安装对应主模式。
 
-`(every #'package-installed-p prelude-packages)`这里的`#`是什么效果？
+自动安装主要是通过`auto-mode-alist`这个变量实现的。这个list的每个元素的结构是`(REGEXP . FUNCTION)`。前者是用来判断后缀名的正则表达式。后者是当打开这种后缀文件时，调用的方法。
+
+prelude使用这个list，添加了很多程序代码的自动安装宏：
+
+```
+(defmacro prelude-auto-install (extension package mode)
+  "When file with EXTENSION is opened triggers auto-install of PACKAGE.
+PACKAGE is installed only if not already present.  The file is opened in MODE."
+  `(add-to-list 'auto-mode-alist
+                `(,extension . (lambda ()
+                                 (unless (package-installed-p ',package)
+                                   (package-install ',package))
+                                 (,mode)))))
+```
+
+宏的相关知识可以看[这篇文章](http://mushanshitiancai.github.io/2016/02/18/emacs/emacs%E7%9A%84macro/)。不过感觉可以完全不用宏实现吧？
+
+`(every #'package-installed-p prelude-packages)`这里的`#`是什么效果？--其实是`#'`，是`function`的缩写。告诉emacs解释器，后面跟着的表达式是函数，可以使用优化手段了。
 
 
+### 用户可控配置定义-prelude-custom.el
+prelude定义了一些用户可以修改的配置。prelude-custom.el是这些配置项定义的地方。
+
+```
+;; customize
+(defgroup prelude nil
+  "Emacs Prelude configuration."
+  :prefix "prelude-"
+  :group 'convenience)
+
+(defcustom prelude-auto-save t
+  "Non-nil values enable Prelude's auto save."
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-guru t
+  "Non-nil values enable `guru-mode'."
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-whitespace t
+  "Non-nil values enable Prelude's whitespace visualization."
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-clean-whitespace-on-save t
+  "Cleanup whitespace from file before it's saved.
+Will only occur if `prelude-whitespace' is also enabled."
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-flyspell t
+  "Non-nil values enable Prelude's flyspell support."
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-user-init-file (expand-file-name "personal/"
+                                                    user-emacs-directory)
+  "Path to your personal customization file.
+Prelude recommends you only put personal customizations in the
+personal folder.  This variable allows you to specify a specific
+folder as the one that should be visited when running
+`prelude-find-user-init-file'.  This can be easily set to the desired buffer
+in lisp by putting `(setq prelude-user-init-file load-file-name)'
+in the desired elisp file."
+  :type 'string
+  :group 'prelude)
+
+(defcustom prelude-indent-sensitive-modes
+  '(conf-mode coffee-mode haml-mode python-mode slim-mode yaml-mode)
+  "Modes for which auto-indenting is suppressed."
+  :type 'list
+  :group 'prelude)
+
+(defcustom prelude-yank-indent-modes '(LaTeX-mode TeX-mode)
+  "Modes in which to indent regions that are yanked (or yank-popped).
+Only modes that don't derive from `prog-mode' should be listed here."
+  :type 'list
+  :group 'prelude)
+
+(defcustom prelude-yank-indent-threshold 1000
+  "Threshold (# chars) over which indentation does not automatically occur."
+  :type 'number
+  :group 'prelude)
+
+(defcustom prelude-theme 'zenburn
+  "The default color theme, change this in your /personal/preload config."
+  :type 'symbol
+  :group 'prelude)
+
+(defcustom prelude-shell (getenv "SHELL")
+  "The default shell to run with `prelude-visit-term-buffer'"
+  :type 'string
+  :group 'prelude)
+
+(provide 'prelude-custom)
+
+;;; prelude-custom.el ends here
+
+```
+
+`defgroup` TODO
+
+`defcustom` TODO
+
+### 界面相关配置-prelude-ui.el
+
+```
+;; 关闭工具条
+;; the toolbar is just a waste of valuable screen estate
+;; in a tty tool-bar-mode does not properly auto-load, and is
+;; already disabled anyway
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+
+(menu-bar-mode -1)
+
+;; 禁用光标闪烁
+;; the blinking cursor is nothing, but an annoyance
+(blink-cursor-mode -1)
+
+;; 关闭欢迎界面
+;; disable startup screen
+(setq inhibit-startup-screen t)
+
+;; nice scrolling
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
+
+;; mode line settings
+(line-number-mode t)
+(column-number-mode t)
+(size-indication-mode t)
+
+;; enable y/n answers
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; 
+;; more useful frame title, that show either a file or a
+;; buffer name (if the buffer isn't visiting a file)
+(setq frame-title-format
+      '("" invocation-name " Prelude - " (:eval (if (buffer-file-name)
+                                            (abbreviate-file-name (buffer-file-name))
+                                          "%b"))))
+
+;; 设置主题。默认prelude使用zenburn主题
+;; use zenburn as the default theme
+(when prelude-theme
+  (load-theme prelude-theme t))
+
+(require 'smart-mode-line)
+(setq sml/no-confirm-load-theme t)
+;; delegate theming to the currently active theme
+(setq sml/theme nil)
+(add-hook 'after-init-hook #'sml/setup)
+
+;; 启用beacon-mode，这个模式会在光标移动后闪亮当前行，效果图见下方
+;; show the cursor when moving after big movements in the window
+(require 'beacon)
+(beacon-mode +1)
+
+(provide 'prelude-ui)
+;;; prelude-ui.el ends here
+```
+
+[![](https://github.com/Malabarba/beacon/raw/master/example-beacon.gif)](https://github.com/Malabarba/beacon/blob/master/example-beacon.gif)
 
 
 
