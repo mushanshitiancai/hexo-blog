@@ -49,7 +49,7 @@ java界面部分，不学。java高级知识，涉及**NIO，网络通信，反�
   - Collection：独立元素的序列。包括List,Set,Queue接口。
   - Map：由键值对组成的对象。
 - Collection接口概括了`序列`的概念。一种存放一组对象的方式。
-  - 
+  - Collection的`add`的语义是`确保这个Collection包含指定的元素`，这是为了兼容Set和List
   - 所有的Collection都可以被foreach遍历。
 
 问题：
