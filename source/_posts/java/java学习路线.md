@@ -48,7 +48,7 @@ java界面部分，不学。java高级知识，涉及**NIO，网络通信，反�
 - java容器类分为两个不同的概念：
   - Collection：独立元素的序列。包括List,Set,Queue接口。
   - Map：由键值对组成的对象。
-- Collection接口概括了`序列`的概念。
+- Collection接口概括了`序列`的概念。一种存放一组对象的方式。
 
 问题：
 - 书中用到了`for(Apple c : apples)`，这是哪个版本的特性？
