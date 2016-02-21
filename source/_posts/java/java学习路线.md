@@ -8,9 +8,9 @@ tags: [java]
 
 ## 学习路线图
 
-![](http://c.hiphotos.baidu.com/zhidao/pic/item/e850352ac65c1038a1c09482b2119313b07e8930.jpg)
+![](/img/java/java-load-map1.jpg)
 
-![](http://h.hiphotos.baidu.com/zhidao/pic/item/a08b87d6277f9e2f983f506c1f30e924b899f348.jpg)
+![](/img/java/java-load-map2.jpg)
 
 上面是随便在网上找的Java学习路线图。当我向别人说我要转Java时，他们总是说别，人太多了，为何太多？培训机构遍地都是。这的确是中国特有的现象，像我一个同学，三本学校，学校里什么技术都没交，最后大四让学生自己去报java培训班，然后他就走上javaee之路。扯远了，我的意思是国内培训机构如此多，历史也比较悠久了，他们总结的路线图还是很有道理的，基本成了最佳实践了，你看上面两个机构的线路图基本是一样的。
 
