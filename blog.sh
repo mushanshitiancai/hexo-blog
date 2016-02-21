@@ -7,6 +7,7 @@ if [ "$1" = "d" ];then
     git add .
     git commit -m "Site updated: `date +%Y-%m-%d\ %H:%M:%S`"
     git push origin master
+    echo "deploy `date +%Y-%m-%d\ %H:%M:%S`\n" >> ~/blog_log
 fi
 
 if [ "$1" = "n" ];then
