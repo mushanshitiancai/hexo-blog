@@ -37,7 +37,7 @@ java界面部分，不学。java高级知识，涉及**NIO，网络通信，反�
 
 开发工具：懒得去破解intelliJ IDEA，就用eclispe吧。
 
-### 2016年02月21日 
+### 2016年02月21日 P275-279 5P 1:04
 建立了github仓库learn-java。运行hello world。
 《Java编程思想》第十一章，持有对象。P275-311 36P
 
@@ -51,6 +51,7 @@ java界面部分，不学。java高级知识，涉及**NIO，网络通信，反�
 - Collection接口概括了`序列`的概念。一种存放一组对象的方式。
   - Collection的`add`的语义是`确保这个Collection包含指定的元素`，这是为了兼容Set和List
   - 所有的Collection都可以被foreach遍历。
+
 
 问题：
 - 书中用到了`for(Apple c : apples)`，这是哪个版本的特性？
