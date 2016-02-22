@@ -1,7 +1,7 @@
 ---
 title: Linux命令学习笔记
 date: 2016-01-23 22:01:18
-tags: [Linux]
+tags: linux
 ---
 
 ## 建立硬/软链接

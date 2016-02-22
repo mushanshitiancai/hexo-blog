@@ -153,7 +153,7 @@ Returns a sequential Stream with this collection as its source.
   - LinkedList：随机访问慢，中间插入/删除快。特性比ArrayList多。
 
 **抽象方法：**
-这里列出的是List在Collection基础上添加的方法：
+这里列出的是List在Collection基础上添加的方法，因为List指的是顺序存储的，所以在Collection上加入了**基于位置的操作**。
 
 ```
 //查询操作：
