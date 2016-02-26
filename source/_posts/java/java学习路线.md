@@ -213,6 +213,18 @@ default Spliterator<E> spliterator()
 - Arrays这个类还不太了解。需要看一下数组的章节。
 
 
+## PS 为什么想要从PHP转JAVA
+因为本来是写JAVA的（安卓）所以在公司要求情况下转PHP后一直都是带着比较的态度来学习PHP的。可惜的是我没写过JAVA后台，所以比较可能并不准确。
+
+- PHP没有类型。
+  大家都说没有类型好。开发快啥的。但是我觉得也不尽然。
+
+  动态类型会导致大量的类型检查代码:
+  
+  ```
+  'order_id' => intval($order['order_id'])
+  ```
+
 ## 参考地址
 - [100 Days of Swift - samvlu.com](http://samvlu.com/)
 - [allenwong/30DaysofSwift: A self taught project to learn Swift.](https://github.com/allenwong/30DaysofSwift)
