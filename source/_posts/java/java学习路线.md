@@ -37,6 +37,26 @@ java界面部分，不学。java高级知识，涉及**NIO，网络通信，反�
 
 开发工具：懒得去破解intelliJ IDEA，就用eclispe吧。
 
+测试代码也不能浪费啊：
+学习DEMO仓库：[mushanshitiancai/learn-java: 学习JAVA的DEMO](https://github.com/mushanshitiancai/learn-java)
+
+### 知识点优先级
+特指未掌握知识点
+- [ ] JCF集合框架，数组（第11章，第17章。第5章，第16章）
+- [ ] 枚举（第5章，第19章）
+- [ ] 类的初始化与清理（第5章）
+- [ ] 异常（第12章）
+- [ ] 泛型（第15章）
+- [ ] 反射（第14章）
+- [ ] IO（第18章）
+- [ ] 注解（第20章）
+- [ ] 并发（第21章）
+
+小知识点：
+- [ ] 随机数
+- [ ] JCF历史？
+- [ ] Java中操作数据库，成功与否怎么判断（目前公司的基本就是没有判断，也就算是不管数据不一致了）
+
 ### 2016年02月21日 P215-224 10P 3:06
 建立了github仓库learn-java。运行hello world。
 《Java编程思想》第十一章，持有对象。P215-247 32P
@@ -212,10 +232,50 @@ default Spliterator<E> spliterator()
 - 书中用到了`for(Apple c : apples)`，这是哪个版本的特性？
 - Arrays这个类还不太了解。需要看一下数组的章节。
 
+### 2016年02月27日
+- JCF(Java Collections Framework)。出现在Java1.2中。
+- LinkedList
+- Stack 书中提到Java1.0中设计的Stack是继承与LinkedList的，这是一个设计错误。
+
+[Java集合类: Set、List、Map、Queue使用场景梳理 - .Little Hann - 博客园](http://www.cnblogs.com/LittleHann/p/3690187.html)
+
+![](http://images.cnitblog.com/i/532548/201404/262238192165666.jpg)
+
+这个图片总结了JCF(Java Collections Framework)的继承图谱。
+
+#### JCF作者
+Josh Bloch。
+
+JDK1.1中的java.math、1.4中的assertions，还有大家所熟识的Collections Framework皆是Joshua一手打造。其中的Collections Framework还获得了当年的Jolt大奖。
+
+曾担任google的首席JAVA架构师。
+
+#### Java1.0/1.1容器（重要）
+图谱中有两个类是`Legacy`的。这个是什么意思呢？
+
+[collections - what are the legacy classes in Java? - Stack Overflow](http://stackoverflow.com/questions/21086307/what-are-the-legacy-classes-in-java)
+
+Vector,Dictionary,HashTable,Properties,Stack。这些类是在JCF出现之前就实现了的。在JCF出现后，为了向后兼容，重构了这些类，使之与JCF成为一个体系。但是不建议在新代码中使用它们。
+
+那么问题来了，Java中如何使用栈呢？《Java编程思想》中自己定义了一个Stack类（基于LinkedList）。主流做法是？
+
+[Why is Java Vector class considered obsolete or deprecated? - Stack Overflow](http://stackoverflow.com/questions/1386275/why-is-java-vector-class-considered-obsolete-or-deprecated)
+
+这个回答指出，JDK的Stack文档指出了，可以使用Deque接口来替代Stack类。但是Deque接口是1.6添加的，所以《Java编程思想 第四版》（基于1.5）并没有提及。
+
+《Java编程思想》的第17章，容器深入研究，17.13 Java1.0/1.1容器也提到了这些。
+
+### 2016年02月28日 
+- 第11章 end
+- 第5章 数组初始化，可变参数列表，枚举
+- 第16章 数组
+
+
 
 ## PS 为什么想要从PHP转JAVA
 因为本来是写JAVA的（安卓）所以在公司要求情况下转PHP后一直都是带着比较的态度来学习PHP的。可惜的是我没写过JAVA后台，所以比较可能并不准确。
 
+- 更多的时候，是在维护升级代码，这是一个伴随着重构的过程。而PHP这类语言，是对重构不友善的（2016年02月28日）
 - PHP没有类型。
   大家都说没有类型好。开发快啥的。但是我觉得也不尽然。
 
