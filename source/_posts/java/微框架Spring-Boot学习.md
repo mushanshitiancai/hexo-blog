@@ -1,5 +1,5 @@
 ---
-title: 【TODO】微框架Spring Boot介绍与入门
+title: 微框架Spring Boot介绍与入门
 date: 2016-03-04 08:38:29
 tags: java
 ---
@@ -160,9 +160,37 @@ $ java -jar target/myproject-0.0.1-SNAPSHOT.jar
 ```
 
 ## 问题
-- [ ] `spring run app.groovy`后，更新代码文件并不会起效，如何做到？
-[20. Developer tools](http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html)
+### Spring可以做到热更新代码么?
+保存文件后，刷新网页就可以看到效果，这个是PHP之流说Java之流傻逼的铁证。个人觉得也是PHP在web开发上，使用比例远比Java高的原因之一。谁不想保存代码就能看到效果呢。
 
+Spring boot也考虑到了这一点，推出了`spring-boot-devtools`。他会监视classpath，一旦发现有类文件更新了，就自动重启。
+
+启用方法很简单，加入`spring-boot-devtools`就可以了：
+
+```
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
+</dependencies>
+```
+
+这个功能需要结合IDE使用，因为IDE会在保存的时候更新class文件（目前我是这么理解的）。
+
+1. [78. Hot swapping](http://docs.spring.io/spring-boot/docs/current/reference/html/howto-hotswapping.html)
+2. [20. Developer tools](http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html)
+3. [DevTools in Spring Boot 1.3](https://spring.io/blog/2015/06/17/devtools-in-spring-boot-1-3)
+
+这三个连接是更详细的说明，还是搞不明白，可以看看第三个连接的视频（我就是倒腾半天看了视频才弄清楚的。。。）。
+
+### `spring-boot-devtools`每次都会重启应用，还是有点慢，还可以更快么？
+可以！
+
+有两个方案，`JRebel`和`Spring Loaded`。前者更屌，但是收费，后者开源，所以可以考虑使用后者。
+
+`Spring Loaded`的使用会再出一篇文章，敬请期待。
 
 ## 参考文章
 -  [深入学习微框架：Spring Boot](http://www.infoq.com/cn/articles/microframeworks1-spring-boot)
