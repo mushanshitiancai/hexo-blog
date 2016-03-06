@@ -84,8 +84,13 @@ Vert.x
     $ sdk install groovy
     
     或者指定具体版本：
-
+    
     $ sdk install groovy 2.4.6
+    
+    或者安装本地的文件：
+    
+    $ sdk install grails 3.1.0-SNAPSHOT /path/to/grails-3.1.0-SNAPSHOT
+
 
 ### 列出一个sdk的所有可用版本
 
