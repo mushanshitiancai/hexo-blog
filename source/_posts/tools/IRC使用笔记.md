@@ -18,6 +18,12 @@ IRC客户端数不胜数，我选择了一个命令行的客户端`Irssi`
 
 [Freenode ##java or #java - Stack Overflow](http://stackoverflow.com/questions/13271092/freenode-java-or-java)
 
+## 国外网络搜集
+就像国内聊天各种网络用户各种梗一样，国外也是一样的，这些一般字典里还搜不到。。。这里记录一下：
+
+- m or f : 是男是女
+- asl : Age/Sex/Location/年龄/性别/所在地
+
 
 ## 参考地址
 - [Getting Irssi](https://irssi.org/download/#binaries)
