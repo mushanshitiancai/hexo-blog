@@ -4,7 +4,7 @@
 #       : 2016-03-15 获取git仓库状态，只在有修改的情况下，才会执行发布操作
 
 
-if [ "$#" = 0 || "$1" = "-h" ];then
+if [ "$#" = 0 -o "$1" = "-h" ];then
   echo "Usage: sh blog.sh [dnp]"
   echo "       d  deployment hexo to github"
   echo "       n  create a new blog"
