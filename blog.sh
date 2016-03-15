@@ -7,7 +7,7 @@ function git_change(){
 }
 
 if [ "$1" = "d" ];then
-    if [ ! git_change ];then
+    if [ ! git_change = "0" ];then
       echo "not modified."
       exit
     fi
