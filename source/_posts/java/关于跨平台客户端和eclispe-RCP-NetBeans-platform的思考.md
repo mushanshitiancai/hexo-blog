@@ -14,7 +14,7 @@ tags: java
 
 上网搜了一下eclispe rcp的资料，有，但是都很久，集中在eclispe rcp3，书籍也是。现在最新的eclispe rcp出到4了(后面成为e4)。去官网搜了一下，咦，怎么找不到文档呢。只看到了一本e4书《Eclipse 4 RCP》。
 
-![](/img/eclispe-rcp-document.png)
+![](/img/eclispe/eclispe-rcp-document.png)
 
 而这本书不是免费的。他的作者是Lars Vogel，是e4的主要开发者。
 
@@ -39,7 +39,7 @@ NetBeans platform和eclispe rcp一样，为大型客户端软件提供了一套�
 ## 参考文章
 - [Rich Client Platform - Eclipsepedia](https://wiki.eclipse.org/Rich_Client_Platform)
 - [Eclipse RCP (Rich Client Platform) - Tutorial](http://www.vogella.com/tutorials/EclipseRCP/article.html)
-- [][stackoverflow_e4_decument]
+- [Eclipse 4 RCP (aka E4) documentation - Stack Overflow][stackoverflow_e4_decument]
 - [Eclipse Community Forums: Newcomers » Eclipse 4 RCP (e4) documentation](https://www.eclipse.org/forums/index.php/t/485982/)
 - [暂时放弃e4，回到Eclipse 3.x RCP](http://m.blog.csdn.net/article/details?id=7924394)
 - [DukeScript：随处运行Java的新尝试](http://www.tuicool.com/m/articles/6bAjUb)
