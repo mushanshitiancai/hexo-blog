@@ -43,7 +43,6 @@ C-z 挂起当前client
 ```
 
 
-
 我的tmux配置。
 
 ```
@@ -90,6 +89,22 @@ set-window-option -g window-status-current-bg colour10
 # 绑定'r'为重新读取配置
 bind r source-file ~/.tmux.conf \; display "Reloaded!!!!!"
 ```
+
+## mouse相关配置提示错误
+我在mac上使用这个配置，提示错误：
+
+```
+/Users/mazhibin/.tmux.conf:11: unknown option: mouse-resize-pane               
+/Users/mazhibin/.tmux.conf:12: unknown option: mouse-select-pane
+/Users/mazhibin/.tmux.conf:13: unknown option: mouse-select-window
+/Users/mazhibin/.tmux.conf:14: unknown option: mode-mouse
+```
+
+这是因为我mac上的tmux的版本是2.1。centos上的是1.9。而tmux2中，mouse的相关配置被重写了。只需要：
+
+    set -g mouse on
+
+即可。
 
 ## 配置颜色
 ### 啥是colour？

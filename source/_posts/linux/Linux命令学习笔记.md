@@ -4,16 +4,8 @@ date: 2016-01-23 22:01:18
 tags: linux
 ---
 
-## `echo "" | wc`为什么有一个字节？？
-
-```
-$ echo "" | wc
-    1       0       1
-```
-
-明明echo的是一个空字符串，为什么wc还是显示为有一行，一个字节呢？？
-
-因为：echo默认会输出一个回车！！！
+TODO:
+- [Linux终端：用cat命令查看不可见字符](http://www.centoscn.com/CentOS/help/2013/1223/2259.html)
 
 ## 建立硬/软链接
 
