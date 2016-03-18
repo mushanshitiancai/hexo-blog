@@ -2,6 +2,7 @@
 # author: mazhibin
 # log   : 2016-02-25 新建
 #       : 2016-03-15 获取git仓库状态，只在有修改的情况下，才会执行发布操作
+#       : 2016-03-18 修复判断git仓库状态的bug（没有搞懂shell的if语句导致的）
 
 
 if [ "$#" = 0 -o "$1" = "-h" ];then
@@ -15,13 +16,13 @@ cd "$(dirname "$0")"
 
 # 判断git仓库是否有未提交的修改
 function git_change(){
-  expr $(git status --porcelain 2>/dev/null | wc -l)
+  [ $(git status --porcelain 2>/dev/null | wc -l) != "0" ]
 }
 
 # 发布最新博客到github，同时也把hexo参考提交到github
 # 如果没有修改则不会进行提交
 if [ "$1" = "d" ];then
-    if [ ! git_change = "0" ];then
+    if ! git_change;then
       echo "not modified."
       exit
     fi
