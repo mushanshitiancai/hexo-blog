@@ -1,7 +1,6 @@
 ---
 title: gun global使用笔记
-tags:
-  - tools
+tags: emacs
 date: 2016-02-03 16:10:52
 ---
 

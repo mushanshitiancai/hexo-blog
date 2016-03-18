@@ -100,11 +100,17 @@ bind r source-file ~/.tmux.conf \; display "Reloaded!!!!!"
 /Users/mazhibin/.tmux.conf:14: unknown option: mode-mouse
 ```
 
-这是因为我mac上的tmux的版本是2.1。centos上的是1.9。而tmux2中，mouse的相关配置被重写了。只需要：
+这是因为我mac上的tmux的版本是2.1。centos上的是1.9。而tmux2中，mouse的相关配置被重写了。需要：
 
-    set -g mouse on
+```
+set-option -g mouse on
 
-即可。
+# make scrolling with wheels work
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+bind -n WheelDownPane select-pane -t= \; send-keys -M
+```
+
+[unix - tmux set -g mouse-mode on doesnt work - Stack Overflow](http://stackoverflow.com/questions/11832199/tmux-set-g-mouse-mode-on-doesnt-work)
 
 ## 配置颜色
 ### 啥是colour？
