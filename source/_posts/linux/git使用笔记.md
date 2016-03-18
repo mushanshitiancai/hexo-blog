@@ -16,3 +16,6 @@ tags: linux
 然后`git st`的显示效果为：
 
     source/_posts/linux/git使用笔记.md
+
+## 参考地址
+- [git 中文文件名 乱码 mac - beike - ITeye技术网站](http://beike.iteye.com/blog/1075682)
