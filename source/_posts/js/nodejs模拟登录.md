@@ -1,7 +1,7 @@
 ---
 title: nodejs模拟登录
 date: 2016-03-20 18:51:26
-tags: js
+tags: [js,nodejs]
 ---
 
 写个模型登录新浪微博练个手。
