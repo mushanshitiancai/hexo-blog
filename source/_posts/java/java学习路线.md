@@ -285,6 +285,19 @@ Vector,Dictionary,HashTable,Properties,Stack。这些类是在JCF出现之前就
   'order_id' => intval($order['order_id'])
   ```
 
+- 动态语言的代码不是自描述的
+2016年03月22日
+今天我打算用nodejs写一个爬虫。我选选择了superagent，因为没有提供类型cookiejar的功能，我又尝试了unirest。我发现一个问题，js这种灵活而动态的语言，太依赖文档了，如果没有文档，那么js的库将会非常非常难用。我花了一个晚上，基本上都是再和这些库的api做斗争。如果你的需求在这些库的文档的demo都覆盖了的话，你是幸福的，而且你会觉得他的确很好用。一旦你想有些非主流的用法，抱歉，麻烦了。
+
+比如superagent其实有一个agent类，但是文档里没有，我在issue中发现了有用到的例子，才明白，原来还有这个方法。
+
+而如果是在静态类型中，至少你输入`.`，IDE会列出这个类的所有方法。基本上在那个时候，就可以通过函数签名大概知道怎么用了。比如你看到有一个agent方法，返回Agent类。你跳转到Agent类中，看一下这个类的方法签名，基本上也就明了了。
+
+再举个例子，unirest有个jar方法，我大致搜索（对，看js的代码只能靠最原始的搜索）了一下，发现没有jar方法。只有一个数组里有一个jar字符串。花了不少时间，才明白，这个数据被用来动态的构造unirest中的方法。这种动态都添加函数，在js这种类型的语言中很常见，也是一把双刃剑。不利于阅读，不利于维护。
+
+可能你要吐槽我保守，吐槽我不懂的动态的奥义。我只想说，goto是不建议用的，为什么，因为不利于阅读，不利于维护，这一点是大家在学习时都学到了的，大家想必也是认可的。而在动态语言中，比goto还要方便还要可怕的奥义比比皆是，而没人觉得不妥。这就是两个世界。
+
+
 ## 参考地址
 - [100 Days of Swift - samvlu.com](http://samvlu.com/)
 - [allenwong/30DaysofSwift: A self taught project to learn Swift.](https://github.com/allenwong/30DaysofSwift)
