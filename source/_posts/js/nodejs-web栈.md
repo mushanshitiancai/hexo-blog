@@ -11,4 +11,20 @@ tags: [js,nodejs]
 - http框架：express
 - 日志：winston
 - mysql数据库：
+- cookie：cookie-parser
+- session：express-session
+
 - 网络请求库：unirest/superagent
+- cookies：tough-cookie
+
+
+
+## cookies
+
+```
+
+
+//序列化 反序列化
+var o = cookieJar.serializeSync();
+var cookieJar = CookieJar.deserializeSync();
+```

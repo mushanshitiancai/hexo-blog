@@ -36,4 +36,4 @@ req.xhr            如果是ajax请求则为true
 ```
 
 ## 参考资料
-
+- [cookie 和 session - Node.js 实战心得 - 极客学院Wiki](http://wiki.jikexueyuan.com/project/node-lessons/cookie-session.html)
