@@ -84,5 +84,6 @@ awk中内置了两个排序函数`asort`和`asorti`。`asort`对值排序，`aso
 - [awk的sort功能（zz） - wclin88的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/wclin88/article/details/6022149)
 - [awk的sort命令学习一例 - 一直奔跑在路上 - 51CTO技术博客](http://liran728729.blog.51cto.com/2505117/1152213)
 - [awk 数组排序多种实现方法 - 程默 - 博客园](http://www.cnblogs.com/chengmo/archive/2010/10/09/1846696.html)
+- [awk重定向和管道-g_programming-ChinaUnix博客](http://blog.chinaunix.net/uid-25324849-id-3079511.html)
 
 
