@@ -35,6 +35,17 @@ req.subdomains     子域名(tobi.ferrets.example.com -> ["ferrets", "tobi"])
 req.xhr            如果是ajax请求则为true
 ```
 
+## jade
+jade如何显示原始html？
+
+    p!= param
+
+
+## 登录
+登录出现ERR_TOO_MANY_REDIRECTS错误:
+
+[node.js - Express.js ERR_TOO_MANY_REDIRECTS error - Stack Overflow](http://stackoverflow.com/questions/33727433/express-js-err-too-many-redirects-error)
+
 ## 疑问
 - 每个用户都对应一个User类，那这个类是每次用户请求都new呢？还是new一遍然后保存到session中？
 - mysql连接，是后台启动后就connect，然后退出的时候才end，还是每次查询都connect/end？
