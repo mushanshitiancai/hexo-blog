@@ -14,6 +14,7 @@ tags: [js,nodejs]
 - cookie：cookie-parser
 - session：express-session
 
+- 服务端处理dom：cheerio
 - 网络请求库：unirest/superagent
 - cookies：tough-cookie
 
@@ -28,3 +29,6 @@ tags: [js,nodejs]
 var o = cookieJar.serializeSync();
 var cookieJar = CookieJar.deserializeSync();
 ```
+
+
+[cheerio html 方法中文字体被转换问题，求教 - CNode技术社区](http://cnodejs.org/topic/54bdd639514ea9146862ac37)

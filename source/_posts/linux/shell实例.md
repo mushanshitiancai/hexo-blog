@@ -18,11 +18,18 @@ tags: linux
 
 数据有4列，分别表示姓名，语文，数学，英语成绩，给出语文，数学，英语分数最高的人名。
 
-方案：
+按列排序，第一个想到的就是sort了，方案：
 
+    # 输出语文成绩最高的一行
+    sort -nk2,2 input
+    # 输出数学成绩最高的一行
     sort -nk3,3 input
+    # 输出英语成绩最高的一行
+    sort -nk4,4 input
 
 使用sort对某一列排序，就可以得出单科排序后的结果。如果只要最高的，`head -n 1`就可以了。如果一定要只输出人名，再`awk '{print $1'}`。
+
+> sort -nk3,3 的使用可以参考[Linux命令学习笔记 | 木杉的博客](http://mushanshitiancai.github.io/2016/01/23/linux/Linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/)
 
 ## 表格数据处理2
 依然是成绩表，但是格式会麻烦一些：

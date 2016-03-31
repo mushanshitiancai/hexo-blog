@@ -35,5 +35,10 @@ req.subdomains     子域名(tobi.ferrets.example.com -> ["ferrets", "tobi"])
 req.xhr            如果是ajax请求则为true
 ```
 
+## 疑问
+- 每个用户都对应一个User类，那这个类是每次用户请求都new呢？还是new一遍然后保存到session中？
+- mysql连接，是后台启动后就connect，然后退出的时候才end，还是每次查询都connect/end？
+- **注意：**保存类到session中，会丢失方法！所以保存类到session中不可行。
+
 ## 参考资料
 - [cookie 和 session - Node.js 实战心得 - 极客学院Wiki](http://wiki.jikexueyuan.com/project/node-lessons/cookie-session.html)
