@@ -130,7 +130,6 @@ git clone https://github.com/iissnan/hexo-theme-next themes/next
 
     git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia
     
-    
 ## 皮肤的详细配置
 我最终使用的是`yilia`，所以来说说怎么配置这款皮肤。皮肤自己的配置在`themes/yilia/_config.yml`中。
 
@@ -144,9 +143,14 @@ avatar: /public/image/you-avatar.png
 
 // TODO 这里发现了`yilia`的一些问题。以后来详细说明
 
-# 绑定域名
+## 绑定域名
 
 // TODO 目前还没考虑好是否绑定域名。日后再说吧。
+
+## 技巧
+### 显示摘要
+默认首页会把文章的全部展示出来，这样信息太多了不太好。如何显示摘要呢？hexo默认带了这个功能的，只要在文章中插入`<!-- more -->`，之前的内容就会被作为摘要展示了。
+
 
 # 参考连接
 - [GitHub Pages - Websites for you and your projects, hosted directly from your GitHub repository. Just edit, push, and your changes are live.](https://pages.github.com/)
@@ -155,3 +159,4 @@ avatar: /public/image/you-avatar.png
 - [NexT - an elegant theme for Hexo.](http://theme-next.iissnan.com/)
 - [litten/hexo-theme-yilia: 一个简洁优雅的hexo主题 ; A simple and elegant theme for hexo.](https://github.com/litten/hexo-theme-yilia)
 - [(1)hexo常用命令笔记 - 埋名 - SegmentFault](http://segmentfault.com/a/1190000002632530?utm_source=tuicool&utm_medium=referral)
+- [Hexo 主题Light修改教程 - 简书](http://www.jianshu.com/p/70343b7c2fd3)

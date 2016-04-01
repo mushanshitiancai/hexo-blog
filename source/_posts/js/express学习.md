@@ -35,6 +35,9 @@ req.subdomains     子域名(tobi.ferrets.example.com -> ["ferrets", "tobi"])
 req.xhr            如果是ajax请求则为true
 ```
 
+## 中间件的问题
+redirect会触发中间件么？
+
 ## jade
 jade如何显示原始html？
 
