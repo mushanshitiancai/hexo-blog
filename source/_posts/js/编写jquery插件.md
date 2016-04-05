@@ -1,5 +1,5 @@
 ---
-title: 编写jquery插件
+title: 编写jQuery插件
 date: 2016-04-02 11:49:39
 tags: [js,jquery]
 ---
