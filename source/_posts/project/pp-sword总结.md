@@ -18,6 +18,7 @@ pp-sword是最近在写的一个用来方便查询公司线上数据的小工具
 - bootstrap
 - 如何做仿yilla的左右布局
 - jquery异步提交表单(jquery.from)
+- jquery获取节点html
 
 先上狂拽酷炫吊炸天的原型图：
 
@@ -25,3 +26,5 @@ pp-sword是最近在写的一个用来方便查询公司线上数据的小工具
 
 
 [js模版引擎handlebars.js实用教程——目录 - 杨元 - 博客园](http://www.cnblogs.com/iyangyuan/archive/2013/12/12/3471227.html)
+
+[stringification - How do you convert a jQuery object into a string? - Stack Overflow](http://stackoverflow.com/questions/652763/how-do-you-convert-a-jquery-object-into-a-string)
