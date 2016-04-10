@@ -89,11 +89,78 @@ mysql官方推荐使用`mysqld_safe`来启动mysqld服务，这个脚本做了�
 - 使用 mysqld 脚本启动：/etc/inint.d/mysqld stop
 - mysqladmin shutdown
 
-我选择的是`mysqladmin shutdown`
+我选择的是`mysqladmin shutdown`。
+
+[手动安装mysql，使用mysqld_safe启动mysql服务](http://san-yun.iteye.com/blog/1493931)这篇文字提供了一个脚本，有参考意义：
+
+```
+#!/bin/sh
+
+mysql_port=3306
+mysql_username="root"
+mysql_password=""
+
+function_start_mysql()
+{
+    printf "Starting MySQL...\n"
+    /bin/sh /usr/local/webserver/mysql/bin/mysqld_safe --defaults-file=/data1/mysql/${mysql_port}/my.cnf 2>&1 > /dev/null &
+}
+
+function_stop_mysql()
+{
+    printf "Stoping MySQL...\n"
+    /usr/local/webserver/mysql/bin/mysqladmin -u ${mysql_username} -p${mysql_password} -h 127.0.0.1 -S /tmp/mysql.sock shutdown
+}
+
+function_restart_mysql()
+{
+    printf "Restarting MySQL...\n"
+    function_stop_mysql
+    sleep 5
+    function_start_mysql
+}
+
+function_kill_mysql()
+{
+    kill -9 $(ps -ef | grep 'bin/mysqld_safe' | grep ${mysql_port} | awk '{printf $2}')
+    kill -9 $(ps -ef | grep 'libexec/mysqld' | grep ${mysql_port} | awk '{printf $2}')
+}
+
+if [ "$1" = "start" ]; then
+    function_start_mysql
+elif [ "$1" = "stop" ]; then
+    function_stop_mysql
+elif [ "$1" = "restart" ]; then
+function_restart_mysql
+elif [ "$1" = "kill" ]; then
+function_kill_mysql
+else
+    printf "Usage: /data1/mysql/${mysql_port}/mysql {star|stop|restart|kill}\n"
+fi
+```
 
 ## 自动启动
 
+    $ sudo chkconfig mysqld on
 
+虽然不知道原理，但是`chkconfig`配置的自动启动是使用`mysqld_safe`来启动服务的，因为启动系统后，查看进程：
+
+```
+-- 系统启动后，有mysqld_safe和mysqld进程，而且mysqld进程的父进程是mysqld_safe，说明是mysqld_safe启动的
+$ ps -ef | grep mysql
+root      1398     1  0 15:34 ?        00:00:00 /bin/sh /usr/bin/mysqld_safe --datadir=/var/lib/mysql --socket=/var/lib/mysql/mysql.sock --pid-file=/var/run/mysqld/mysqld.pid --basedir=/usr --user=mysql
+mysql     3670  1398  0 15:37 ?        00:00:00 /usr/libexec/mysqld --basedir=/usr --datadir=/var/lib/mysql --user=mysql --log-error=/var/log/mysqld.log --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/lib/mysql/mysql.sock
+vagrant   3732  3391  0 15:37 pts/0    00:00:00 grep mysql
+
+-- 关闭mysqld进程
+$ sudo kill -9 3670
+
+-- 关闭mysqld进程后，新的mysqld进程出现了，说明mysqld_safe的自动重启mysqld的功能正在运作
+$ ps -ef | grep mysql
+root      1398     1  0 15:34 ?        00:00:00 /bin/sh /usr/bin/mysqld_safe --datadir=/var/lib/mysql --socket=/var/lib/mysql/mysql.sock --pid-file=/var/run/mysqld/mysqld.pid --basedir=/usr --user=mysql
+mysql     3772  1398  1 15:38 ?        00:00:00 /usr/libexec/mysqld --basedir=/usr --datadir=/var/lib/mysql --user=mysql --log-error=/var/log/mysqld.log --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/lib/mysql/mysql.sock
+vagrant   3791  3391  0 15:38 pts/0    00:00:00 grep mysql
+```
 
 ## 参考资料
 - [CentOs中mysql的安装与配置 - 发表是最好的记忆 - 博客园](http://www.cnblogs.com/shenliang123/p/3203546.html)
