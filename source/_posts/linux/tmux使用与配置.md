@@ -10,6 +10,38 @@ tmux是一个终端复用工具。就是你可以在一个终端中用tmux开很
 
 tmux使用分层的思想来管理终端：会话(session)>窗口(window)>面板(panel)。一个tmux是可以被多个客户端(client)访问的。
 
+## 安装
+centos中无法使用yum安装tmux（不知道为什么，明明这么多的人在用），所以只能手动安装了，一下代码转载自：[Install tmux 1.9 on rhel/centos 6](https://gist.github.com/rothgar/cecfbd74597cc35a6018)
+
+```
+# Install tmux on Centos release 6.5
+
+# install deps
+yum install gcc kernel-devel make ncurses-devel
+
+# DOWNLOAD SOURCES FOR LIBEVENT AND MAKE AND INSTALL
+curl -OL https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
+tar -xvzf libevent-2.0.21-stable.tar.gz
+cd libevent-2.0.21-stable
+./configure --prefix=/usr/local
+make
+sudo make install
+
+# DOWNLOAD SOURCES FOR TMUX AND MAKE AND INSTALL
+curl -OL http://downloads.sourceforge.net/tmux/tmux-1.9a.tar.gz
+tar -xvzf tmux-1.9a.tar.gz
+cd tmux-1.9a
+LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local
+make
+sudo make install
+
+# pkill tmux
+# close your terminal window (flushes cached tmux executable)
+# open new shell and check tmux version
+tmux -V
+```
+
+## 使用
 tmux命令常用操作：
 
 ```
