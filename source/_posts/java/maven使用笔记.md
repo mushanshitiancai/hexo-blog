@@ -4,6 +4,10 @@ date: 2016-04-11 20:16:19
 tags: java
 ---
 
+maven是Java世界中必回的一个工程管理工具。
+
+<!-- more -->
+
 ## 安装
 
 ## 约定优于配置
@@ -68,6 +72,30 @@ package: com.mushan
 ```
 
 `maven-archetype-quickstart`在App.java中写好了hello world的代码。
+
+### 直接指定选项
+也可以直接在命令中指定选项：
+
+    $ mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1 -DgroupId=com.company -DartifactId=project -Dversion=1.0-SNAPSHOT -Dpackage=com.company.project
+
+这里的`-B`选项，是批量模式也就是不进行互动的意思：
+
+    -B,--batch-mode                        Run in non-interactive (batch)
+
+### 过滤列表
+默认会列出所有的项目原型，选择麻烦，可以进行过滤，格式是：[groupId:]artifactId：
+
+    $ mvn archetype:generate -Dfilter=org.apache:struts
+
+或者是在交互模式下过滤：
+
+    $ mvn archetype:generate
+    
+    ...
+
+    Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): org.apache:struts
+
+比如我们想要看maven官方的工程原型可以使用`org.apache.maven.archetypes:`过滤。
 
 ## 运行工程
 

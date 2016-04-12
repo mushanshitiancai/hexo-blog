@@ -1,7 +1,7 @@
 ---
 title: 安装配置mysql
 date: 2016-04-10 09:31:14
-tags: linux
+tags: mysql
 ---
 
 记录一下mysql在centos6.6上的安装与配置。
