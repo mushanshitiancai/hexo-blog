@@ -4,7 +4,7 @@ date: 2016-04-12 22:38:20
 tags: mysql
 ---
 
-## 运行mysql远程访问
+## 允许mysql远程访问
 安装mysql后，远程访问这个机子的mysql服务，提示错误：
 
     $ mysql -h192.168.33.10 -P 3306 -u root -p111
@@ -43,6 +43,10 @@ Query OK, 0 rows affected (0.00 sec)
 然后就可以在外部连接这个数据库了：
 
     $ mysql -h192.168.33.10 -P 3306 -u root -p222
+
+## 为什么什么权限也没有但是还是可以查询增删改查？
+
+- [mysql - Only "grant usage", but can still select, drop, create? - Database Administrators Stack Exchange](http://dba.stackexchange.com/questions/66584/only-grant-usage-but-can-still-select-drop-create)
 
 ## 参考资料
 - [is not allowed to connect to this MySQL server解决办法-mysql教程-数据库-壹聚教程网](http://www.111cn.net/database/mysql/42040.htm)
