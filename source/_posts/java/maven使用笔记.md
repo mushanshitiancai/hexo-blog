@@ -113,6 +113,28 @@ package: com.mushan
 
     $ java -cp target/mvn-test-1.0-SNAPSHOT.jar com.mushan.App
 
+上面这个中方法只能运行个hello world，如果你的代码用到了第三方库，那么上面这种原始方法就不行了。
+
+正宗的maven运行工程的方法是：
+
+    $ mvn compile
+    $ mvn exec:java -Dexec:mainClass="com.mushan.xx"
+
+exec插件可以通过指定主类类运行工程。同时还会帮你准备好classpath。
+
+但是我在执行的过程中发现了一个提示：
+
+```
+[WARNING] thread Thread[Abandoned connection cleanup thread,5,com.mushan.App] was interrupted but is still alive after waiting at least 15000msecs
+[WARNING] thread Thread[Abandoned connection cleanup thread,5,com.mushan.App] will linger despite being asked to die via interruption
+[WARNING] NOTE: 1 thread(s) did not finish despite being asked to  via interruption. This is not a problem with exec:java, it is a problem with the running code. Although not serious, it should be remedied.
+[WARNING] Couldn't destroy threadgroup org.codehaus.mojo.exec.ExecJavaMojo$IsolatedThreadGroup[name=com.mushan.App,maxpri=10]
+java.lang.IllegalThreadStateException
+...
+```
+
+这个可以通过在后面加上`-Dexec.cleanupDaemonThreads=false`参数来解决。[参考](http://stackoverflow.com/questions/33465161/exception-while-trying-to-run-java-program-from-maven)。
+
 ## POM(Project Object Model)
 项目对象模型。从名字可以看得出来，maven践行了Java世界中的一切皆对象的设计，在项目管理上也使用了面对对象的设计。
 
@@ -201,3 +223,4 @@ package 阶段：jar:jar
 ## 参考资料
 - [Apache Maven 入门篇 ( 上 )](http://www.oracle.com/technetwork/cn/community/java/apache-maven-getting-started-1-406235-zhs.html)
 - [Apache Maven 入门篇 ( 下 )](http://www.oracle.com/technetwork/cn/community/java/apache-maven-getting-started-2-405568-zhs.html)
+- [maven--命令，依赖，聚合 - 粉末无颜的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/shenshen123jun/article/details/9079153)
