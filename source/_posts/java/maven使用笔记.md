@@ -82,6 +82,12 @@ package: com.mushan
 
     -B,--batch-mode                        Run in non-interactive (batch)
 
+如果不使用批量模式，maven会让你确定配置。这就有了额外的交互了。
+
+`-D`用来指定配置属性：
+
+    -D,--define <arg>                      Define a system property
+
 ### 过滤列表
 默认会列出所有的项目原型，选择麻烦，可以进行过滤，格式是：[groupId:]artifactId：
 

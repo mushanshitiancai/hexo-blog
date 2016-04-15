@@ -76,6 +76,27 @@ To do so, start the server, then issue the following commands:
 
     $ mysql -u root -p
 
+## mac下安装
+
+```
+$ brew install mysql
+
+...
+
+We've installed your MySQL database without a root password. To secure it run:
+    mysql_secure_installation
+
+To connect run:
+    mysql -uroot
+
+To have launchd start mysql at login:
+  ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+Then to load mysql now:
+  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+Or, if you don't want/need launchctl, you can just run:
+  mysql.server start
+```
+
 ## 启动
 mysql官方推荐使用`mysqld_safe`来启动mysqld服务，这个脚本做了更多的工作，包括打日志，遇到错误自动重启mysql等。
 
@@ -160,6 +181,24 @@ $ ps -ef | grep mysql
 root      1398     1  0 15:34 ?        00:00:00 /bin/sh /usr/bin/mysqld_safe --datadir=/var/lib/mysql --socket=/var/lib/mysql/mysql.sock --pid-file=/var/run/mysqld/mysqld.pid --basedir=/usr --user=mysql
 mysql     3772  1398  1 15:38 ?        00:00:00 /usr/libexec/mysqld --basedir=/usr --datadir=/var/lib/mysql --user=mysql --log-error=/var/log/mysqld.log --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/lib/mysql/mysql.sock
 vagrant   3791  3391  0 15:38 pts/0    00:00:00 grep mysql
+```
+
+## 配置账户
+默认mysql只提供了一个root用户。root用户只能从本地登录。我们可以建立一个可以从远程登录的普通用户。
+
+配置账户要注意最小权限原则。
+
+```
+-- 先赋予用户最基本的登录权限，用户可以从任何host登录
+grant usage on *.* to mushan identified by '111';
+-- 授予用户特定库的操作权限
+grant all on xx_table.* to mushan;
+```
+
+上面两句话其实等价于一句：
+
+```
+grant all on xx_table.* to mushan identified by '111';
 ```
 
 ## 参考资料
