@@ -43,6 +43,20 @@ if [ "$1" = "n" ];then
     blog_name=$(echo "$2" | sed 's/.*\///')
   fi
 
+  blog_dir="./source/_posts/$blog_dir"
+
+  # 先判断子目录是否存在，不存在就咨询要不要新建
+  if [ ! -d "$blog_dir" ];then
+    echo "子目录'${blog_dir}'不存在,是否新建?(输入y新建): \c"
+    read need_create
+    if [ "$need_create" = 'y' ];then
+      mkdir $blog_dir
+    else
+      echo "子目录不存在，创建博客取消"
+      exit
+    fi
+  fi
+
   # 新建
   if [ "$#" = "3" ];then
       hexo n "$blog_name" "$3"
@@ -50,8 +64,8 @@ if [ "$1" = "n" ];then
       hexo n "$blog_name"
   fi
 
-  # 移动
-  
+  # 移动(如果覆盖则提示)
+  find ./source/_posts -maxdepth 1 -type f ! -name ".DS_Store" ! -name "." -exec mv -i {} $blog_dir \;
 fi
 
 # 发布草稿到正式博客
