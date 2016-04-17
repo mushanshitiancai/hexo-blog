@@ -33,13 +33,25 @@ if [ "$1" = "d" ];then
     echo -e "deploy `date +%Y-%m-%d\ %H:%M:%S`\n" >> ~/blog_log
 fi
 
-# 新建博客，也可以新建草稿
+# 新建博客，也可以新建草稿(可以指定子目录)
 if [ "$1" = "n" ];then
-    if [ "$#" = "3" ];then
-        hexo n "$2" "$3"
-    else
-        hexo n "$2"
-    fi
+  blog_dir="other"     # 不指定博客子目录，都移动到other下
+  blog_name="$2"
+  if [[ "$2" =~ "/" ]];then
+    # 指定博客在子目录中
+    blog_dir=$(echo "$2" | sed 's/\/.*//')
+    blog_name=$(echo "$2" | sed 's/.*\///')
+  fi
+
+  # 新建
+  if [ "$#" = "3" ];then
+      hexo n "$blog_name" "$3"
+  else
+      hexo n "$blog_name"
+  fi
+
+  # 移动
+  
 fi
 
 # 发布草稿到正式博客

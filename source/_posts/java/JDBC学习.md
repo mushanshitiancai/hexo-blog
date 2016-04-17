@@ -169,17 +169,79 @@ PreparedStatement是预编译的Statement对象。因为是预编译，所以效
 - setTime(int paramIndex, java.sql.Time x)
 - setObject(int paramIndex, Object x)
 
+**问题：**
+- 不设置参数执行会遇到什么问题？
 
+        Exception in thread "main" java.sql.SQLException: No value specified for parameter 1
 
 ### java.sql.CallableStatement
+CallableStatement是用来调用存储过程的。
+
 ### java.sql.ResultSet
 
+常用方法：
+- next()
+- getInt()
+
 ## 关闭连接
-[JDBC数据库连接池connection关闭后Statement和ResultSet未关闭的问题 - k1121 - ITeye技术网站](http://k1121.iteye.com/blog/1279063)
+参考：[JDBC数据库连接池connection关闭后Statement和ResultSet未关闭的问题 - k1121 - ITeye技术网站](http://k1121.iteye.com/blog/1279063)
+
+根据JDBC规范：
+
+> JDBC. 4.0 Specification——13.1.4 Closing Statement Objects 
+> 
+> An application calls the method Statement.close to indicate that it has finished processing a statement. All Statement objects will be closed when the connection that created them is closed. However, it is good coding practice for applications to close statements as soon as they have finished processing them. This allows any external resources that the statement is using to be released immediately. 
+> 可以通过Statement.close来显式关闭statement。让创建statement的连接关闭后，所有对应的statement都会被关闭。但是在使用完statement后就关闭他们是最佳实践，因为这样可以释放statement占用的外部资源。
+> 
+> Closing a Statement object will close and invalidate any instances of ResultSet produced by that Statement object. The resources held by the ResultSet object may not be released until garbage collection runs again, so it is a good practice to explicitly close ResultSet objects when they are no longer needed. 
+> 关闭Statement对象会关闭这个statement对象创建的所有ResultSet对象。但是ResultSet对象持有的资源会在下一次垃圾回收的时候才会被释放。所以在使用完后就关闭ResultSet对象是一个最佳实践。
+> 
+> Once a Statement has been closed, any attempt to access any of its methods with the exception of the is Closed or close methods will result in a SQLException being thrown. 
+> 一旦Statement被关闭，操作他的有些方法会抛出SQLException。
+> 
+> These comments about closing Statement objects apply to PreparedStatement and CallableStatement objects as well. 
+> 上面说的对于PreparedStatement和CallableStatement同样适用。
+
+**问题：**
+- 通过Statement关闭而关闭ResultSet不会释放资源是什么志愿。和主动close ResultSet不一样？
+- `any attempt to access any of its methods with the exception of the is Closed or close methods will result in a SQLException being thrown`这句话说close也会触发异常，但是其实不会，为什么。
+
+例子：如果你在关闭了Statement后继续操作之前生成的ResultSet就会触发异常：
 
     Exception in thread "main" java.sql.SQLException: Operation not allowed after ResultSet closed
+
+一个关闭连接的良好例子：
+
+```
+public static void close(Connection con,Statement stmt,ResultSet rs){
+    if(rs != null){
+        try {
+            rs.close();      // 关闭结果集
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if(stmt != null){
+                try {
+                    stmt.close();    // 关闭
+                }catch (SQLException e){
+                    e.printStackTrace();
+                } finally {
+                    if(con != null){
+                        try {
+                            con.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
 
 
 ## 参考资料
 - 《Java数据库详解》
 - [在eclipse导入Java 的jar包的方法 JDBC【图文说明】 - 陶伟基Wiki - 博客园](http://www.cnblogs.com/taoweiji/archive/2012/12/11/2812295.html)
+- [Java SE 7 Java Database Connectivity (JDBC)-related APIs & Developer Guides](http://docs.oracle.com/javase/7/docs/technotes/guides/jdbc/)
