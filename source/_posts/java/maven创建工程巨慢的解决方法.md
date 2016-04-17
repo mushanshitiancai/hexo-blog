@@ -27,7 +27,7 @@ archetype插件有一个`archetypeCatalog`参数，这个参数指定从哪里�
 
 如果你使用的是IDEA，需要在设置中添加这个选项：
 
-![](http://static.oschina.net/uploads/space/2015/0617/215636_8E5T_225373.png)
+![](/img/java/idea-maven.png)
 
 转自：[地址](http://my.oschina.net/u/225373/blog/468035)
 
