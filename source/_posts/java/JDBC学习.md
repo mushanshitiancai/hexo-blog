@@ -42,8 +42,7 @@ $ mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -Darc
 
 简化版：获取连接→创建Statement→执行数据库操作→获取结果→关闭Statement→关闭结果集→关闭连接。
 
-**问题：** 关闭Statement→关闭结果集→关闭连接，这个顺序是固定的么？
-
+**问题：** 【TODO】 `关闭Statement→关闭结果集→关闭连接`，这个顺序是固定的么？我在别的地方看到了`关闭结果集→关闭Statement→关闭连接`，哪个是对的？
 
 对应的代码如下：
 
@@ -137,13 +136,48 @@ jdbc主要的接口有：
 
 **问题：**
 - executeQuery()执行更新操作是什么下场？
+
+        Exception in thread "main" java.sql.SQLException: Can not issue data manipulation statements with executeQuery().
+
+    也就是说，不行。
+
 - executeUpdate()执行查询操作是什么下场？
+
+        Exception in thread "main" java.sql.SQLException: Can not issue SELECT via executeUpdate() or executeLargeUpdate().
+
+    也就是说，不行。
+
 - getResultSet()只会返回execute()的结果么？
 
-### java.sql.ResultSet
-### java.sql.PreparedStatement
-### java.sql.CallableStatement
+    四种情况：
+    - 获得Statement后直接getResultSet  - null
+    - 执行executeQuery后getResultSet  - 无论executeQuery结果如何，都是空结果集
+    - 执行executeUpdate后getResultSet - null
+    - 执行execute后getResultSet       - 如果是查询语句，null，如果是更新语句，则是返回的结果集
 
+### java.sql.PreparedStatement
+PreparedStatement是预编译的Statement对象。因为是预编译，所以效率高一点。也是因为这个，所以在获取语句对象的时候就要指定sql语句。对于语句中的变量，可以使用`?`来占位，之后再设置为具体的值。
+
+常用方法：
+- close()            关闭连接
+- executeQuery()     执行查询sql，返回ResultSet对象
+- executeUpdate()    执行更新sql，返回更新的行数
+- execute()          执行任意sql，返回bool值，表示是否返回了ResultSet对象
+- setBoolean(int paramIndex, boolean x)    替换?指定的参数，paramIndex指定是第几个?
+- set...                                   不同类型有不同的set函数
+- setDate(int paramIndex, java.sql.Date x) 
+- setTime(int paramIndex, java.sql.Time x)
+- setObject(int paramIndex, Object x)
+
+
+
+### java.sql.CallableStatement
+### java.sql.ResultSet
+
+## 关闭连接
+[JDBC数据库连接池connection关闭后Statement和ResultSet未关闭的问题 - k1121 - ITeye技术网站](http://k1121.iteye.com/blog/1279063)
+
+    Exception in thread "main" java.sql.SQLException: Operation not allowed after ResultSet closed
 
 
 ## 参考资料
