@@ -29,7 +29,7 @@ project-dir             // 项目根目录，存放pom.xml和所有其他目录
 
     $ mvn archetype:generate
 
-不带其他参数，maven就会进入交互建立工程模式。
+不带其他参数，maven就会进入交互建立工程模式。如果觉得很慢，参考[maven创建工程巨慢的解决方法](http://mushanshitiancai.github.io/2016/04/17/java/maven%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B%E5%B7%A8%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/)
 
 第一次运行，maven会下载很多依赖。然后会列出一个项目原型列表，有很多，我看到的有1500多条。maven默认的选择是766，也就是`maven-archetype-quickstart`。接下来会让你选择哪一个版本的原型，默认选择的是最新版本，回车即可。
 
