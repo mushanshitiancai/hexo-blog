@@ -11,6 +11,8 @@ tags: java
 
 但是到了最后一步访问，tomcat总是提示404。崩溃。。。。
 
+<!-- more -->
+
 后来我意识到是不是我的操作步骤和他们的有些不同而导致的。不同之处是，他们直接新建一个webapp，而我是建立了一个webapp的module。
 
 ![](img/java/idea-maven-webapp/1.png)
