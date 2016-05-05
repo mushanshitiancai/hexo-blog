@@ -39,6 +39,19 @@ tags: [project]
 
 ## 设计
 
+- 使用百度脑图的思维导图开源组件
+
+## 一步一步
+### 2016年05月05日
+今天查了atom和vscode的一些对比。
+
+最感性的是这个视频对比：
+[Atom vs Visual Studio Code - Memory and CPU - YouTube](https://www.youtube.com/watch?v=jBuizwplv1k&ab_channel=JoshuaWulf)
+
+atom打开很慢，内存占用更是奇高。。。所以打算基于vscode开发。
+
+[Microsoft/vscode: Visual Studio Code](https://github.com/Microsoft/vscode)
+
 
 [ghcmod.py]: https://github.com/SublimeHaskell/SublimeHaskell/blob/e622d39d05c0f74b8ca9ae760b495bcf54828684/ghcmod.py
 [tern_server_doc]: http://ternjs.net/doc/manual.html#server
