@@ -1,7 +1,7 @@
 ---
 title: 安装配置vagrant
 date: 2016-04-10 09:23:55
-tags: linux
+tags: [linux,vagrant]
 ---
 
 Vagrant是一个虚拟机管理工具，极大的方便我们使用虚拟机。以前那种打开virtual box/VMware，然后加载镜像，安装捣腾半天的时代过去了。通过Vagrant可以使用别人打包好的box，自己调教好的系统也可以打包给别人使用。
@@ -53,6 +53,32 @@ Vagrant是一个虚拟机管理工具，极大的方便我们使用虚拟机。�
         vagrant package
 
     具体参考[Creating a Base Box - Vagrant Documentation](http://docs.vagrantup.com/v2/boxes/base.html)
+
+> vagrant目前不支持移动虚拟机，所以慎重选择新建虚拟机的目录！
+
+## vagrant管理
+如果你在本机多个地方启动了vagrant，要怎么管理呢？可以使用命令`global-status`：
+
+```
+$ vagrant global-status
+id       name    provider   state   directory
+--------------------------------------------------------------------------
+edb8f98  default virtualbox aborted /Users/mazhibin/project/learn/laravel/Homestead
+2fc4f12  default virtualbox running /Users/mazhibin/project/learn/vagrent
+
+The above shows information about all known Vagrant environments
+on this machine. This data is cached and may not be completely
+up-to-date. To interact with any of the machines, you can go to
+that directory and run Vagrant, or you can use the ID directly
+with Vagrant commands from any directory. For example:
+"vagrant destroy 1a2b3c4d"
+```
+
+命令`global-status`会显示机器上面存在的所有vagrant实例，以及他们的运行状况。
+
+并且可以通过显示的各个实例的`id`，来在任何目录下操作这个vagrant实例。比如：
+
+    $ vagrant halt 2fc4f12
 
 ## vagarnt配置
 
