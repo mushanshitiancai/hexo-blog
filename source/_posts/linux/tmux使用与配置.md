@@ -1,7 +1,7 @@
 ---
-title: 【TODO】tmux使用与配置
+title: tmux使用与配置
 date: 2016-03-02 16:40:38
-tags: tools
+tags: [linux,tmux]
 ---
 
 tmux是一个终端复用工具。就是你可以在一个终端中用tmux开很多终端。
