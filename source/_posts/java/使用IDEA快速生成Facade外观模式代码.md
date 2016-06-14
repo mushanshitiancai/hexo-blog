@@ -49,9 +49,3 @@ Java虽然啰嗦，但是配合IDE的功能，还是弥补了不少。
 - [JAVA设计模式十九--Facade(外观模式) - hfmbook的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/hfmbook/article/details/7702642)
 - [java - Generate Code with redirection IntelliJ Idea 15 - Stack Overflow](http://stackoverflow.com/questions/35635834/generate-code-with-redirection-intellij-idea-15)
 - [java - Can IntelliJ automatically create a decorator class? - Stack Overflow](http://stackoverflow.com/questions/4325699/can-intellij-automatically-create-a-decorator-class)
-
-
-
-
-
-
