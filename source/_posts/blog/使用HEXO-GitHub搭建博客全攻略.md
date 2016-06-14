@@ -172,3 +172,4 @@ avatar: /public/image/you-avatar.png
 - [litten/hexo-theme-yilia: 一个简洁优雅的hexo主题 ; A simple and elegant theme for hexo.](https://github.com/litten/hexo-theme-yilia)
 - [(1)hexo常用命令笔记 - 埋名 - SegmentFault](http://segmentfault.com/a/1190000002632530?utm_source=tuicool&utm_medium=referral)
 - [Hexo 主题Light修改教程 - 简书](http://www.jianshu.com/p/70343b7c2fd3)
+- [Hexo使用攻略：（四）Hexo的分类和标签设置 | { GoonX }](http://ijiaober.github.io/2014/08/05/hexo/hexo-04/)
