@@ -23,7 +23,7 @@ $ mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -Darc
 
 添加mysql驱动程序依赖：
 
-```
+```xml
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
@@ -46,7 +46,7 @@ $ mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -Darc
 
 对应的代码如下：
 
-```
+```java
 package com.mushan;
 
 import java.sql.Connection;

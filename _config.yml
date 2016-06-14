@@ -7,7 +7,7 @@ title: 木杉的博客
 subtitle: 要么精通，要么死
 description: 这是木杉的个人博客
 author: 木杉
-language:
+language: zh-CN
 timezone:
 
 # URL
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: yilia
+theme: maupassant
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -71,3 +71,4 @@ deploy:
   type: git
   repo: git@github.com:mushanshitiancai/mushanshitiancai.github.io.git
     
+rss: /atom.xml #rss地址

@@ -2,6 +2,7 @@
 title: 使用HEXO+GitHub搭建博客全攻略
 date: 2016-01-21 17:28:05
 tags: blog
+toc: true
 ---
 
 木杉的博客V3版迟迟没法动手。因为前缀项目Atom-note还没眉目呢。。。
@@ -151,6 +152,17 @@ avatar: /public/image/you-avatar.png
 ### 显示摘要
 默认首页会把文章的全部展示出来，这样信息太多了不太好。如何显示摘要呢？hexo默认带了这个功能的，只要在文章中插入`<!-- more -->`，之前的内容就会被作为摘要展示了。
 
+### 开启RSS功能
+
+    $ npm install hexo-generator-feed --save
+
+编辑hexo/_config.yml，添加如下代码：
+    
+    rss: /atom.xml #rss地址  默认即可
+
+## 杂项
+2016年06月14日
+换成了maupassant-hexo这个主题，感觉很不错！
 
 # 参考连接
 - [GitHub Pages - Websites for you and your projects, hosted directly from your GitHub repository. Just edit, push, and your changes are live.](https://pages.github.com/)
