@@ -11,7 +11,7 @@ Queue是一个很重要的接口。尤其是在并发编程中，比如像Blocki
 
 先来看看Queue接口的代码
 
-```
+```java
 public interface Queue<E> extends Collection<E> {
 
     //将元素插入队列，总是返回true，如果失败，抛出异常
@@ -58,7 +58,7 @@ PS. 个人觉得，element这个函数名取得简直傻逼。
 ## Deque
 Queue是单端的操作。Deque是双端的操作。
 
-```
+```java
 public interface Deque<E> extends Queue<E> {
 
     //在头部插入元素，如果空间不够，抛出IllegalStateException
@@ -178,6 +178,7 @@ public interface Deque<E> extends Queue<E> {
 Java集合除了失败的Stack类，并没有定义新的Stack方法，而是把Stack的方法定义在Deque里了。
 
 | Stack方法 |  等价的Deque方法  | 等价的Queue方法  |
+|-----------|-----------------|----------------|
 |  push(e) | addFirst(e)     |   无            |
 |  pop()   | removeFirst()   |   remove()      |
 |  peek()  | peekFirst()     |   peek()        |
@@ -186,7 +187,9 @@ Java集合除了失败的Stack类，并没有定义新的Stack方法，而是把
 
 使用Deque来作为Stack：
 
-    Deque<Integer> stack = new ArrayDeque<Integer>();
+```java
+Deque<Integer> stack = new ArrayDeque<Integer>();
+```
 
 **最好不要插入null：**
 
