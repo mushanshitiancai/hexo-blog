@@ -569,9 +569,6 @@ public Iterator<E> iterator() {
     return new Itr();
 }
 
-/**
- + An optimized version of AbstractList.Itr
- */
 private class Itr implements Iterator<E> {
     int cursor;       // index of next element to return
     int lastRet = -1; // index of last element returned; -1 if no such
@@ -981,6 +978,8 @@ public boolean isEmpty() {
 
 ## 总结
 
+- ArrayList的无参数构造函数新建的长度为0，添加第一个元素后，长度为默认长度10
+- ArrayList指定新建的长度为0，添加第一个元素后，长度为1，为正常增长结果
 - ArrayList通过数组存放数据，成员是elementData
 - ArrayList的增长方式是增加原来的一半
 - elementData成员是transient的，不会被自动序列化

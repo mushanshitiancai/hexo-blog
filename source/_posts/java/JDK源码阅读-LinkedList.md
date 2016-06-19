@@ -25,7 +25,7 @@ LinkedList实现了List和Deque接口，所以可以把LinkedList当做队列或
 transient int size = 0;
 
 // 指向头元素的引用
-// 永远成立的表达式【有疑问】: (first == null && last == null) ||
+// 永远成立的表达式: (first == null && last == null) ||
 //                 (first.prev == null && first.item != null)
 transient Node<E> first;
 
@@ -34,6 +34,10 @@ transient Node<E> first;
 //                          (last.next == null && last.item != null)
 transient Node<E> last;
 ```
+
+这里我有一个很大的疑问。就是源码注释的永远成立的表达式，感觉是不对的。因为LinkedList是允许添加null的元素的，所以可能出现(first.prev == null && first.item == null)的情况。
+
+这个时候我心里激动了一下，我擦，我是不是发现了jdk的一个小bug，看看jdk最新代码什么情况，唉，可惜已经被人修复了。。。http://hg.openjdk.java.net/jdk9/dev/jdk/rev/cabf2d0876ef
 
 ### 构造函数
 
@@ -47,6 +51,24 @@ public LinkedList(Collection<? extends E> c) {
     addAll(c);
 }
 ```
+
+### 节点类
+
+```
+private static class Node<E> {
+    E item;
+    Node<E> next;
+    Node<E> prev;
+
+    Node(Node<E> prev, E element, Node<E> next) {
+        this.item = element;
+        this.next = next;
+        this.prev = prev;
+    }
+}
+```
+
+这是链表节点类，因为是双向链表，所以有一个`next`一个`prev`引用。
 
 ### 内部用插入/删除方法（链表操作方法）
 
@@ -168,7 +190,7 @@ E unlink(Node<E> x) {
 都是实现`Deque`接口的方法
 
 ```
-//获取第一个元素
+//获取第一个元素，如果列表为空，报错
 public E getFirst() {
     final Node<E> f = first;
     if (f == null)
@@ -176,7 +198,7 @@ public E getFirst() {
     return f.item;
 }
 
-//获取最后一个元素
+//获取最后一个元素，如果列表为空，报错
 public E getLast() {
     final Node<E> l = last;
     if (l == null)
@@ -213,7 +235,7 @@ public void addLast(E e) {
 
 使用上面包装好的链表操作函数，这些函数的实现变得很简单。
 
-
+这几个方法如果在获取、删除时发现列表是空的会报出NoSuchElementException。
 
 ```
 /**
@@ -309,15 +331,9 @@ public boolean addAll(int index, Collection<? extends E> c) {
     return true;
 }
 
-/**
- + Removes all of the elements from this list.
- + The list will be empty after this call returns.
- */
+//清空所有元素
 public void clear() {
-    // Clearing all of the links between nodes is "unnecessary", but:
-    // - helps a generational GC if the discarded nodes inhabit
-    //   more than one generation
-    // - is sure to free memory even if there is a reachable Iterator
+    // 把元素都设置为null，帮助GC
     for (Node<E> x = first; x != null; ) {
         Node<E> next = x.next;
         x.item = null;
@@ -329,31 +345,18 @@ public void clear() {
     size = 0;
     modCount++;
 }
+```
 
+### 基于位置的操作
 
-// Positional Access Operations
-
-/**
- + Returns the element at the specified position in this list.
- *
- + @param index index of the element to return
- + @return the element at the specified position in this list
- + @throws IndexOutOfBoundsException {@inheritDoc}
- */
+```
+//返回特定位置上的元素
 public E get(int index) {
     checkElementIndex(index);
     return node(index).item;
 }
 
-/**
- + Replaces the element at the specified position in this list with the
- + specified element.
- *
- + @param index index of the element to replace
- + @param element element to be stored at the specified position
- + @return the element previously at the specified position
- + @throws IndexOutOfBoundsException {@inheritDoc}
- */
+//替换指定位置上的元素
 public E set(int index, E element) {
     checkElementIndex(index);
     Node<E> x = node(index);
@@ -362,15 +365,7 @@ public E set(int index, E element) {
     return oldVal;
 }
 
-/**
- + Inserts the specified element at the specified position in this list.
- + Shifts the element currently at that position (if any) and any
- + subsequent elements to the right (adds one to their indices).
- *
- + @param index index at which the specified element is to be inserted
- + @param element element to be inserted
- + @throws IndexOutOfBoundsException {@inheritDoc}
- */
+//在指定位置插入元素
 public void add(int index, E element) {
     checkPositionIndex(index);
 
@@ -380,86 +375,66 @@ public void add(int index, E element) {
         linkBefore(element, node(index));
 }
 
-/**
- + Removes the element at the specified position in this list.  Shifts any
- + subsequent elements to the left (subtracts one from their indices).
- + Returns the element that was removed from the list.
- *
- + @param index the index of the element to be removed
- + @return the element previously at the specified position
- + @throws IndexOutOfBoundsException {@inheritDoc}
- */
+//删除指定位置上的元素
 public E remove(int index) {
     checkElementIndex(index);
     return unlink(node(index));
 }
 
-/**
- + Tells if the argument is the index of an existing element.
- */
+//判断index是否合法
 private boolean isElementIndex(int index) {
     return index >= 0 && index < size;
 }
 
-/**
- + Tells if the argument is the index of a valid position for an
- + iterator or an add operation.
- */
+//判断index是否可以用来add或者用来迭代。多了一个index==size的合法位置，因为可以在size上添加最后一个元素
 private boolean isPositionIndex(int index) {
     return index >= 0 && index <= size;
 }
 
-/**
- + Constructs an IndexOutOfBoundsException detail message.
- + Of the many possible refactorings of the error handling code,
- + this "outlining" performs best with both server and client VMs.
- */
+//拼接位置错误信息
 private String outOfBoundsMsg(int index) {
     return "Index: "+index+", Size: "+size;
 }
 
+//检查index是否合法，不合法就报错
 private void checkElementIndex(int index) {
     if (!isElementIndex(index))
         throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
 }
 
+//判断index是否可以用来add或者用来迭代，不合法就报错
 private void checkPositionIndex(int index) {
     if (!isPositionIndex(index))
         throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
 }
 
-/**
- + Returns the (non-null) Node at the specified element index.
- */
+//返回指定位置上的元素
 Node<E> node(int index) {
-    // assert isElementIndex(index);
+    //必须在外部保证index合法
 
+    //判断位置在前半区间还是后半区间
     if (index < (size >> 1)) {
+
+        //如果在前半区间，从前往后遍历
         Node<E> x = first;
         for (int i = 0; i < index; i++)
             x = x.next;
         return x;
     } else {
+
+        //如果在后半区间，从后往前遍历
         Node<E> x = last;
         for (int i = size - 1; i > index; i--)
             x = x.prev;
         return x;
     }
 }
+```
 
-// Search Operations
+### 搜索操作
 
-/**
- + Returns the index of the first occurrence of the specified element
- + in this list, or -1 if this list does not contain the element.
- + More formally, returns the lowest index {@code i} such that
- + <tt>(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i)))</tt>,
- + or -1 if there is no such index.
- *
- + @param o element to search for
- + @return the index of the first occurrence of the specified element in
- +         this list, or -1 if this list does not contain the element
- */
+```
+//从前往后搜索指定元素位置，如果找不到，返回-1
 public int indexOf(Object o) {
     int index = 0;
     if (o == null) {
@@ -478,17 +453,7 @@ public int indexOf(Object o) {
     return -1;
 }
 
-/**
- + Returns the index of the last occurrence of the specified element
- + in this list, or -1 if this list does not contain the element.
- + More formally, returns the highest index {@code i} such that
- + <tt>(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i)))</tt>,
- + or -1 if there is no such index.
- *
- + @param o element to search for
- + @return the index of the last occurrence of the specified element in
- +         this list, or -1 if this list does not contain the element
- */
+//从后往前搜索指定元素位置，如果找不到，返回-1
 public int lastIndexOf(Object o) {
     int index = size;
     if (o == null) {
@@ -506,191 +471,94 @@ public int lastIndexOf(Object o) {
     }
     return -1;
 }
+```
 
-// Queue operations.
+### 队列操作（Queue接口）
 
-/**
- + Retrieves, but does not remove, the head (first element) of this list.
- *
- + @return the head of this list, or {@code null} if this list is empty
- + @since 1.5
- */
+```
+//返回第一个元素，但是不会删除。如果列表为空，返回null
 public E peek() {
     final Node<E> f = first;
     return (f == null) ? null : f.item;
 }
 
-/**
- + Retrieves, but does not remove, the head (first element) of this list.
- *
- + @return the head of this list
- + @throws NoSuchElementException if this list is empty
- + @since 1.5
- */
+//返回第一个元素，但是不会删除。如果列表为空，报出NoSuchElementException
 public E element() {
     return getFirst();
 }
 
-/**
- + Retrieves and removes the head (first element) of this list.
- *
- + @return the head of this list, or {@code null} if this list is empty
- + @since 1.5
- */
+//返回第一个元素并删除。如果列表为空返回null
 public E poll() {
     final Node<E> f = first;
     return (f == null) ? null : unlinkFirst(f);
 }
 
-/**
- + Retrieves and removes the head (first element) of this list.
- *
- + @return the head of this list
- + @throws NoSuchElementException if this list is empty
- + @since 1.5
- */
+//返回并删除第一个元素。如果列表为空报NoSuchElementException
 public E remove() {
     return removeFirst();
 }
 
-/**
- + Adds the specified element as the tail (last element) of this list.
- *
- + @param e the element to add
- + @return {@code true} (as specified by {@link Queue#offer})
- + @since 1.5
- */
+//追加元素
 public boolean offer(E e) {
     return add(e);
 }
+```
 
-// Deque operations
-/**
- + Inserts the specified element at the front of this list.
- *
- + @param e the element to insert
- + @return {@code true} (as specified by {@link Deque#offerFirst})
- + @since 1.6
- */
+### 双端队列操作（Deque接口）
+
+```
+//从头部插入元素
 public boolean offerFirst(E e) {
     addFirst(e);
     return true;
 }
 
-/**
- + Inserts the specified element at the end of this list.
- *
- + @param e the element to insert
- + @return {@code true} (as specified by {@link Deque#offerLast})
- + @since 1.6
- */
+//从尾部插入元素
 public boolean offerLast(E e) {
     addLast(e);
     return true;
 }
 
-/**
- + Retrieves, but does not remove, the first element of this list,
- + or returns {@code null} if this list is empty.
- *
- + @return the first element of this list, or {@code null}
- +         if this list is empty
- + @since 1.6
- */
+//获取第一个元素，如果列表为空返回null
 public E peekFirst() {
     final Node<E> f = first;
     return (f == null) ? null : f.item;
  }
 
-/**
- + Retrieves, but does not remove, the last element of this list,
- + or returns {@code null} if this list is empty.
- *
- + @return the last element of this list, or {@code null}
- +         if this list is empty
- + @since 1.6
- */
+//获取最后一个元素，如果列表为空返回null
 public E peekLast() {
     final Node<E> l = last;
     return (l == null) ? null : l.item;
 }
 
-/**
- + Retrieves and removes the first element of this list,
- + or returns {@code null} if this list is empty.
- *
- + @return the first element of this list, or {@code null} if
- +     this list is empty
- + @since 1.6
- */
+//获取并删除第一个元素，如果列表为空返回null
 public E pollFirst() {
     final Node<E> f = first;
     return (f == null) ? null : unlinkFirst(f);
 }
 
-/**
- + Retrieves and removes the last element of this list,
- + or returns {@code null} if this list is empty.
- *
- + @return the last element of this list, or {@code null} if
- +     this list is empty
- + @since 1.6
- */
+//获取并删除最后一个元素，如果列表为空返回null
 public E pollLast() {
     final Node<E> l = last;
     return (l == null) ? null : unlinkLast(l);
 }
 
-/**
- + Pushes an element onto the stack represented by this list.  In other
- + words, inserts the element at the front of this list.
- *
- + <p>This method is equivalent to {@link #addFirst}.
- *
- + @param e the element to push
- + @since 1.6
- */
+//栈push操作
 public void push(E e) {
     addFirst(e);
 }
 
-/**
- + Pops an element from the stack represented by this list.  In other
- + words, removes and returns the first element of this list.
- *
- + <p>This method is equivalent to {@link #removeFirst()}.
- *
- + @return the element at the front of this list (which is the top
- +         of the stack represented by this list)
- + @throws NoSuchElementException if this list is empty
- + @since 1.6
- */
+//栈pop操作
 public E pop() {
     return removeFirst();
 }
 
-/**
- + Removes the first occurrence of the specified element in this
- + list (when traversing the list from head to tail).  If the list
- + does not contain the element, it is unchanged.
- *
- + @param o element to be removed from this list, if present
- + @return {@code true} if the list contained the specified element
- + @since 1.6
- */
+//删除从前往后第一个出现的相等元素
 public boolean removeFirstOccurrence(Object o) {
     return remove(o);
 }
 
-/**
- + Removes the last occurrence of the specified element in this
- + list (when traversing the list from head to tail).  If the list
- + does not contain the element, it is unchanged.
- *
- + @param o element to be removed from this list, if present
- + @return {@code true} if the list contained the specified element
- + @since 1.6
- */
+//删除从后往前第一个出现的相等元素
 public boolean removeLastOccurrence(Object o) {
     if (o == null) {
         for (Node<E> x = last; x != null; x = x.prev) {
@@ -709,7 +577,11 @@ public boolean removeLastOccurrence(Object o) {
     }
     return false;
 }
+```
 
+### 迭代器操作
+
+```
 /**
  + Returns a list-iterator of the elements in this list (in proper
  + sequence), starting at the specified position in the list.
@@ -832,18 +704,6 @@ private class ListItr implements ListIterator<E> {
     final void checkForComodification() {
         if (modCount != expectedModCount)
             throw new ConcurrentModificationException();
-    }
-}
-
-private static class Node<E> {
-    E item;
-    Node<E> next;
-    Node<E> prev;
-
-    Node(Node<E> prev, E element, Node<E> next) {
-        this.item = element;
-        this.next = next;
-        this.prev = prev;
     }
 }
 
@@ -1127,6 +987,8 @@ static final class LLSpliterator<E> implements Spliterator<E> {
     }
 }
 ```
+
+
 
 ## 参考资料
 - [常用数据结构及复杂度 - 文章 - 伯乐在线](http://blog.jobbole.com/72886/)
