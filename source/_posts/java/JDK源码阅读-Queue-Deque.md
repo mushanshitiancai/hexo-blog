@@ -194,5 +194,5 @@ Java集合除了失败的Stack类，并没有定义新的Stack方法，而是把
 
 PS. Deque继承自Queue，两套方法交杂在一起，Deque可以使用Queue中的方法，但是却很不名义，还是有些乱的。
 
-### 参考资料
+## 参考资料
 - http://tool.oschina.net/apidocs/apidoc?api=jdk-zh

@@ -237,25 +237,15 @@ public void addLast(E e) {
 
 这几个方法如果在获取、删除时发现列表是空的会报出NoSuchElementException。
 
+## 查找与搜索
+
 ```
-/**
- + Returns {@code true} if this list contains the specified element.
- + More formally, returns {@code true} if and only if this list contains
- + at least one element {@code e} such that
- + <tt>(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))</tt>.
- *
- + @param o element whose presence in this list is to be tested
- + @return {@code true} if this list contains the specified element
- */
+//判断列表中是否存在元素
 public boolean contains(Object o) {
     return indexOf(o) != -1;
 }
 
-/**
- + Returns the number of elements in this list.
- *
- + @return the number of elements in this list
- */
+//获取长度
 public int size() {
     return size;
 }
@@ -285,7 +275,11 @@ public boolean remove(Object o) {
     }
     return false;
 }
+```
 
+### 批量操作
+
+```
 //添加另外一个集合的元素，如果在添加过程中，外部集合的内容被修改了，行为是不确定的
 public boolean addAll(Collection<? extends E> c) {
     return addAll(size, c);
@@ -582,32 +576,13 @@ public boolean removeLastOccurrence(Object o) {
 ### 迭代器操作
 
 ```
-/**
- + Returns a list-iterator of the elements in this list (in proper
- + sequence), starting at the specified position in the list.
- + Obeys the general contract of {@code List.listIterator(int)}.<p>
- *
- + The list-iterator is <i>fail-fast</i>: if the list is structurally
- + modified at any time after the Iterator is created, in any way except
- + through the list-iterator's own {@code remove} or {@code add}
- + methods, the list-iterator will throw a
- + {@code ConcurrentModificationException}.  Thus, in the face of
- + concurrent modification, the iterator fails quickly and cleanly, rather
- + than risking arbitrary, non-deterministic behavior at an undetermined
- + time in the future.
- *
- + @param index index of the first element to be returned from the
- +              list-iterator (by a call to {@code next})
- + @return a ListIterator of the elements in this list (in proper
- +         sequence), starting at the specified position in the list
- + @throws IndexOutOfBoundsException {@inheritDoc}
- + @see List#listIterator(int)
- */
+//获取LinkedList的ListIterator
 public ListIterator<E> listIterator(int index) {
     checkPositionIndex(index);
     return new ListItr(index);
 }
 
+//是fail-fast的
 private class ListItr implements ListIterator<E> {
     private Node<E> lastReturned;
     private Node<E> next;
@@ -620,6 +595,7 @@ private class ListItr implements ListIterator<E> {
         nextIndex = index;
     }
 
+    //判断是否还有元素，不是通过null而是通过size
     public boolean hasNext() {
         return nextIndex < size;
     }
@@ -707,16 +683,12 @@ private class ListItr implements ListIterator<E> {
     }
 }
 
-/**
- + @since 1.6
- */
+//获取逆向迭代器
 public Iterator<E> descendingIterator() {
     return new DescendingIterator();
 }
 
-/**
- + Adapter to provide descending iterators via ListItr.previous
- */
+//逆向迭代器是基于正向迭代器的简单包装
 private class DescendingIterator implements Iterator<E> {
     private final ListItr itr = new ListItr(size());
     public boolean hasNext() {
@@ -729,7 +701,11 @@ private class DescendingIterator implements Iterator<E> {
         itr.remove();
     }
 }
+```
 
+### 克隆与获取数组
+
+```
 @SuppressWarnings("unchecked")
 private LinkedList<E> superClone() {
     try {
@@ -739,16 +715,11 @@ private LinkedList<E> superClone() {
     }
 }
 
-/**
- + Returns a shallow copy of this {@code LinkedList}. (The elements
- + themselves are not cloned.)
- *
- + @return a shallow copy of this {@code LinkedList} instance
- */
+//克隆LinkedList，会克隆每个Node，但是不会克隆每个元素的内容
 public Object clone() {
     LinkedList<E> clone = superClone();
 
-    // Put clone into "virgin" state
+    // 保持处女的状态（原始注释可就是这句哦）
     clone.first = clone.last = null;
     clone.size = 0;
     clone.modCount = 0;
@@ -760,20 +731,7 @@ public Object clone() {
     return clone;
 }
 
-/**
- + Returns an array containing all of the elements in this list
- + in proper sequence (from first to last element).
- *
- + <p>The returned array will be "safe" in that no references to it are
- + maintained by this list.  (In other words, this method must allocate
- + a new array).  The caller is thus free to modify the returned array.
- *
- + <p>This method acts as bridge between array-based and collection-based
- + APIs.
- *
- + @return an array containing all of the elements in this list
- +         in proper sequence
- */
+//返回数组
 public Object[] toArray() {
     Object[] result = new Object[size];
     int i = 0;
@@ -782,44 +740,7 @@ public Object[] toArray() {
     return result;
 }
 
-/**
- + Returns an array containing all of the elements in this list in
- + proper sequence (from first to last element); the runtime type of
- + the returned array is that of the specified array.  If the list fits
- + in the specified array, it is returned therein.  Otherwise, a new
- + array is allocated with the runtime type of the specified array and
- + the size of this list.
- *
- + <p>If the list fits in the specified array with room to spare (i.e.,
- + the array has more elements than the list), the element in the array
- + immediately following the end of the list is set to {@code null}.
- + (This is useful in determining the length of the list <i>only</i> if
- + the caller knows that the list does not contain any null elements.)
- *
- + <p>Like the {@link #toArray()} method, this method acts as bridge between
- + array-based and collection-based APIs.  Further, this method allows
- + precise control over the runtime type of the output array, and may,
- + under certain circumstances, be used to save allocation costs.
- *
- + <p>Suppose {@code x} is a list known to contain only strings.
- + The following code can be used to dump the list into a newly
- + allocated array of {@code String}:
- *
- + <pre>
- +     String[] y = x.toArray(new String[0]);</pre>
- *
- + Note that {@code toArray(new Object[0])} is identical in function to
- + {@code toArray()}.
- *
- + @param a the array into which the elements of the list are to
- +          be stored, if it is big enough; otherwise, a new array of the
- +          same runtime type is allocated for this purpose.
- + @return an array containing the elements of the list
- + @throws ArrayStoreException if the runtime type of the specified array
- +         is not a supertype of the runtime type of every element in
- +         this list
- + @throws NullPointerException if the specified array is null
- */
+//返回指定类型的数组
 @SuppressWarnings("unchecked")
 public <T> T[] toArray(T[] a) {
     if (a.length < size)
@@ -835,17 +756,14 @@ public <T> T[] toArray(T[] a) {
 
     return a;
 }
+```
 
+### 序列化/反序列化
+
+```
 private static final long serialVersionUID = 876323262645176354L;
 
-/**
- + Saves the state of this {@code LinkedList} instance to a stream
- + (that is, serializes it).
- *
- + @serialData The size of the list (the number of elements it
- +             contains) is emitted (int), followed by all of its
- +             elements (each an Object) in the proper order.
- */
+//序列化，写入size，然后是没一个元素，注意LinkedList中size也是transient的
 private void writeObject(java.io.ObjectOutputStream s)
     throws java.io.IOException {
     // Write out any hidden serialization magic
@@ -859,10 +777,7 @@ private void writeObject(java.io.ObjectOutputStream s)
         s.writeObject(x.item);
 }
 
-/**
- + Reconstitutes this {@code LinkedList} instance from a stream
- + (that is, deserializes it).
- */
+//反序列化
 @SuppressWarnings("unchecked")
 private void readObject(java.io.ObjectInputStream s)
     throws java.io.IOException, ClassNotFoundException {
@@ -876,22 +791,26 @@ private void readObject(java.io.ObjectInputStream s)
     for (int i = 0; i < size; i++)
         linkLast((E)s.readObject());
 }
+```
 
+### Java8中的新方法
+
+```
 /**
- + Creates a <em><a href="Spliterator.html#binding">late-binding</a></em>
- + and <em>fail-fast</em> {@link Spliterator} over the elements in this
- + list.
+ * Creates a <em><a href="Spliterator.html#binding">late-binding</a></em>
+ * and <em>fail-fast</em> {@link Spliterator} over the elements in this
+ * list.
  *
- + <p>The {@code Spliterator} reports {@link Spliterator#SIZED} and
- + {@link Spliterator#ORDERED}.  Overriding implementations should document
- + the reporting of additional characteristic values.
+ * <p>The {@code Spliterator} reports {@link Spliterator#SIZED} and
+ * {@link Spliterator#ORDERED}.  Overriding implementations should document
+ * the reporting of additional characteristic values.
  *
- + @implNote
- + The {@code Spliterator} additionally reports {@link Spliterator#SUBSIZED}
- + and implements {@code trySplit} to permit limited parallelism..
+ * @implNote
+ * The {@code Spliterator} additionally reports {@link Spliterator#SUBSIZED}
+ * and implements {@code trySplit} to permit limited parallelism..
  *
- + @return a {@code Spliterator} over the elements in this list
- + @since 1.8
+ * @return a {@code Spliterator} over the elements in this list
+ * @since 1.8
  */
 @Override
 public Spliterator<E> spliterator() {
@@ -988,7 +907,13 @@ static final class LLSpliterator<E> implements Spliterator<E> {
 }
 ```
 
+## 总结
 
+- LinkedList就是普通的双向链表，但是他可以作为列表，队列，双向队列，栈使用，是一个功能很多的集合类
+- LinkedList在实现了几个链表操作函数后，使用这些函数来保证Deque等接口的方法，核心代码不多
+- ❤️获取指定位置上的元素，LinkedList使用了加速技巧：判断位置在前半区间还是后半区间，如果在前半区间，从前往后遍历，如果在后半区间，从后往前遍历
+- LinkedList因为实现了Deque，所以存在大量冗余的方法，具体可以参考：[JDK源码阅读-Queue/Deque | 木杉的博客](http://mushanshitiancai.github.io/2016/06/19/java/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-Queue-Deque/)
+- LinkedList实现了Deque，可以获取逆向迭代器，而逆向迭代器是正向迭代器的简单包装
 
 ## 参考资料
 - [常用数据结构及复杂度 - 文章 - 伯乐在线](http://blog.jobbole.com/72886/)

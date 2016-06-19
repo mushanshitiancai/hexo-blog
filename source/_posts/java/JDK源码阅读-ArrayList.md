@@ -956,7 +956,7 @@ private class SubList extends AbstractList<E> implements RandomAccess {
 ### 杂项
 
 ```
-//克隆ArrayList，对elementData进行复制
+//克隆ArrayList，对elementData进行复制，元素本身不会被复制
 public Object clone() {
     try {
         ArrayList<?> v = (ArrayList<?>) super.clone();
@@ -987,6 +987,7 @@ public boolean isEmpty() {
 - ArrayList的迭代器在迭代过程中如果发现数据源被修改，会快速失败，是通过modCount变量实现的
 - ArrayList在序列化过程中如果发现数据源被修改，会快速失败
 - subList不会建立新的数组，而是在原来的数据源上操作
+- clone会复制存放数据的底层数组elementData，但是不会复制元素本身。
 
 ## 参考资料
 - [java的arrayList中，数组为什么被transient修饰，这是因为什么原因而设计出来的？_百度知道](http://zhidao.baidu.com/link?url=2INEEQeNLOfZdrhnu-5g95990EDJjZ7H-T7sJNHagdKzedXz0qPRCVRm4kJUypVvNKOmfBE2964_RtH-IjCaQa)
