@@ -1,7 +1,7 @@
 ---
 title: JDK源码阅读-ArrayList
 date: 2016-06-17 07:09:28
-categories: [java,JDK源码阅读]
+categories: [JAVA,JDK源码阅读]
 tags: java
 toc: true
 ---
