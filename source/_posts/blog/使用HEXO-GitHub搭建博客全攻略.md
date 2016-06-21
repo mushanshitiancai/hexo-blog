@@ -160,6 +160,10 @@ avatar: /public/image/you-avatar.png
     
     rss: /atom.xml #rss地址  默认即可
 
+### 开启大小写敏感 2016年06月21日
+
+
+
 ## 杂项
 2016年06月14日
 换成了maupassant-hexo这个主题，感觉很不错！
