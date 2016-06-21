@@ -161,8 +161,24 @@ avatar: /public/image/you-avatar.png
     rss: /atom.xml #rss地址  默认即可
 
 ### 开启大小写敏感 2016年06月21日
+默认下Hexo在同步到git时是设置为大小写不敏感的，这个估计是考虑到windows/mac的用户才这么设计的，但是这会带来很多问题，比如我一个tag，原来名字是linux，后来我改为Linux，git同步的时候不认为这个是个修改，那么线上的的tag会一直叫linux，但是hexo生成的tag链接却是Linux的，github的处理链接时是大小写敏感的，这就导致404了。
 
+处理的办法是，打开`<Hexo根目录>\.deploy_git\.git\config`，
 
+    ignorecase = true
+
+修改为：
+
+    ignorecase = false
+
+对于原来的不一致的仓库，就只能清空然后再上传了：
+
+```
+cd .deploy_git
+git rm -rf *
+git commit -m 'clean all file'
+git push
+```
 
 ## 杂项
 2016年06月14日
