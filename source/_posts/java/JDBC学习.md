@@ -1,6 +1,7 @@
 ---
 title: JDBC学习
 date: 2016-04-07 17:07:44
+categories: [JAVA]
 tags: java
 ---
 

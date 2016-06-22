@@ -1,6 +1,7 @@
 ---
 title: Intellj IDEA中maven项目的子module的依赖无法被识别
 date: 2016-04-26 11:35:29
+categories: [JAVA]
 tags: java
 ---
 

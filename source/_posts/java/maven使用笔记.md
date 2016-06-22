@@ -1,6 +1,7 @@
 ---
 title: maven使用笔记
 date: 2016-04-11 20:16:19
+categories: [JAVA]
 tags: java
 ---
 
