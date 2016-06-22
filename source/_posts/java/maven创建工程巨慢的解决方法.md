@@ -1,8 +1,8 @@
 ---
 title: maven创建工程巨慢的解决方法
 date: 2016-04-17 18:11:55
-categories: [JAVA]
-tags: java
+categories: [Java]
+tags: [java,maven]
 ---
 
 使用`mvn archetype:generate`的时候一直很慢。会卡在`[INFO] Generating project in Batch mode`或者是`[INFO] Generating project in Interactive mode`上。让人瞬间没有写代码的欲望了😢

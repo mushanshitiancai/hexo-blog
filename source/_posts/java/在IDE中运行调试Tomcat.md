@@ -1,7 +1,7 @@
 ---
 title: 在IDE中运行调试Tomcat
 date: 2016-05-27 17:51:00
-categories: [JAVA]
+categories: [Java]
 tags: java
 ---
 

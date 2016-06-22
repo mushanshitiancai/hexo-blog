@@ -1,6 +1,7 @@
 ---
 title: 使用IDEA快速生成Facade外观模式代码
 date: 2016-06-14 11:36:43
+categories: [Java]
 tags: java
 ---
 

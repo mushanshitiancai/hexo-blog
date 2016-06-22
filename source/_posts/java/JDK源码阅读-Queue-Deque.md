@@ -1,7 +1,7 @@
 ---
 title: JDK源码阅读-Queue/Deque
 date: 2016-06-19 15:40:28
-categories: [JAVA,JDK源码阅读]
+categories: [Java,JDK源码阅读]
 tags: java
 toc: true
 ---

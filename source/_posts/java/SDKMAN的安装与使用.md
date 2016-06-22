@@ -1,7 +1,7 @@
 ---
 title: SDKMAN的安装与使用
 date: 2016-03-04 18:36:24
-categories: [JAVA]
+categories: [Java]
 tags: java
 ---
 

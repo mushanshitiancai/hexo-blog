@@ -1,7 +1,7 @@
 ---
 title: 掌握Java-并发
 date: 2016-05-23 23:28:46
-categories: [JAVA]
+categories: [Java,掌握Java]
 tags: java
 ---
 

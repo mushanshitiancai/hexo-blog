@@ -1,8 +1,8 @@
 ---
 title: IntelliJ IDEA建立maven web项目无法运行
 date: 2016-04-24 21:08:06
-categories: [JAVA]
-tags: java
+categories: [Java]
+tags: [java,maven]
 ---
 
 参照网上使用idea来建立maven web项目的文章：

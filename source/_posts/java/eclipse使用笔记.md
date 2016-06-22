@@ -1,7 +1,7 @@
 ---
 title: eclipse使用笔记
 date: 2016-02-27 16:17:09
-categories: [JAVA]
+categories: [Java]
 tags: java
 ---
 
