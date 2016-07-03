@@ -5,7 +5,10 @@ categories: [Java,掌握Java]
 tags: java
 ---
 
-![](/img/java/concurrent.png)
+<div style="overflow: scroll">
+    <img src="/img/java/concurrent.svg" style="max-width: 5000px">
+</div>
+
 
 这一章看得累死了。。。例子都又臭又长。。。过程语言搞并发真的是吃力不讨好，不知道用akka是什么体验。
 
