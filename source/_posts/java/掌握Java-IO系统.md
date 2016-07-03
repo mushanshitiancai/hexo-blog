@@ -5,4 +5,6 @@ categories: [Java,掌握Java]
 tags: java
 ---
 
-![](/img/java/io.png)
+<div style="overflow: scroll">
+    <img src="/img/java/io.svg" style="max-width: 5000px">
+</div>
