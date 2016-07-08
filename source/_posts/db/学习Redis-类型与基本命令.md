@@ -4,7 +4,10 @@ date: 2016-05-21 10:39:49
 tags: [db,redis]
 ---
 
-![](/img/redis/redis-1.png)
+<div style="overflow: scroll">
+    <img src="/img/redis/redis-1.svg" style="max-width: 5000px">
+</div>
+
 
 ## 参考资料
 - 《Redis入门指南》

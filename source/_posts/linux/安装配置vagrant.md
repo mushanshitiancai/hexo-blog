@@ -2,6 +2,7 @@
 title: 安装配置vagrant
 date: 2016-04-10 09:23:55
 tags: [linux,vagrant]
+toc: true
 ---
 
 Vagrant是一个虚拟机管理工具，极大的方便我们使用虚拟机。以前那种打开virtual box/VMware，然后加载镜像，安装捣腾半天的时代过去了。通过Vagrant可以使用别人打包好的box，自己调教好的系统也可以打包给别人使用。

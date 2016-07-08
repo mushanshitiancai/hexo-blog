@@ -3,6 +3,7 @@ title: 掌握Java-Array/List排序
 date: 2016-07-03 18:15:22
 categories: [Java,掌握Java]
 tags: java
+toc: true
 ---
 
 说Array/List排序之前先说两个和比较相关的重要接口：`Comparable`和`Comparator`。
