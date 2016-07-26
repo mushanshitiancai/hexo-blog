@@ -2,7 +2,7 @@
 title: Protocol Buffers学习笔记
 date: 2016-07-05 22:14:59
 categories:
-tags: architecture
+tags: [architecture,protocol-buffers]
 ---
 
 公司使用Protocol Buffers（下文简称PB）作为RPC架构的基础，所以我一直认为PB是一个RPC框架。今天面试官的反问才让我意识到，**PB不是一个RPC框架，而是一种数据格式**。PB官网对于PB是什么的描述：
@@ -137,11 +137,11 @@ PB是一个数据格式，已经操作这种数据格式的框架。他本身是
 ## 序列化原理
 为什么PB能够做到比XML小3-10倍，比XML快20-100倍呢。可以参考[Google Protocol Buffer 的使用和原理][Google Protocol Buffer 的使用和原理]。总结如下：
 
-- Protocol Buffers使用了Varint压缩技术。Varint使用少的字节表示小的数字，用多的字节表示打的数字。比如对于int32类型，需要固定4个字节。而使用了Varint技术后，使用1-5个字节。根据统计学，会更节省空间。
+- Protocol Buffers使用了**Varint**压缩技术。Varint使用少的字节表示小的数字，用多的字节表示打的数字。比如对于int32类型，需要固定4个字节。而使用了Varint技术后，使用1-5个字节。根据统计学，会更节省空间。
 - Varint技术的原理是使用高位bit来指定使用几个字节表示数字。如果是1表示下个字节也用来表示这个数字，如果是0表示这是这个数字的最后一个byte。
-- Protocol Buffers使用小端顺序
+- Protocol Buffers使用**小端顺序**
 - 存放Message的区块被称为Message Buffer。Message Buffer由Field组成，每个Field由Key和Value组成。Key用来表示这个字段是对应proto文件中的哪个字段。key的定义为 `(field_number << 3) | wire_type`，field_number也就是tag数字，所以使用位移就可以确定字段，速度极快。
-- 负数的最高位固定为1，所以如果使用Varint技术，会固定使用5个字节，比较浪费。PB使用ZigZag技术压缩有符号数。原理是使用正整数表示所有正负数，比如`0，-1，1，2`经过ZigZag压缩后为`0，1，2，3`。这样就可以使用Varint压缩了。
+- 负数的最高位固定为1，所以如果使用Varint技术，会固定使用5个字节，比较浪费。PB使用**ZigZag**技术压缩有符号数。原理是使用正整数表示所有正负数，比如`0，-1，1，2`经过ZigZag压缩后为`0，1，2，3`。这样就可以使用Varint压缩了。
 
 ## 参考资料
 - [Protocol Buffers  |  Google Developers](https://developers.google.com/protocol-buffers/)
