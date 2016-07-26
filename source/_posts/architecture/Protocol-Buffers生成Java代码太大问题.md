@@ -5,7 +5,11 @@ categories:
 tags: [architecture,protocol-buffers]
 ---
 
-一个比较长的proto文件，生成的Java代码有2.6M之多。。。而且是单文件，用IDEA打开，整个IDE都不好了。。。提示`File size exceeds configured limit (2560000). Code insight features not available.`，因为文件太大，IDEA都不对其进行代码分析了。。。
+一个比较长的proto文件，生成的Java代码有2.6M之多。。。而且是单文件，用IDEA打开，整个IDE都不好了。。。提示
+
+    File size exceeds configured limit (2560000). Code insight features not available
+
+因为文件太大，IDEA都不对其进行代码分析了。。。
 
 解决的思路有两种，一种是放宽IDEA对于文件大小的限制，可以参考[[Intellij IDEA]File size exceeds configured limit - Less is More - 开源中国社区](http://my.oschina.net/shipley/blog/510762)，但是我不认为这是一种好的做法，因为巨大的单文件对于IDE解析是一个极大的负担，会极大影响开发体验。
 
