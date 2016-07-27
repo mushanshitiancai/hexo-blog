@@ -7,7 +7,9 @@ tags: [architecture,protocol-buffers]
 
 一个比较长的proto文件，生成的Java代码有2.6M之多。。。而且是单文件，用IDEA打开，整个IDE都不好了。。。提示
 
-    File size exceeds configured limit (2560000). Code insight features not available
+```
+File size exceeds configured limit (2560000). Code insight features not available
+```
 
 因为文件太大，IDEA都不对其进行代码分析了。。。
 
