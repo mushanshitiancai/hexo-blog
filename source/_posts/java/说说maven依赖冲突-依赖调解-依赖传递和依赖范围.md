@@ -37,6 +37,7 @@ maven引入依赖，并不是把jar包拷贝到项目中来，而是把jar包下
 
 第一列是第一直接依赖，第一行是第二直接依赖，中间表示传递性依赖范围。
 
+## 依赖冲突和依赖调解
 真是因为依赖传递，所以才带来了依赖冲突的可能。比如A->X(1.0)，A->B->X(2.0)。A直接依赖了1.0版本的X，而A依赖的B依赖了2.0版本的X。如果依赖范围合适的话，B中依赖的X也是会传递到A项目中的。而两个X的版本不一致，这就产生了依赖冲突。
 
 在依赖冲突发生时，maven不会直接提示错误，而是用一套规则来进行 **依赖调解**。规则有两条：
@@ -50,6 +51,7 @@ maven引入依赖，并不是把jar包拷贝到项目中来，而是把jar包下
 
 大部分情况下maven这种自动的依赖调解能帮我们解决问题了。但是有时候我们不得不手动处理依赖冲突。这种冲突可能不是同一个依赖的不同版本（这个依赖调解能搞定），而是不能同时出现的两个依赖。比如slf4j-log4j和logback这两个依赖是不能同时出现的，但是因为他们的坐标不一样，所以maven不会对齐进行处理。这个时候我们就需要手动进行 **排除依赖** 了。
 
+## 排除依赖
 下面的例子就是排除依赖的例子，排除依赖的时候就不用指定版本了：
 
 ```
@@ -68,7 +70,52 @@ maven引入依赖，并不是把jar包拷贝到项目中来，而是把jar包下
 
 这种排除是很方便来了，如果有许多相同的间接依赖需要排除的话，会比较麻烦，可以参考：[maven实现依赖的“全局排除”](http://my.oschina.net/liuyongpo/blog/177301)
 
+## 检查依赖冲突
+因为maven在依赖冲突发生时使用依赖调解，所以不会有任何提示。那我们要如何检查呢？方法有两种。
 
+第一种是使用`mvn dependency:tree -Dverbose`来列出项目的所有依赖以及传递性依赖。对于重复和冲突的依赖，会提示`omitted for duplicate`和`omitted for conflict with x.x.x`。
+
+第二个方法是使用maven的enforcer插件。在项目POM中加入：
+
+```
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <version>1.4.1</version>
+            <executions>
+                <execution>
+                    <id>enforce</id>
+                    <configuration>
+                        <rules>
+                            <dependencyConvergence/>
+                        </rules>
+                    </configuration>
+                    <goals>
+                        <goal>enforce</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+
+这样在用maven编译时，如果存在依赖冲突，就会有错误提示：
+
+```Dependency convergence error for org.slf4j:slf4j-api1.6.1 paths to dependency are:
+ 
+[ERROR]
+Dependency convergence error for org.slf4j:slf4j-api:1.6.1 paths to dependency are:
++-org.myorg:my-project:1.0.0-SNAPSHOT
+  +-org.slf4j:slf4j-jdk14:1.6.1
+    +-org.slf4j:slf4j-api:1.6.1
+and
++-org.myorg:my-project:1.0.0-SNAPSHOT
+  +-org.slf4j:slf4j-nop:1.6.0
+    +-org.slf4j:slf4j-api:1.6.0
+```
 
 ## 参考资料
 - 《Maven实战》
