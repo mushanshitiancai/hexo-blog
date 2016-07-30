@@ -56,7 +56,13 @@ mvn install
 
 这是因为opensesame的pom指定了去阿里的仓库上下载，而阿里的仓库现在挂了，所以，修改opensesame的pom文件，注释掉repositories，distributionManagement，pluginRepositories这些标签。还得注释dubbo-parent的pom.xml中的repositories标签。
 
-再次install还是失败。。说com.alibaba:fastjson:pom:1.1.8找不到。上mvnrepository看一下，发现maven仓库上根本就没有这个版本。。。修改dubbo-parent的pom.xml的`<fastjson_version>1.1.8</fastjson_version>`为`<fastjson_version>1.1.15</fastjson_version>`
+再次install还是失败。。说com.alibaba:fastjson:pom:1.1.8找不到。上mvnrepository看一下，发现maven仓库上根本就没有这个版本。。。修改dubbo-parent的pom.xml的
+
+    <fastjson_version>1.1.8</fastjson_version>
+
+为
+
+    <fastjson_version>1.1.15</fastjson_version>
 
 再次install终于成功。
 
@@ -160,8 +166,7 @@ com.alibaba.citrus.service.pipeline.PipelineException: Failed to invoke Valve[#3
 
 说明你暴露了一个顶级包下的接口类似于`DemoServer`，如果你暴露的是`com.xx.DemoServer`就不会有这个问题。这个应该是dubbo的一个bug。
 
-环境搭建好了，接下来我们写一个简单的服务提供者和服务消费者的例子。请看
-
+环境搭建好了，接下来我们写一个简单的服务提供者和服务消费者的例子。请看[搭建dubbo+zookeeper+spring环境-编码篇][搭建dubbo+zookeeper+spring环境-编码篇]
 ## 参考资料
 - [Dubbo与Zookeeper、SpringMVC整合和使用（负载均衡、容错） - 在前进的路上 - 博客频道 - CSDN.NET](http://blog.csdn.net/congcong68/article/details/41113239)
 - [dubbo实践（二）自己动手编译源码][dubbo实践（二）自己动手编译源码]
@@ -171,3 +176,4 @@ com.alibaba.citrus.service.pipeline.PipelineException: Failed to invoke Valve[#3
 
 
 [dubbo实践（二）自己动手编译源码]: http://www.cnblogs.com/pengkw/p/3674730.html
+[搭建dubbo+zookeeper+spring环境-编码篇]: http://mushanshitiancai.github.io/2016/07/29/java/%E6%90%AD%E5%BB%BAdubbo-zookeeper-spring%E7%8E%AF%E5%A2%83-%E7%BC%96%E7%A0%81%E7%AF%87/
