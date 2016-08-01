@@ -219,4 +219,7 @@ public class DemoAction {
 ## 总结
 花了两天才把整个环境搭建好。虽然环境搭建复杂，但是但是可以看得出来，使用dubbo封装服务是非常方便的。因为dubbo采用无侵入加上结合spring配置的设置，所以消费者在调用远程服务的时候，只要引入了接口依赖，调用起来和本地无异，具体的通信细节，dubbo都封装好了。
 
+文章中新建的工程可以在我的github上下载：[dubbo例子][mushanshitiancai/dubbo-demo: 最简单的dubbo例子]
+
 [搭建dubbo+zookeeper+spring环境-环境篇]:http://mushanshitiancai.github.io/2016/07/29/java/%E6%90%AD%E5%BB%BAdubbo-zookeeper-spring%E7%8E%AF%E5%A2%83-%E7%8E%AF%E5%A2%83%E7%AF%87/
+[mushanshitiancai/dubbo-demo: 最简单的dubbo例子]: https://github.com/mushanshitiancai/dubbo-demo
