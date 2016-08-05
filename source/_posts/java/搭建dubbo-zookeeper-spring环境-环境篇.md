@@ -19,6 +19,7 @@ zookeeper的配置文件在`/usr/local/etc/zookeeper/zoo.cfg`
 
     brew services start zookeeper
 
+windows的同学可以参考：[Windows安装和使用zookeeper][Windows安装和使用zookeeper]
 
 ## 编译dubbo
 
@@ -176,3 +177,4 @@ com.alibaba.citrus.service.pipeline.PipelineException: Failed to invoke Valve[#3
 
 [dubbo实践（二）自己动手编译源码]: http://www.cnblogs.com/pengkw/p/3674730.html
 [搭建dubbo+zookeeper+spring环境-编码篇]: http://mushanshitiancai.github.io/2016/07/29/java/%E6%90%AD%E5%BB%BAdubbo-zookeeper-spring%E7%8E%AF%E5%A2%83-%E7%BC%96%E7%A0%81%E7%AF%87/
+[Windows安装和使用zookeeper]: http://www.cnblogs.com/shanyou/p/3221990.html
