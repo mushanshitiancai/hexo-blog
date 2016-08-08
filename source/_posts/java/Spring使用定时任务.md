@@ -88,6 +88,8 @@ Spring在spring-context-support这个库中提供了Quartz的支持，所以需�
 
 <!-- 配置调度工厂 -->
 <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <!-- 设置调度器开始工作的延迟，单位秒 -->
+    <property name="startupDelay" value="10"/>
     <!-- 指定需要触发的触发器 -->
     <property name="triggers">
         <list>
@@ -96,6 +98,12 @@ Spring在spring-context-support这个库中提供了Quartz的支持，所以需�
     </property>
 </bean>
 ```
+
+这里重点说一下`concurrent`这个配置，他指定是否可以并发执行任务。比如我设置一秒执行一次任务，但是任务执行一次需要一分钟，那么为了保证没秒都能执行一次任务，Quartz会起新的线程来执行任务。而如果`concurrent`设置为false，那么同时只会有一个任务在执行，即使已经破坏了设置的频率，也保证只有一个任务在执行。
+
+问题：被delay的任务，是被缓存还是被抛弃？
+实测：估计是没有“被delay的任务”的概念，如果concurrent=false，那么执行期间不会去触发，执行完成后才会再次开始触发。
+测试用例：一个任务第一次执行一分钟，其他执行基本不耗时。cron="*/5 * * * * ?"，第一次执行完毕后，不会一次性打印出多个后续任务，而是再过了5s后打印。
 
 ### 任务代码
 任务代码就是普通的类了：

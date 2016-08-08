@@ -27,6 +27,7 @@ if [ "$1" = "d" ];then
       echo "not modified."
       exit
     fi
+    hexo clean
     hexo g && hexo d
     git add .
     git commit -m "Site updated: `date +%Y-%m-%d\ %H:%M:%S`"
