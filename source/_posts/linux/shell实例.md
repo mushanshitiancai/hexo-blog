@@ -1,7 +1,7 @@
 ---
 title: shell实例
 date: 2016-03-29 16:22:39
-tags: linux
+tags: [linux,shell]
 ---
 
 ## 收集箱
