@@ -80,6 +80,73 @@ awk中内置了两个排序函数`asort`和`asorti`。`asort`对值排序，`aso
 
 只使用awk来计算总分，然后输出为人名和总分两列，然后就可以很方便地用sort排序了。个人倾向用这种方法，符合UNIX风格。
 
+## 使用AWK处理二维数据（日志数据）
+
+先用grep处理后的数据格式为：
+
+```
+"CheckOrderAntispam":0.022068977355957
+"CheckOrderAntispam":0.025101900100708
+"CheckOrderAntispam":0.025767087936401
+"CheckOrderAntispam":0.02592396736145
+"CheckOrderAntispam":0.119145154953
+"buildData":0.00030207633972168
+"buildData":4.7922134399414
+"buildData":5.9127807617188
+"buildData":6.3896179199219
+"checkBalancePay":1.1920928955078
+"checkBalancePay":1.9073486328125
+"checkBalancePay":9.5367431640625
+"checkBalancePay":9.5367431640625
+"checkBalancePay":9.5367431640625
+"checkCanUseCOD":1.0013580322266
+```
+
+是典型的`key:value`格式。需求是统计出来最大值，最小值，平均值，大于0.5的值。我自然而然的想到了awk的数组，不过awk的数组比较原始，需要花些时间学习，大家可以参考这篇文章：
+
+[linux awk数组操作详细介绍 - 程默 - 博客园](http://www.cnblogs.com/chengmo/archive/2010/10/08/1846190.html)
+
+然后编写代码：
+
+```
+{
+    total[$1]+=$2;
+    count[$1]+=1;
+    if(!($1 in max) || $2 > max[$1]){
+        max[$1]=$2;
+    }
+    if(!($1 in min) || $2 < min[$1]){
+        min[$1]=$2;
+    }
+    if($2>0.5){
+        bigcount[$1]+=1;
+        big[$1,bigcount[$1]]=$2;
+    }
+}
+END{
+    printf("%-35s => %10s %10s %10s   %s\n","name","min","max","average",">0.5");
+    for(i in total){
+        average=total[i]/count[i];
+        bigstr="";
+        for(j=1;j<=bigcount[i];j++){
+            if(bigstr!=""){
+                bigstr=bigstr","big[i,j];
+            }else{
+                bigstr=big[i,j];
+            }
+        }
+        printf("%-35s => %10f %10f %10f   %s\n",i,min[i],max[i],average,bigstr);
+    }  
+}
+```
+
+输出为：
+
+![](/img/shell/awk-1.png.png)
+
+其中格式化输出的部分可以参考：
+
+[awk之printf详解-zooyo-ChinaUnix博客](http://blog.chinaunix.net/uid-10540984-id-3070738.html)
 
 ## 错误
 错误：
