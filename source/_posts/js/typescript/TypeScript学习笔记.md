@@ -28,6 +28,18 @@ TypeScript是微软的作品，这个干爹是合格的，更令我心动的是�
 
 [Typescript Tutorials - Setup VS Code to Write, Run & Debug Typescript](http://www.mithunvp.com/typescript-tutorials-setting-visual-studio-code/)
 
+## 使用DefinitelyTyped
+我们在编写typescript时，如何与那些javascript代码交互呢？虽然本质上是一样的，但是javascript的代码是没有类型信息的。对于这一点，typescript开发者早就考虑到了如何与海量的现有javascript兼容。typescript支持`.d.ts`结尾的声明文件，这种文件是专门用来为现有代码定义类型信息的。
+
+可是现在的javascript库这么多，都自己定义不是类似了。。。所以网上有开源组织维护了一个各种库的类型定义文件的仓库，也就是DefinitelyTyped项目。我们可以在上面查看是否有我们正要使用的项目的类型定义文件。
+
+在TypeScript2.0之后，TypeScript官方支持了DefinitelyTyped，使用定义文件变得非常方便，因为只要用npm就行了，比如你要依赖lodash，执行：
+
+```
+npm install --save @types/lodash
+```
+
+编译器就会自动使用lodash的定义文件了。一般来说，模块的类型信息对应的模块为`@types/模块名`。如果你想要查询你想用的模块是否有对应的类型定义，可以在[TypeSearch](https://microsoft.github.io/TypeSearch/)上搜索。
 
 ## 参考资料
 - [List of languages that compile to JS]

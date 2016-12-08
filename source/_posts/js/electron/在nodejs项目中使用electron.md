@@ -11,9 +11,7 @@ tags: [javascript]
 
 但是又有人留言说希望能支持Linux，想想也是，弄了一个插件但是只是支持mac也不太好，所以打算来研究一下如何在nodejs程序中启动一个electron程序。
 
-
-
-
+TODO
 
 [Paste Image]: https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image
 [Windows / Linux support · Issue #1 · mushanshitiancai/vscode-paste-image]: https://github.com/mushanshitiancai/vscode-paste-image/issues/1
