@@ -132,7 +132,6 @@ module.exports = {
 
 entry字段有两种写法，一种是单实体写法，一种是对象写法。
 
-
 上面的例子是单实体写法，表示只有一个入口文件。如果有多个入口文件，可以设置为字符串数组。
 
 对象写法可以更完整地定义入口文件，像这样：
@@ -185,7 +184,7 @@ module.exports = {
 
 `output.path`和`output.filename`这两个字段指定了打包好的文件的输出位置。
 
-对于上面提到的多个入口的配置，也会对应多个输出，我们可以使用`[name]`这个占位符来表示entry的名字，比如这样：
+对于上面提到,我们可以定义多个入口entry，这会让webpack生成多个块(chunk)，但是我们只能定义一个output配置，我们可以使用`[name]`这个占位符来表示entry的名字，比如这样：
 
 ```
 entry: {
@@ -199,6 +198,16 @@ output: {
 ```
 
 这样webpack就会输出处理后的app.js和vendor.js
+
+`output.filename`可以使用三个占位符：
+
+- `[name]` 使用块的名字替代，也就是entry中的key
+- `[hash]` 使用编译时的hash替代
+- `[chunkhash]` 使用块的hash替代
+
+`[hash]`和`[chunkhash]`对于前端开发是非常有用的。因为如果这个块里的代码没有被修改，生成的块的名字的hash是不变的，这样浏览器在请求这个文件时，会使用缓存，加快页面载入。而如果块的内容改变了，hash改变，会强制让浏览器下载新的文件，打到避免使用缓存的目的。
+
+正是因为这个问题，所以推荐的做法是把项目文件（易变）和项目依赖的库文件（不易变）分开来打包。具体见下文的**划分大文件**。
 
 ### Loaders
 应该让你的项目中的所有资源都让webpack来处理，而不是留给浏览器来处理。webpack认为所有文件 (.css, .html, .scss, .jpg, etc.)都是模块，但是webpack本质上只理解JavaScript，所以需要使用loader来把这些文件转换成webpack识别的模块，进而再让webpack处理。
@@ -249,8 +258,232 @@ module.exports = config;
 
 这个例子中使用了webpack自带的插件和第三方插件。UglifyJsPlugin这个插件是一个非常常用的webpack自带插件，用于压缩生成的js代码。
 
+### Target
+javascript现在使用的范围很广，可能是在浏览器中运行，可能在服务端运行，也可能在electron中运行。webpack支持编译javascript到不同的平台上。
+
+| target            | Description |
+| ----------------- | ----------- |
+| async-node        | 编译到Node.js相似的环境（fs和vm读取块的方式为异步） |
+| electron          | 编译到Electron的render进程，提供了一些额外插件 |
+| electron-renderer | 编译到Electron的render进程 |
+| node              | 编译到Node.js相似的环境（使用Node.js要求的方式读取块）  |
+| node-webkit       | 编译到在WebKit中使用的环境，使用JSONP读取块。  |
+| web               | 编译到浏览器环境（默认值） |
+| webworker         | 编译为WebWorker |
+
+默认webpack是编译js到浏览器中运行的，所以target默认值为web。
+
+我们有时候需要构建多个平台，就需要输出多个target，可以这样配置：
+
+```
+const config = {
+	target: 'web',
+    entry: "./index.js",
+    output: {
+        filename: "bundle.js"
+    }
+}
+
+const nodeConfig = {
+    target: 'node',
+    entry: "./index.js",
+    output: {
+        filename: "node-bundle.js"
+    }
+}
+
+module.exports = [config, nodeConfig];
+```
+
+更好的写法：
+
+```
+module.exports = {
+  entry: './foo.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'foo.bundle.js'
+  }
+};
+Multiple Targets
+webpack.config.js
+
+var path = require('path');
+var webpack = require('webpack');
+var webpackMerge = require('webpack-merge');
+
+var baseConfig = {
+  target: 'async-node',
+  entry: {
+    entry: './entry.js'
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'inline',
+      filename: 'inline.js',
+      minChunks: Infinity
+    }),
+    new webpack.optimize.AggressiveSplittingPlugin({
+        minSize: 5000,
+        maxSize: 10000
+    }),
+  ]
+};
+
+let targets = ['web', 'webworker', 'node', 'async-node', 'node-webkit', 'electron-main'].map((target) => {
+  let base = webpackMerge(baseConfig, {
+    target: target,
+    output: {
+      path: path.resolve(__dirname, 'dist/' + target),
+      filename: '[name].' + target + '.js'
+    }
+  });
+  return base;
+});
+
+module.exports = targets;
+```
+
+## 自动重新编译
+webpack支持监视文件的修改，并在文件修改后自动重新编译，这对于开发是很有帮助的。开启watch模式有两种方法，一种是修改配置，`watch`配置项指定是否开启watch模式：
+
+```
+watch: true
+```
+
+开启了watch模式后，运行`webpack`执行编译后，程序不会退出，会继续监视文件。
+
+第二种方法是命令行后添加参数`--watch`或者`-w`，就可以开启watch模式
+
+## 支持CSS
+
+
+## 支持JSX
+如果你使用webpack编译react的代码，就需要处理jsx了。和上文所说的一样，webpack本身只懂javascript，所以需要loader来吧jsx转换成普通javascript来让webpack来处理，这里使用的是`babel-loader`。首先安装依赖：
+
+```
+npm install babel-core babel-loader babel-preset-react --save-dev
+```
+
+然后在webpack的配置文件中添加：
+
+```
+module: {
+    rules: [{
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+            loader: 'babel-loader',
+            options: {
+                presets: ['react']
+            }
+        },
+    }]
+}
+```
+
+## 划分大文件
+上文提到了，项目一般由项目代码和项目依赖的库代码组成，其中项目代码是易变的，库代码是不易变的。考虑到浏览器缓存的问题，我们依赖把这两个部分独立打包，这样库代码打包后的文件保持不变，可以最大粒度利用用户浏览器中的缓存。
+
+比如我们有一个项目，使用`moment`这个库来处理时间：
+
+```
+var moment = require('moment');
+console.log(moment().format());
+```
+
+我们使用webpack来打包这个项目：
+
+```
+module.exports = function(env) {
+    return {
+        entry: './index.js',
+        output: {
+            filename: '[chunkhash].[name].js`,
+            path: './dist'
+        }
+    }
+}
+```
+
+这样只会打包出一个文件，包含了项目文件和moment库文件。不好。所以我们要让webpack独立打包库文件：
+
+```
+module.exports = function(env) {
+    return {
+        entry: {
+            main: './index.js',
+            vendor: 'moment'
+        },
+        output: {
+            filename: '[chunkhash].[name].js`,
+            path: './dist'
+        }
+    }
+}
+```
+
+这里我们指定了多个entry，一个入口是项目的index.js一个是moment库。打包后，生成两个js，**但是moment在两个文件中都出现了！**
+
+对于这种情况，我们需要使用`CommonsChunkPlugin`这个webpack官方插件，这个插件可以提取公共的代码到独立的打包文件中，我们加入这个文件，然后指定公共的bundle为vender：
+
+```
+var webpack = require('webpack');
+module.exports = function(env) {
+    return {
+        entry: {
+            main: './index.js',
+            vendor: 'moment'
+        },
+        output: {
+            filename: '[chunkhash].[name].js`,
+            path: './dist'
+        },
+        plugins: [
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor' // Specify the common bundle's name.
+            })
+        ]
+    }
+}
+```
+
+这样打包后，main入口生成的文件中就不在包含vendor中的代码了。
+
+但是，还有一个问题！如果你修改了main入口中对应文件的代码，再次打包时，vendor对应的打包文件的hash也发生了变化。也就是说，修改项目文件，会影响库文件的打包！如果这样的话，还怎么利用缓存嘛。。。。
+
+这是因为在生成打包文件时，webpack会加入一些必要的运行时代码，这些代码是易变的。对于这个问题，webpack的解决方案是可以把这些易变的运行时代码再提取出来，放到一个叫manifest的打包文件中去：
+
+```
+var webpack = require('webpack');
+module.exports = function(env) {
+    return {
+        entry: {
+            main: './index.js',
+            vendor: 'moment'
+        },
+        output: {
+            filename: '[chunkhash].[name].js`,
+            path: './dist'
+        },
+        plugins: [
+            new webpack.optimize.CommonsChunkPlugin({
+                names: ['vendor', 'manifest'] // Specify the common bundle's name.
+            })
+        ]
+    }
+};
+```
+
+终于，库文件生成的打包文件不在变化了！
+
 ## 参考资料
 - [webpack](https://webpack.js.org/get-started/)
+- [webpack-target](https://webpack.js.org/configuration/target/)
 - [Webpack 简介 - ts - GUIDE](https://angular.cn/docs/ts/latest/guide/webpack.html)
 - [JavaScript 模块化历程 - WEB前端 - 伯乐在线](http://web.jobbole.com/83761/)
 - [[新姿势]前端革命，革了再革：WebPack - mcfog - SegmentFault](https://segmentfault.com/a/1190000002507327)

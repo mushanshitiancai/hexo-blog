@@ -5,6 +5,8 @@ categories:
 tags: [js,angularjs]
 ---
 
+Angularjs资源收集
+
 ## AngularJS资源搜索引擎
 - [Angular Script](http://angularscript.com/)
 
