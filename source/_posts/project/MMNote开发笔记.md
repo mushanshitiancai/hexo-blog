@@ -3,6 +3,7 @@ title: MMNote开发笔记
 date: 2016-12-21 14:23:10
 categories:
 tags:
+toc: true
 ---
 
 
@@ -152,6 +153,8 @@ ts的interface可以有默认值么？ -- 不能
 
 看来是为了能够修饰shadow dom内部而生的选择器。
 
+---
+
 滚动条样式目前看来没有同意写法，还好我们只用写webkit的：
 
 [自定义浏览器滚动条的样式，打造属于你的滚动条风格](http://www.lyblog.net/detail/314.html)
@@ -160,21 +163,31 @@ ts的interface可以有默认值么？ -- 不能
 
 ![](/img/mmnote-2017-01-02-tree-demo2.png)
 
+---
+
 发现树控件中的选中是个麻烦事。点击一个节点，选中当前，但是需要把之前选中的取消选中，如果支持多选，就得用一个数组来保存了。
 
 而且选中后的高亮也是麻烦事。vscode中因为不是数结构所以好做，但是Atom中就不容易了，需要用一个定位为absolute的before伪元素来做到。
 
+---
+
 服了，javascript中竟然没有清空数组的方法。。。see [How do I empty an array in JavaScript? - Stack Overflow](http://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript)
+
+---
+
+接着就是引入code-mirror了。
+
+参考项目：[JedWatson/react-codemirror: Codemirror Component for React.js](https://github.com/JedWatson/react-codemirror)
+
+**注意** CodeMirror.fromTextArea()这个方法，会使用textarea中的内容，忽视传入的value参数。
+
+
+
 
 
 
 # TODO 
 [React动画实践](http://www.alloyteam.com/2016/01/react-animation-practice/)
-
-
-
-
-
 
 [理解CSS3 max/min-content及fit-content等width值]: http://www.zhangxinxu.com/wordpress/2016/05/css3-width-max-contnet-min-content-fit-content/
 [node-klaw: A Node.js file system walker with a Readable stream interface]: https://github.com/jprichardson/node-klaw
