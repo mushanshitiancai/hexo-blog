@@ -9,6 +9,22 @@ toc: true
 
 前文待补。。。
 
+## 值得学习的教程
+
+- [使用 Electron 构建桌面应用 - 前端外刊评论 - 知乎专栏](https://zhuanlan.zhihu.com/p/20225295?columnSlug=FrontendMagazine)
+
+## 值得学习的APP
+
+- [brrd/Abricotine: Markdown editor with inline preview](https://github.com/brrd/Abricotine)
+- [Automattic/simplenote-electron: A Simplenote React app packaged in Electron](https://github.com/Automattic/simplenote-electron)
+- [AnotherNote/anote: another markdown note (inspired by evernote)](https://github.com/AnotherNote/anote)
+- [amitmerchant1990/electron-markdownify: A minimal Markdown editor desktop app based on Electron](https://github.com/amitmerchant1990/electron-markdownify)
+
+## 开发工具
+
+## 发布工具
+
+- [felixrieseberg/ember-electron: Build, test, compile and package desktop apps with Ember Cli (1.x & 2.x) and Electron](https://github.com/felixrieseberg/ember-electron)
 
 ### 2016年12月22日 React动画
 这两天从react-treebeard这个插件看起，了解其中使用到的Radium和velocity-react。因为这个插件在限制宽度的情况下，显示有些问题，所以要么进行修改，要么得自己写一个。
@@ -146,7 +162,7 @@ ts的interface可以有默认值么？ -- 不能
 
 ![]（/img/mmnote-2017-01-02-tree-demo.png)
 
-## 2017年01月02日 星期一 树形控件滚动条样式
+### 2017年01月02日 星期一 树形控件滚动条样式
 看Atom的滚动条样式发现css的选择器中出现了`/deep/`这种写法。
 
 [html5 - What do /deep/ and ::shadow mean in a CSS selector? - Stack Overflow](http://stackoverflow.com/questions/25609678/what-do-deep-and-shadow-mean-in-a-css-selector/25609679#25609679)
@@ -180,6 +196,61 @@ ts的interface可以有默认值么？ -- 不能
 参考项目：[JedWatson/react-codemirror: Codemirror Component for React.js](https://github.com/JedWatson/react-codemirror)
 
 **注意** CodeMirror.fromTextArea()这个方法，会使用textarea中的内容，忽视传入的value参数。
+
+---
+
+遇到一个棘手问题，codemirror和flex布局结合，导致宽度处理不对了。
+
+被搞吐了，一个下午就花在codemirror的linenumber上了，搞不懂新写的例子都没问题。就是这个项目里面的有问题。
+
+表现是这样的：
+
+![](../../img/mmnote-2017-01-02-codemirror-error.png)
+
+右边灰色的全是line number。。。先回避这个问题吧。
+
+目前的效果：
+
+![](/img/mmnote-2017-01-02-codemirror-demo.png)
+
+乍看还不错😁，但是还很不完美。
+
+---
+
+接下来是想实现快捷键Ctrl+S保存的功能。
+
+学习[使用 Electron 构建桌面应用 - 前端外刊评论 - 知乎专栏](https://zhuanlan.zhihu.com/p/20225295?columnSlug=FrontendMagazine)
+
+其中提到了无标题栏窗口的做法，可以在mac中做出很漂亮的界面：
+
+[Frameless Window - Electron](http://electron.atom.io/docs/api/frameless-window/)
+
+观察了一下，发现atom是包含系统标题栏的，而vscode则是使用了`titleBarStyle: 'hidden'`加上自定义的标题栏实现的。
+
+![](/img/mmnote-2017-01-02-atom-title-bar.png)
+
+![](/img/mmnote-2017-01-02-vacode-title-bar.png)
+
+后者可以让标题栏成为主题可以定制的一部分，明显更好看了。不知道windows底下是如何表现的。
+
+---
+
+ipc原来是通过on和send来交互的，用起来很简单。
+
+被坑了一波。`var ipc = require('ipc');`这种写法是过时的，新的写法是：`const {ipcMain} = require('electron')`
+
+[ipcMain - Electron](http://electron.atom.io/docs/api/ipc-main/)
+
+// TODO 下次继续学习这个博客
+
+
+
+
+
+
+
+
+
 
 
 
