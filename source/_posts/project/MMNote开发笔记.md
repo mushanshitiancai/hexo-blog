@@ -243,17 +243,44 @@ ipc原来是通过on和send来交互的，用起来很简单。
 
 // TODO 下次继续学习这个博客
 
+### 2017年01月04日 星期三 IPC
+
+遇到错误`Cannot find name 'Promise'`，需要把typescript的target改成es1.6
+
+[node.js - error TS2304: Cannot find name 'Promise' - Stack Overflow](http://stackoverflow.com/questions/39116687/error-ts2304-cannot-find-name-promise)
 
 
+《electron学习笔记》，添加IPC章节。
 
+### 2017年01月07日 星期六 快捷键
 
+如何为程序添加快捷键呢（非全局快捷键）？
 
+vscode的快捷键设置格式是：
 
+```
+{ "key": "cmd+delete", "command": "deleteAllRight",
+                       "when": "editorTextFocus && !editorReadonly" },
+```
 
+一个快捷键绑定了一个命令，同时when指定了快捷键生效的前提条件。条件由几个bool变量构成。
 
+而一如既往，Atom的设计更为叹服：
 
+```
+'atom-text-editor':
+  'ctrl-b': 'typescript:go-to-declaration'
 
+'atom-text-editor[data-grammar="source gfm"]:not([mini])':
+  'tab':        'markdown-folder:dwim-toggle'
+  'alt-c':      'markdown-folder:cycle'
+```
 
+类似css选择器的写法，更加强大。
+
+我发现好几个地方的设计都是如何，Atom的设计更加前卫。可惜代码质量没有大神来监督，导致在性能上败了。同时选型coffeescript也是个白痴选择。
+
+上面两个是王牌，最求最高可定制。而普通软件是如何做的呢？
 
 
 

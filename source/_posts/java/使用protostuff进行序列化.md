@@ -88,10 +88,18 @@ public final class Bar
 }
 ```
 
-
 ## protostuff生成的protobuf格式的数据能被protobuf自己生成的类解析么？
 能。我只测试了简单类型。对于复杂类型会不会出现不兼容还不清楚，同时对于版本的兼容性也还不太清楚。
 
+## 将POJO生成proto文件
+这个需要使用[webbynet/protostuff-runtime-proto: Protostuff Runtime Proto Files Generator](https://github.com/webbynet/protostuff-runtime-proto)这个项目。
+
+使用非常简单，通过RuntimeSchema得到schema后直接就可以生成proto：
+
+```
+String content = Generators.newProtoGenerator(schema).generate();
+System.out.println(content);
+```
 
 ## 参考资料
 - [protostuff/protostuff: Java serialization library, proto compiler, code generator](https://github.com/protostuff/protostuff)
