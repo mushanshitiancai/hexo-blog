@@ -448,6 +448,92 @@ writing - turbo
 writing - zap
 ```
 
+组合生成器的生命周期我们需要注意，我这里做了一个实验：
+
+app生成器，其中组合了part生成器和tool生成器：
+
+```js
+const Generator = require("yeoman-generator");
+
+module.exports = class extends Generator{
+    default() {console.log("app - default");}
+    writing() {console.log("app - writing");}
+    conflicts() {console.log("app - conflicts");}
+    install() {console.log("app - install");}
+    end() {console.log("app - end");}
+    initializing() {console.log("app - initializing");}
+    prompting() {console.log("app - prompting");}
+    configuring() {console.log("app - configuring");} 
+
+    default(){
+        this.composeWith(require.resolve("../part"),{});
+        this.composeWith(require.resolve("../tool"),{});
+    }
+}
+```
+
+part生成器：
+
+```js
+const Generator = require("yeoman-generator");
+
+module.exports = class extends Generator {
+    default() {console.log("part - default");}
+    writing() {console.log("part - writing");}
+    conflicts() {console.log("part - conflicts");}
+    install() {console.log("part - install");}
+    end() {console.log("part - end");}
+    initializing() {console.log("part - initializing");}
+    prompting() {console.log("part - prompting");}
+    configuring() {console.log("part - configuring");} 
+}
+```
+
+tool生成器：
+
+```js
+const Generator = require("yeoman-generator");
+
+module.exports = class extends Generator {
+    default() {console.log("tool - default");}
+    writing() {console.log("tool - writing");}
+    conflicts() {console.log("tool - conflicts");}
+    install() {console.log("tool - install");}
+    end() {console.log("tool - end");}
+    initializing() {console.log("tool - initializing");}
+    prompting() {console.log("tool - prompting");}
+    configuring() {console.log("tool - configuring");} 
+}
+```
+
+输出：
+
+```
+app - initializing
+app - prompting
+app - configuring
+part - initializing
+tool - initializing
+part - prompting
+tool - prompting
+part - configuring
+tool - configuring
+part - default
+tool - default
+app - writing
+part - writing
+tool - writing
+app - conflicts
+part - conflicts
+tool - conflicts
+app - install
+part - install
+tool - install
+app - end
+part - end
+tool - end
+```
+
 ## 参考资料
 - [Getting started with Yeoman | Yeoman](http://yeoman.io/learning/)
 - [generator-generator/index.js at master · yeoman/generator-generator](https://github.com/yeoman/generator-generator/blob/master/app/index.js)
