@@ -2,7 +2,7 @@
 title: MMNote开发笔记
 date: 2016-12-21 14:23:10
 categories:
-tags:
+tags: [mmnote]
 toc: true
 ---
 
@@ -25,6 +25,8 @@ toc: true
 ## 发布工具
 
 - [felixrieseberg/ember-electron: Build, test, compile and package desktop apps with Ember Cli (1.x & 2.x) and Electron](https://github.com/felixrieseberg/ember-electron)
+
+## 开发手记
 
 ### 2016年12月22日 React动画
 这两天从react-treebeard这个插件看起，了解其中使用到的Radium和velocity-react。因为这个插件在限制宽度的情况下，显示有些问题，所以要么进行修改，要么得自己写一个。
@@ -241,8 +243,6 @@ ipc原来是通过on和send来交互的，用起来很简单。
 
 [ipcMain - Electron](http://electron.atom.io/docs/api/ipc-main/)
 
-// TODO 下次继续学习这个博客
-
 ### 2017年01月04日 星期三 IPC
 
 遇到错误`Cannot find name 'Promise'`，需要把typescript的target改成es1.6
@@ -252,7 +252,7 @@ ipc原来是通过on和send来交互的，用起来很简单。
 
 《electron学习笔记》，添加IPC章节。
 
-### 2017年01月07日 星期六 快捷键
+### 2017年01月07日 星期六 快捷键 命令框架
 
 如何为程序添加快捷键呢（非全局快捷键）？
 
@@ -280,8 +280,98 @@ vscode的快捷键设置格式是：
 
 我发现好几个地方的设计都是如何，Atom的设计更加前卫。可惜代码质量没有大神来监督，导致在性能上败了。同时选型coffeescript也是个白痴选择。
 
+---
+
 上面两个是王牌，最求最高可定制。而普通软件是如何做的呢？
 
+electron本身使用MenuItem中的click属性来定义菜单点击后执行的代码。我看了Abricotine这款笔记软件的实现，他在菜单template中添加了几个自定义字段，比如platform，command。然后在新建菜单之前，处理一遍template，比如检查当前平台，如果不符合，就隐藏一些菜单项。然后把所有的command翻译为对应的click函数，使用其顶级Application类来执行命令。
+
+```
+// 处理template中的每个item
+
+// 把command翻译为click函数，委托给sendCommand
+// sendCommand的定义是：var sendCommand = abrApp.execCommand.bind(abrApp)
+if (item.command) {
+    item.click = (function (command, parameters) {
+        return function () { sendCommand(command, parameters); };
+    })(item.command, item.parameters);
+    item.id = item.command;
+    delete item.command;
+    delete item.parameters;
+}
+
+// 对于菜单的状态，还可以根据配置文件来更新
+if (item.type === "checkbox" && typeof item.checked === "string") {
+    item.checked = getConfig(config, item.checked);
+}
+```
+
+我觉得这个设计非常值得学习。用命令来组织这些操作，也是所有编辑器的设计，这样用户也可以在命令面板中执行。
+
+---
+
+Abricotine中是如何exec命令的呢？
+
+```
+execCommand: function (command, parameters) {
+    // 发送命令到当前激活的窗口
+    var win = BrowserWindow.getFocusedWindow();
+    if (win) {
+        // 使用IPC发送命令
+        return win.webContents.send("command", command, parameters);
+    }
+    // if no window, run a command from commands-main.js
+    if (commands && commands[command]) {
+        commands[command](this, parameters);
+    } else {
+        console.error("Unknown command '" + command + "'");
+    }
+}
+```
+
+答案是通过IPC发送命令带对应的window来执行。在render进程代码中，定义command列表：
+
+```
+var commands = {
+
+    new: function(win, abrDoc, cm) {
+        abrDoc.new();
+    },
+
+    open: function(win, abrDoc, cm) {
+        abrDoc.open();
+    },
+
+    ...
+}
+
+// 执行命令
+execCommand: function (command, parameters) {
+    var win = remote.getCurrentWindow(),
+        abrDoc = this;
+    if (commands && commands[command]) {
+        commands[command](win, abrDoc, abrDoc.cm, parameters);
+    } else {
+        console.error("Unknown command '" + command + "'");
+    }
+},
+```
+
+---
+
+《electron学习笔记》，添加对话框，菜单，快捷键，shell章节。
+
+---
+
+新建《Abricotine是如何整合CodeMirror的》
+
+### 2017年01月08日 星期日 CodeMirror插件机制
+
+昨天知道了Abricotine的那些“特效”是通过CodeMirror插件实现的。今天来了解一下如何写CodeMirror插件。
+
+《CodeMirror使用笔记》添加“扩展CodeMirror”章节
+
+《Abricotine是如何整合CodeMirror的》完善
 
 
 # TODO 
