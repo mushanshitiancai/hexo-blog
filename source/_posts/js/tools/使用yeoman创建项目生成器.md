@@ -3,6 +3,7 @@ title: 使用yeoman创建项目生成器
 date: 2017-01-09 10:33:32
 categories:
 tags: [js]
+toc: true
 ---
 
 ![](https://github.com/yeoman/yeoman/raw/master/yeoman-illustration.png)
