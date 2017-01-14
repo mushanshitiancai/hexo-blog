@@ -63,8 +63,27 @@ npm install --save codemirror @types/codemirror react-split-pane @types/react-sp
 └── webpack.config.js
 ```
 
+## 使用yeoman
+2017年01月14日
+
+一开始我还打算写个shell脚本来新建项目，这样以后再推翻迭代时建立项目会简单一些。后来我了解到了yeoman这个项目生成器工具，所以打算用yeoman来做一个生成“electron-typescript-react”的生成器。yeoman的教程可以看[使用yeoman创建项目生成器 | 木杉的博客][使用yeoman创建项目生成器 | 木杉的博客]
+
+
+
+
+
+
+
+
+
+
+
 
 // todo
 - electron-connect
 - yarn
 - squirrel
+
+
+
+[使用yeoman创建项目生成器 | 木杉的博客]: http://mushanshitiancai.github.io/2017/01/09/js/tools/%E4%BD%BF%E7%94%A8yeoman%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90%E5%99%A8/

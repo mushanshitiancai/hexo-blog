@@ -373,6 +373,13 @@ execCommand: function (command, parameters) {
 
 《Abricotine是如何整合CodeMirror的》完善
 
+### 2017年01月14日 星期六 完善项目搭建
+
+《node.js新的包管理器 - yarn》完成。
+
+《使用yeoman创建项目生成器》完成。
+
+
 
 # TODO 
 [React动画实践](http://www.alloyteam.com/2016/01/react-animation-practice/)
