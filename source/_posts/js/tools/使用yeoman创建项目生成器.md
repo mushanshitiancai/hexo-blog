@@ -125,6 +125,27 @@ Generator.extend({
 });
 ```
 
+我弄了一个方便复制版：
+
+```js
+initializing() {
+}
+prompting() {
+}
+configuring() {
+}
+default () {
+}
+writing() {
+}
+conflicts() {
+}
+install() {
+}
+end() {
+}
+```
+
 如果你需要做异步任务，可以这么写：
 
 ```
@@ -533,6 +554,29 @@ tool - install
 app - end
 part - end
 tool - end
+```
+
+## 相关工具
+
+### 询问用户要建立的node项目名称，并且确保这个名称没有在npm上被人使用了
+
+[SBoudrias/inquirer-npm-name: Helper function using inquirer to validate a value provided in a prompt does not exist as an npm package.](https://github.com/SBoudrias/inquirer-npm-name)
+
+```js
+var generators = require('yeoman-generator');
+var inquirer = require('inquirer');
+var askName = require('inquirer-npm-name');
+
+module.exports = generators.Base.extend({
+  prompting: function () {
+    return askName({
+      name: 'name',
+      message: 'Module Name'
+    }, this).then(function (name) {
+      console.log(name);
+    });
+  }
+});
 ```
 
 ## 参考资料

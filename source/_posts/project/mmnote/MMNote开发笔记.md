@@ -379,7 +379,30 @@ execCommand: function (command, parameters) {
 
 《使用yeoman创建项目生成器》完成。
 
+### 2017年01月15日 星期日 工作流升级 gulp electron-connect mocha
 
+keyword： 
+
+- 学习vscode debug设置
+- 学习mocha/chai，与typescript结合
+- 学习gulp，设计工作流整合
+- gulp整合webpack+electron-connect
+    - watch主进程代码，使用gulp-typescript编译主进程代码，restart electron
+    - watch渲染进程代码，使用webpack-stream编译渲染进程代码，reload electron
+- gulp生成typescript
+    - 生成ts的sourcemap的配置 [floridoo/gulp-sourcemaps: Source map support for Gulp.js](https://github.com/floridoo/gulp-sourcemaps#write-options)
+    - 如何使用vscode来调试 [debugging - How to debug a gulp task with VSCode - Stack Overflow](http://stackoverflow.com/questions/37477139/how-to-debug-a-gulp-task-with-vscode)
+- gulp test任务
+    - 使用gulp-typescript编译render代码，和test代码到test-out中
+    - 拷贝test-res到test-out中去
+    - 执行测试
+
+了解到的库：
+- 使fs等标准库支持promise：[normalize/mz: modernize node.js to current ECMAScript standards](https://github.com/normalize/mz)
+
+学习到的语法：
+- ts不支持重载
+- interface不支持默认值
 
 # TODO 
 [React动画实践](http://www.alloyteam.com/2016/01/react-animation-practice/)

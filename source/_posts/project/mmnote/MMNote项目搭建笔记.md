@@ -68,6 +68,61 @@ npm install --save codemirror @types/codemirror react-split-pane @types/react-sp
 
 一开始我还打算写个shell脚本来新建项目，这样以后再推翻迭代时建立项目会简单一些。后来我了解到了yeoman这个项目生成器工具，所以打算用yeoman来做一个生成“electron-typescript-react”的生成器。yeoman的教程可以看[使用yeoman创建项目生成器 | 木杉的博客][使用yeoman创建项目生成器 | 木杉的博客]
 
+// TODO
+
+
+## 关于调试
+调试开发分为两部分，一个是代码更新自动重启，一个是断点调试。
+
+代码更新重启，这个会极大方便开发。使用webpack-dev-server可以自动刷新render代码。但是主线程的代码更新就无能为力了。
+
+[electron-connect](https://github.com/Quramy/electron-connect)这个项目支持restart和reload electron。restart就是当主进程代码变化时，重启electron。reload是当render代码变化时，让electron重新加载当前页面。
+
+```
+npm install electron-connect --save-dev
+```
+
+结合gulp使用：
+
+```js
+'use strict';
+
+var gulp = require('gulp');
+var electron = require('electron-connect').server.create();
+
+gulp.task('serve', function () {
+
+  // Start browser process
+  electron.start();
+
+  // Restart browser process
+  gulp.watch('app.js', electron.restart);
+
+  // Reload renderer process
+  gulp.watch(['index.js', 'index.html'], electron.reload);
+});
+```
+
+然后在electron代码中植入：
+
+```js
+'use strict';
+
+var app = require('app');
+var BrowserWindow = require('browser-window');
+var client = require('electron-connect').client;
+
+app.on('ready', function () {
+  var mainWindow = new BrowserWindow({
+    width: 400,
+    height: 300
+  });
+  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+
+  // Connect to server process
+  client.create(mainWindow);
+});
+```
 
 
 
@@ -83,7 +138,9 @@ npm install --save codemirror @types/codemirror react-split-pane @types/react-sp
 - electron-connect
 - yarn
 - squirrel
+- [usage with gulp](https://webpack.github.io/docs/usage-with-gulp.html)
 
-
+[gulp + webpack 构建多页面前端项目 - OPEN资讯](http://www.open-open.com/news/view/1c51682)
+[webpack&gulp集成简介 - 简书](http://www.jianshu.com/p/8c9c8f5649c9)
 
 [使用yeoman创建项目生成器 | 木杉的博客]: http://mushanshitiancai.github.io/2017/01/09/js/tools/%E4%BD%BF%E7%94%A8yeoman%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90%E5%99%A8/

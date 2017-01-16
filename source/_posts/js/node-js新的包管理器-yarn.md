@@ -85,3 +85,6 @@ yarn install
 ## 其他命令
 
 全部的命令文档见：[CLI Introduction | Yarn](https://yarnpkg.com/en/docs/cli/)
+
+## 参考资料
+- [Yarn vs npm: Everything You Need to Know](https://www.sitepoint.com/yarn-vs-npm/)

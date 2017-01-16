@@ -467,6 +467,9 @@ windows特有：
 - 读取快捷方式 shell.readShortcutLink(shortcutPath)
 ```
 
+## 使用vscode调试electron程序
+
+
 ## 打包
 
 - [electron-userland/electron-packager: Package and distribute your Electron app with OS-specific bundles (.app, .exe etc) via JS or CLI](https://github.com/electron-userland/electron-packager)
@@ -474,3 +477,4 @@ windows特有：
 
 ## 参考资料
 - [使用 Electron 构建桌面应用 - 前端外刊评论 - 知乎专栏](https://zhuanlan.zhihu.com/p/20225295?columnSlug=FrontendMagazine)
+- [Debugging Electron in Visual Studio Code](http://electron.rocks/debugging-electron-in-vs-code/)
