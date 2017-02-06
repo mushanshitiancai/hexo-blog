@@ -467,6 +467,29 @@ windows特有：
 - 读取快捷方式 shell.readShortcutLink(shortcutPath)
 ```
 
+## 操作剪贴板
+[clipboard - Electron](http://electron.atom.io/docs/api/clipboard/)
+
+跨平台操作剪贴板本来是个很麻烦的事情的。但是electron包装的剪贴板模块简直易用到爆。
+
+操作纯文本：
+
+```
+获取剪贴板文字 clipboard.readText([type])
+往剪贴板写入文字 clipboard.writeText(text[, type])
+```
+
+操作图片：
+
+```
+获取剪贴板图片 clipboard.readImage([type])
+返回NativeImage
+
+往剪贴板写入图片 clipboard.writeImage(image[, type])
+```
+
+其他的还可以操作的格式有：HTML，RTF，Bookmark
+
 ## 使用vscode调试electron程序
 
 
