@@ -835,6 +835,10 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 
 ![](/img/mmnote-demo-170210.png)
 
+大致的架构图：
+
+![](/img/mmnote-architecture-170211.svg)
+
 # TODO 
 - [React动画实践](http://www.alloyteam.com/2016/01/react-animation-practice/)
 - source-map-support
