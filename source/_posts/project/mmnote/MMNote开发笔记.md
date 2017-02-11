@@ -19,9 +19,11 @@ toc: true
 
 ## 开发工具
 
-## 发布工具
+## 打包工具
 
-- [felixrieseberg/ember-electron: Build, test, compile and package desktop apps with Ember Cli (1.x & 2.x) and Electron](https://github.com/felixrieseberg/ember-electron)
+- [electron/application-distribution.md at master · electron/electron](https://github.com/electron/electron/blob/master/docs/tutorial/application-distribution.md)
+- [electron-userland/electron-builder: A complete solution to package and build a ready for distribution Electron app with “auto update” support out of the box](https://github.com/electron-userland/electron-builder)
+- [electron-userland/electron-packager: Package and distribute your Electron app with OS-specific bundles (.app, .exe etc) via JS or CLI](https://github.com/electron-userland/electron-packager)
 
 ## 开发手记
 
@@ -742,6 +744,89 @@ $('html').bind('paste', function(e) {
 学习Abricotine，使用`is-url`来判断字符串是否是url
 
 当前问题：markText后，光标有些问题
+
+### 2017年02月08日 星期三
+
+> 问题：markText后，光标有些问题
+
+解决：
+
+```js
+let element = document.createElement('img');
+element.src = 'file://' + link;
+
+let marker = doc.markText(from, to, {
+    replacedWith: element,
+    handleMouseEvents: true
+});
+
+element.addEventListener("load", function () {
+    marker.changed();
+});
+```
+
+需要调用`marker.changed()`，这样CM会更具当前marker的大小来更新编辑器以及光标。
+
+- [Typing Destructured Object Parameters in TypeScript | Marius Schulz](https://blog.mariusschulz.com/2015/11/13/typing-destructured-object-parameters-in-typescript)
+
+当前任务：[task-11]错误的图片逻辑：
+1. 标红
+2. 编辑过程中如果不在满足图片语法，则退化为普通文本
+3. 编辑过程中如果图片合法了，则渲染为图片
+
+### 2017年02月09日 星期四
+使用img的error事件完成错误处理的需求[task-11]。
+
+下一步任务：完善编辑体验（学习SimpleMDE）
+
+1. [task-12]列表等回车会自动补全前缀 ✅
+2. [task-13]代码块背景色
+3. [task-14]不同级别的标题大小不一样 ✅
+4. [task-15]图片被选中时，变色
+5. 学习如何编写codemirror mode
+
+**[task-12]:**
+
+`addon/edit/continuelist.js`,这个插件添加了`newlineAndIndentContinueMarkdownList`命令，将他绑定到Enter上即可。
+
+```js
+var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    mode: 'gfm',
+    lineNumbers: true,
+    theme: "default",
+    extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
+});
+```
+
+**[task-14]：**
+
+在css中添加`.CodeMirror .CodeMirror-code .cm-header-1~4`的样式即可：
+
+```css
+.CodeMirror .CodeMirror-code .cm-header-1 {
+    font-size: 200%;
+    line-height: 200%;
+}
+
+.CodeMirror .CodeMirror-code .cm-header-2 {
+    font-size: 160%;
+    line-height: 160%;
+}
+
+.CodeMirror .CodeMirror-code .cm-header-3 {
+    font-size: 125%;
+    line-height: 125%;
+}
+
+.CodeMirror .CodeMirror-code .cm-header-4 {
+    font-size: 110%;
+    line-height: 110%;
+}
+```
+
+### 2017年02月10日 星期五
+
+`beforeSelectionChange`事件，会在选区变化时，但是生效前触发，返回的对象包含：{ranges, origin, update}，可以调用update方法来更新选区。
 
 # TODO 
 - [React动画实践](http://www.alloyteam.com/2016/01/react-animation-practice/)
