@@ -53,7 +53,7 @@ toc: true
 
 ![](/img/mmnote/2016-12-25.png)
 
-主要是解决了react-treebread空间的小空间换行问题和宽度不对问题。CSS的width是关键，具体参考了：[理解CSS3 max/min-content及fit-content等width值][理解CSS3 max/min-content及fit-content等width值]。
+主要是解决了react-treebread空间的小空间换行问题和宽度不对问题。CSS的width是关键，具体参考了：[理解CSS3 max/min-content及fit-content等width值](http://www.zhangxinxu.com/wordpress/2016/05/css3-width-max-contnet-min-content-fit-content/).
 
 我一遍做一边参考atom和vscode（基于HTML5技术就是好啊，随时随地可以参考）。发现atom是常规做法，也就是整个树是一个ol或者ul，然后一个一个递归渲染出。对于没有打开的子目录是不会渲染到DOM上的。
 
@@ -112,7 +112,7 @@ fs-extra这个包是fs包的扩展，其中包括了遍历目录树。
 
 但是呢，依赖这种扩展，对应的ts声明又太久了，现在还懒得学习如何编写声明。还是看看对应的walk是如何实现的吧。
 
-[node-klaw: A Node.js file system walker with a Readable stream interface][node-klaw: A Node.js file system walker with a Readable stream interface]
+[node-klaw: A Node.js file system walker with a Readable stream interface](https://github.com/jprichardson/node-klaw)
 
 代码很简单，就一个文件，但是涉及的知识点很多。
 
@@ -774,7 +774,7 @@ element.addEventListener("load", function () {
 2. 编辑过程中如果不在满足图片语法，则退化为普通文本
 3. 编辑过程中如果图片合法了，则渲染为图片
 
-### 2017年02月09日 星期四
+### 2017年02月09日 星期四 列表补全 标题大小区分
 使用img的error事件完成错误处理的需求[task-11]。
 
 下一步任务：完善编辑体验（学习SimpleMDE）
@@ -784,6 +784,7 @@ element.addEventListener("load", function () {
 3. [task-14]不同级别的标题大小不一样 ✅
 4. [task-15]图片被选中时，变色
 5. 学习如何编写codemirror mode
+6. [task-16]图片宽度最大为编辑器宽度
 
 **[task-12]:**
 
@@ -824,13 +825,16 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 }
 ```
 
-### 2017年02月10日 星期五
+### 2017年02月10日 星期六 打包
 
 `beforeSelectionChange`事件，会在选区变化时，但是生效前触发，返回的对象包含：{ranges, origin, update}，可以调用update方法来更新选区。
+
+完成文章：[打包Electron应用 | 木杉的博客](http://mushanshitiancai.github.io/2017/02/11/js/electron/%E6%89%93%E5%8C%85Electron%E5%BA%94%E7%94%A8/)
+
+目前支持粘贴/预览图片的最新DEMO：
+
+![](/img/mmnote-demo-170210.png)
 
 # TODO 
 - [React动画实践](http://www.alloyteam.com/2016/01/react-animation-practice/)
 - source-map-support
-
-[理解CSS3 max/min-content及fit-content等width值]: http://www.zhangxinxu.com/wordpress/2016/05/css3-width-max-contnet-min-content-fit-content/
-[node-klaw: A Node.js file system walker with a Readable stream interface]: https://github.com/jprichardson/node-klaw

@@ -7,8 +7,6 @@ tags: [js,ts,gulp]
 
 编译typescript的方法有很多，但是如果你已经在使用gulp工作流的话，整合编译任务到gulp中是非常不错的选择。
 
-![](/img/gulp-typescript.png)
-
 <!--more-->
 
 我们使用[gulp-typescript][gulp-typescript]这个gulp插件项目来生成typescript。
