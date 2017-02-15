@@ -779,9 +779,9 @@ element.addEventListener("load", function () {
 
 下一步任务：完善编辑体验（学习SimpleMDE）
 
-1. [task-12]列表等回车会自动补全前缀 ✅
+1. [task-12-x]列表等回车会自动补全前缀 
 2. [task-13]代码块背景色
-3. [task-14]不同级别的标题大小不一样 ✅
+3. [task-14-x]不同级别的标题大小不一样 
 4. [task-15]图片被选中时，变色
 5. 学习如何编写codemirror mode
 6. [task-16]图片宽度最大为编辑器宽度
@@ -825,7 +825,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 }
 ```
 
-### 2017年02月10日 星期六 打包
+### 2017年02月10日 星期六 打包 编辑器卡顿排查
 
 `beforeSelectionChange`事件，会在选区变化时，但是生效前触发，返回的对象包含：{ranges, origin, update}，可以调用update方法来更新选区。
 
@@ -838,6 +838,114 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 大致的架构图：
 
 ![](/img/mmnote-architecture-170211.svg)
+
+下一步任务：
+
+1. [task-17]更新文档的state结构，在编辑器编辑时，不更新state（如果更新会导致效率低下）。只在save时更新state。
+
+Editor现在传入的props是一个url，这个不太不和目前的逻辑了。目前使用了CM的Doc，所以一个editor其实承载了多个doc，只是同时只显示当前doc。
+
+=> 发现如果在编辑器更新时不更新state，那么就不是react+redux的模式了，写起来无从下手。。。参考了[JedWatson/react-codemirror](https://github.com/JedWatson/react-codemirror)，发现他的更新模式和我之前写的一样，先onChange，然后更新props后再比较value，这样看起来真的是非常低效啊。但是他的demo并没有出现卡顿的现象。
+
+经过排查，发现如果关闭Redux的DevTools中间件，卡顿就消失了。看来是因为输入时频繁更新state，导致devtool出现瓶颈（人家毕竟是提供时间旅行的。。。）
+
+### 2017年02月12日 星期日 了解Draft.js File URI state思考
+
+- [Draft.js | Rich Text Editor Framework for React](https://facebook.github.io/draft-js/)
+
+这是simplenote使用的编辑器控件，是Facebook推出的一个原生支持React的编辑器。
+
+1. [task-18]Draft.js是如何接受外部指令的？比如replace？
+
+---
+
+为了所谓之扩展性，所有的笔记路径使用uri格式
+
+- [file URI scheme - Wikipedia](https://en.wikipedia.org/wiki/File_URI_scheme#cite_note-2)
+- [File URIs in Windows – IEBlog](https://blogs.msdn.microsoft.com/ie/2006/12/06/file-uris-in-windows/)
+
+工具：
+- [medialize/URI.js: Javascript URL mutation library](https://github.com/medialize/URI.js)
+
+我需要的能力：
+
+1. 判断协议
+2. 如果是file，获取对应的本地path（[TooTallNate/file-uri-to-path: Convert a file: URI to a file path](https://github.com/TooTallNate/file-uri-to-path)）
+3. 本地path变为file uri（[file-url](https://www.npmjs.com/package/file-url)）
+
+```
+yarn add urijs file-uri-to-path file-url
+yarn add @types/urijs @types/file-url
+```
+
+```ts
+declare module 'file-uri-to-path' {
+    function uri2path(uri: string): string;
+    export = uri2path;
+}
+```
+
+---
+
+现在state的定义和使用都非常的不方便！😤
+
+因为使用了immutable.js，导致获取和更新都非常的不方便，获取必须使用get，类型定义完全无效了，而且嵌套的还得使用get(['a','b']),简直恶心到逆天，而且state更新还必须从顶级往下更新才行。
+
+参考了draft.js和simplenote，有了几点结论：
+
+1. 状态的维护比较恶心是不可避免的，因为draft.js中，更新EditorState也不简单，都是从EditorState这个顶级state开始更新其中的子state的，使用set或者put，或者util。。。
+2. 获取状态可以使用自定义的方法来获取，其中包装immutable的get，这样不会恶心到外面去，但是重复代码量很多。。。。
+3. draft.js比较豪华，所有子状态，只要不是简单类型的，都是自定义Record或者自定义其他数据结构，样板代码量很大。
+4. state尽量扁平化吧，会不那么恶心一点，比如simplenote基本只有一层
+5. simplenote把远端服务的Bucket直接放到state中去，这样做好吗？
+
+### 2017年02月13日 星期一 
+
+继续纠结redux的state的问题。
+
+- [State 范式化 | Redux 中文文档 Join the chat at https://gitter.im/camsong/redux-in-chinese](http://cn.redux.js.org/docs/recipes/reducers/NormalizingStateShape.html)
+
+> 上面的数据结构比较复杂，并且有部分数据是重复的。这里还存在一些让人关心的问题：
+> 1. 当数据在多处冗余后，需要更新时，很难保证所有的数据都进行更新。
+> 2. 嵌套的数据意味着 reducer 逻辑嵌套更多、复杂度更高。尤其是在打算更新深层嵌套数据时。
+> 3. 不可变的数据在更新时需要状态树的祖先数据进行复制和更新，并且新的对象引用会导致与之 connect 的所有 UI 组件都重复 render。尽管要显示的数据没有发生任何改变，对深层嵌套的数据对象进行更新也会强制完全无关的 UI 组件重复 render
+> 正因为如此，在 Redux Store 中管理关系数据或嵌套数据的推荐做法是将这一部分视为**数据库**，并且将数据按范式化存储。
+
+- [不可变更新模式 | Redux 中文文档 Join the chat at https://gitter.im/camsong/redux-in-chinese](http://cn.redux.js.org/docs/recipes/reducers/ImmutableUpdatePatterns.html)
+
+> 正确方法：复制嵌套数据的所有层级
+
+> 不幸的是，正确地使用不变的更新去深度嵌套状态的过程很容易变得冗长难读。 更新 ate.first.second[someId].fourth 的示例大概如下所示：
+
+    ```
+    function updateVeryNestedField(state, action) {
+        return {
+            ....state,
+            first : {
+                ...state.first,
+                second : {
+                    ...state.first.second,
+                    [action.someId] : {
+                        ...state.first.second[action.someId],
+                        fourth : action.someValue
+                    }
+                }
+            }
+        }
+    }
+    ```
+
+> 显然，每一层嵌套使得阅读更加困难，并给了更多犯错的机会。这是其中一个原因，鼓励你保持状态扁平，尽可能构建 reducer。
+
+简直是灾难。。。。
+
+immutable的Cursor用起来：
+
+```js
+var Cursor = require('immutable/contrib/cursor');
+```
+
+- [Immutable 详解及 React 中实践 - pure render - SegmentFault](https://segmentfault.com/a/1190000003910357)
 
 # TODO 
 - [React动画实践](http://www.alloyteam.com/2016/01/react-animation-practice/)
