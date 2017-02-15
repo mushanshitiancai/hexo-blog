@@ -53,3 +53,6 @@ public @interface Inherited {
 
 1. 被`@Inherited`注解的注解只有在class上使用才会有“自动继承的特性”
 2. “自动继承的特性”是指如果在子类上搜索注解，其父类上的被`@Inherited`注解过的注解会考虑在内
+
+## 参考资料
+- [inheritance - How to use @inherited annotation in Java? - Stack Overflow](http://stackoverflow.com/questions/23973107/how-to-use-inherited-annotation-in-java)
