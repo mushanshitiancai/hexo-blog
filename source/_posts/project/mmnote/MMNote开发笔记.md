@@ -779,9 +779,9 @@ element.addEventListener("load", function () {
 
 下一步任务：完善编辑体验（学习SimpleMDE）
 
-1. [task-12-x]列表等回车会自动补全前缀 
+1. [task-12-✅]列表等回车会自动补全前缀 
 2. [task-13]代码块背景色
-3. [task-14-x]不同级别的标题大小不一样 
+3. [task-14-✅]不同级别的标题大小不一样 
 4. [task-15]图片被选中时，变色
 5. 学习如何编写codemirror mode
 6. [task-16]图片宽度最大为编辑器宽度
@@ -841,7 +841,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 
 下一步任务：
 
-1. [task-17]更新文档的state结构，在编辑器编辑时，不更新state（如果更新会导致效率低下）。只在save时更新state。
+1. [task-17-❌]更新文档的state结构，在编辑器编辑时，不更新state（如果更新会导致效率低下）。只在save时更新state。
 
 Editor现在传入的props是一个url，这个不太不和目前的逻辑了。目前使用了CM的Doc，所以一个editor其实承载了多个doc，只是同时只显示当前doc。
 
@@ -855,7 +855,7 @@ Editor现在传入的props是一个url，这个不太不和目前的逻辑了。
 
 这是simplenote使用的编辑器控件，是Facebook推出的一个原生支持React的编辑器。
 
-1. [task-18]Draft.js是如何接受外部指令的？比如replace？
+1. [task-18-✅]Draft.js是如何接受外部指令的？比如replace？
 
 ---
 
@@ -946,6 +946,112 @@ var Cursor = require('immutable/contrib/cursor');
 ```
 
 - [Immutable 详解及 React 中实践 - pure render - SegmentFault](https://segmentfault.com/a/1190000003910357)
+
+### 2017年02月18日 星期六 tree-view结合Redux 软链接处理 fs-promise
+
+Redux 官方 [Tree View](https://github.com/reactjs/redux/tree/master/examples/tree-view) 示例:
+
+```
+git clone https://github.com/reactjs/redux.git
+
+cd redux/examples/tree-view
+npm install
+npm start
+```
+
+open http://localhost:3000/
+
+> 该示例展示了深层嵌套树状视图的渲染，以及为了方便 reducer 更新，state 的标准化写法。优良的渲染表现，来自于容器组件细粒度的、仅针对需要渲染的 tree node 的绑定。
+
+这个例子中，树结构被拉平了。这是redux的state的标准化写法，方便更新。
+
+```js
+let tree = {
+    0: {
+      id: 0,
+      counter: 0,
+      childIds: [],
+      parentId: null
+    }
+  }
+```
+
+---
+
+不同软件对于软链接的处理是如何的呢？
+
+![](/img/mmnote-sublime-ln-file.png)
+
+![](/img/mmnote-vscode-ln-file.png)
+
+我倾向于vscode，但是软链接的文件夹是不是应该用不同的logo？
+
+---
+
+移入fs-promise后，webpack会报错，参考：
+
+- [Module parse failed: /.../node_modules/any-promise/LICENSE Unexpected token · Issue #27 · kevinbeaty/any-promise](https://github.com/kevinbeaty/any-promise/issues/27)
+
+在webpack配置中添加：
+
+```js
+plugins: [
+    new webpack.NormalModuleReplacementPlugin(/^any\-promise$/, 'bluebird'),
+],
+```
+
+### 2017年02月19日 星期日
+
+- [task-19-✅]整合目录树和文档
+
+**[task-19]**
+
+这个整合完，第一阶段就差不多了。现在有几点体会：
+
+1. React+Redux这一套很强，但是我作为从OO这个体系过来的，脑子还是没有完全转过弯来，对于不是“组件.操作(数据)”这种模式还是不适用，老想着直接操作组件。
+2. React+Redux这一套很强，但是使用起来不是很简单，组件的编写还好，但是状态这一块简直不能再恶心了。。。虽然用上Immutable后，拼装新的state返回这个不那么乱了，但是读取和更新状态，真心麻烦。。。而且类型系统扑街
+
+![](/img/mmnote-redux-state-complex.png)
+
+为了尽快吧这个项目写出来，最近有些焦虑症了，影响随眠的级别。。。真担心胃炎因此又犯了。
+
+![](/img/mmnote-combine-tree-and-editor.png)
+
+### 2017年02月20日 星期一
+
+提示Warning：`Warning: a promise was created in a handler but was not returned from it`
+
+参考：[Warning Explanations | bluebird](http://bluebirdjs.com/docs/warning-explanations.html#warning-a-promise-was-created-in-a-handler-but-was-not-returned-from-it)
+
+例子：
+
+```js
+fsp.stat(path).then(stats => {
+    if (stats.isFile()) {
+        dispatch(openFileAction(path));
+    } else if (stats.isDirectory()) {
+        dispatch(openFolderAction(path));
+    }
+    return null;  // <-- 后面有catch或者then必须加，不然就警告了
+}).catch(sendFailAction(dispatch, ACT_OPEN_FAIL));
+```
+
+- [task-20]图片和文字在同一行时，编辑文字不正常
+
+### 2017年02月22日 星期三
+
+查Immutable.js的用起来痛苦的资料，到了vue.js，发现了提到了MobX，了解了一下，原来是React上新的状态管理框架。查了下，都说比Redux好写很多，大致了解一下，感觉不错。
+
+- [对比其他框架 - vue.js](http://cn.vuejs.org/v2/guide/comparison.html#MobX) 
+- [Tutorials, videos and blogs | MobX](https://mobx.js.org/faq/blogs.html)
+
+### 2017年02月26日 星期日 初步整合kityminder 学习mobx
+
+![](/img/mmnote-add-kityminder.png)
+
+看完了mobx教程，牛逼，这样就实现了自动更新了，写起来绝对比redux这种轻松很多。至于状态是可变的，目前看来只是不能时间旅行了。
+
+大致用了一下，爽！最爽的一点是可以直接范围对象属性了，而不是使用immutable哪种恶心的访问方式。这就可以用上typescript的类型优势了。
 
 # TODO 
 - [React动画实践](http://www.alloyteam.com/2016/01/react-animation-practice/)
