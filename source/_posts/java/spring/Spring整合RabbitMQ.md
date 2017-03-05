@@ -5,6 +5,8 @@ categories: [Java,Spring]
 tags: [java,spring]
 ---
 
+<!-- more -->
+
 ## 引入依赖
 
 ```

@@ -5,6 +5,8 @@ categories:
 tags: software
 ---
 
+<!--more-->
+
 优点：
 
 - 单独设计的markdown模式编辑器，不会像wiz那样，基于富文本，而毁了markdown

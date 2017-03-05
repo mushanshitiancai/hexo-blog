@@ -6,6 +6,8 @@ tags: java
 toc: true
 ---
 
+<!--more-->
+
 ## Queue
 Queue是一个很重要的接口。尤其是在并发编程中，比如像BlockingQueue就是继承自Queue接口的。Queue的实现也很多种多样，有最常见的ArrayDeque，LinkedList，这些是按插入顺序排序的。还有具有特殊功能的队列，比如优先级队列PriorityQueue。
 

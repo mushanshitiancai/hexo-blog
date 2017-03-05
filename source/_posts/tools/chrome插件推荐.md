@@ -5,6 +5,8 @@ categories:
 tags:
 ---
 
+<!-- more -->
+
 ## 根据URL规则自动静音页面 -- Mute Tabs By Url
 
 ![](/img/tools/mute-tab-by-url.png)

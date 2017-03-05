@@ -5,6 +5,8 @@ categories:
 tags: [architecture,mq]
 ---
 
+<!-- more -->
+
 ## 安装RabbitMQ
 
 ```

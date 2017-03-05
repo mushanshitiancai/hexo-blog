@@ -1,10 +1,12 @@
 ---
-title: 【TODO】JUnit4学习笔记
+title: JUnit4学习笔记
 date: 2016-08-01 17:52:05
 categories: [Java]
 tags: [java,junit]
 toc: true
 ---
+
+<!--more-->
 
 ## 入门
 首先在项目中引入junit的依赖：
