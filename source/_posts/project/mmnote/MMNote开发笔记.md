@@ -6,6 +6,10 @@ tags: [mmnote]
 toc: true
 ---
 
+
+
+<!-- more -->
+
 ## 值得学习的教程
 
 - [使用 Electron 构建桌面应用 - 前端外刊评论 - 知乎专栏](https://zhuanlan.zhihu.com/p/20225295?columnSlug=FrontendMagazine)
@@ -1053,6 +1057,3 @@ fsp.stat(path).then(stats => {
 
 大致用了一下，爽！最爽的一点是可以直接范围对象属性了，而不是使用immutable哪种恶心的访问方式。这就可以用上typescript的类型优势了。
 
-# TODO 
-- [React动画实践](http://www.alloyteam.com/2016/01/react-animation-practice/)
-- source-map-support
