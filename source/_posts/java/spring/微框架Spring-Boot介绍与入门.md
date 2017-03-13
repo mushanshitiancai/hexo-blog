@@ -1,8 +1,8 @@
 ---
 title: 微框架Spring Boot介绍与入门
 date: 2016-03-04 08:38:29
-categories: [Java]
-tags: java
+categories: [Java,Spring]
+tags: [java,spring]
 ---
 
 Spring Boot的介绍可以看[这篇文章](http://www.infoq.com/cn/articles/microframeworks1-spring-boot)。总得来说，就是Spring也觉得自己用起来和什么PHP web框架啊，ROR框架啊，Python web框架啊相比太麻烦了，自己也不好意思了，现在大伙又喜欢推崇什么'微框架'(参考[文章](http://www.infoq.com/cn/news/2015/06/Java-Spark-Jodd-Ninja/))，讲究的就是灵活，简洁，易测试，易部署。所以Spring作为Java框架的老大，就祭出了Spring Boot这么一个东西。在Spring强大的基础上，弄了很多简化配置，部署的功能。

@@ -1,7 +1,7 @@
 ---
 title: 'No mapping found for HTTP request with URI [/] in DispatcherServlet问题解决'
 date: 2017-03-13 10:21:58
-categories: [Java]
+categories: [Java,Spring]
 tags: [java,spring]
 ---
 
@@ -74,3 +74,11 @@ public class IndexController {
 
 删除这个文件后，就正常啦！
 
+
+外一则：
+
+```xml
+<mvc:resources mapping="/resources/**" location="/resources/"/>
+```
+
+这个是设置资源文件路由的，一定要记得，location的值，前后都需要有`/`，才能正确的路由。
