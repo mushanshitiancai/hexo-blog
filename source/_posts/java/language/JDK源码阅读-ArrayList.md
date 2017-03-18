@@ -988,6 +988,7 @@ public boolean isEmpty() {
 - ArrayList在序列化过程中如果发现数据源被修改，会快速失败
 - subList不会建立新的数组，而是在原来的数据源上操作
 - clone会复制存放数据的底层数组elementData，但是不会复制元素本身。
+- ArrayList对数组的高效操作使用`System.arraycopy`与`Arrays.copyOf`这两个方法完成。后者调用的也是`System.arraycopy`。
 
 ## 参考资料
 - [java的arrayList中，数组为什么被transient修饰，这是因为什么原因而设计出来的？_百度知道](http://zhidao.baidu.com/link?url=2INEEQeNLOfZdrhnu-5g95990EDJjZ7H-T7sJNHagdKzedXz0qPRCVRm4kJUypVvNKOmfBE2964_RtH-IjCaQa)
