@@ -32,24 +32,24 @@ git clone --depth 1 git://git.jetbrains.org/idea/community.git idea
 ### 添加IDEA jdk
 虽然不知道原因，但是根据[Check Out And Build Community Edition](http://www.jetbrains.org/intellij/sdk/docs/basics/checkout_and_build_community.html)，我们需要建立一个`IDEA jdk`来运行插件：
 
-![](/img/java/idea/14910140405419/14910447672307.jpg)￼
+![](/img/java/idea/14910447672307.jpg)￼
 
 除非你在Mac上使用官方JDK，否则你需要手动添加`/lib/tools.jar`到classpath中。
 
 ### 配置IntelliJ Platform SDK
 打开`File | Project Structure`新建一个`IntelliJ Platform SDK`：
 
-![](/img/java/idea/14910140405419/14910140718316.jpg)￼
+![](/img/java/idea/14910140718316.jpg)￼
 
 Java SDK选择我们刚刚建立的`IDEA jdk`：
 
-![](/img/java/idea/14910140405419/14910449400889.jpg)￼
+![](/img/java/idea/14910449400889.jpg)￼
 
 然后我们可以把下载的IDEA社区版源码添加到源码路径中，这样在调试时，就可以调试IDEA自身的代码了：
 
-![](/img/java/idea/14910140405419/14910450172506.jpg)￼
+![](/img/java/idea/14910450172506.jpg)￼
 
-![](/img/java/idea/14910140405419/14910450845885.jpg)￼
+![](/img/java/idea/14910450845885.jpg)￼
 
 ## 第一个插件
 我们来编写一个最简单的插件来学习编写一个插件的完整步骤。
@@ -57,11 +57,11 @@ Java SDK选择我们刚刚建立的`IDEA jdk`：
 ### 新建工程
 选择`IntellJ Platform Plugin`，然后Project SDK指定刚刚新建的plugin sdk：
 
-![](/img/java/idea/14910140405419/14910451487756.jpg)￼
+![](/img/java/idea/14910451487756.jpg)￼
 
 新建的插件项目：
 
-![](/img/java/idea/14910140405419/14913163331150.jpg)￼
+![](/img/java/idea/14913163331150.jpg)￼
 
 插件根目录下有两个目录`src`和`resources`。`src`是插件代码目录，`resource`是插件资源目录，其中`META-INF/plugin.xml`是插件的描述文件，就像Java web项目的`web.xml`一样。
 
@@ -147,15 +147,15 @@ public class TextBoxes extends AnAction {
 
 这里我们新建了一个菜单组，其中text字符串的下划线表示这个字母作为快捷键。这个菜单显示的效果如下：
 
-![](/img/java/idea/14910140405419/14913176212218.jpg)￼
+![](/img/java/idea/14913176212218.jpg)￼
 
 除了手动新建Action，IDEA还提供了快速新建的方法，在代码目录上点击新建，可以看到Action：
 
-![](/img/java/idea/14910140405419/14913178262565.jpg)￼
+![](/img/java/idea/14913178262565.jpg)￼
 
 可以在这个面板中填写你要新建的Action信息，IDEA会帮你新建类，还有在plugin.xml中帮你注册：
 
-![](/img/java/idea/14910140405419/14913180035888.jpg)￼
+![](/img/java/idea/14913180035888.jpg)￼
 
 ### 运行插件
 运行插件特别简单，和运行普通Java代码一样，点击运行或者调试的按钮，就会启动一个新的IDEA实例，这个实例中插件是生效的。
