@@ -6,7 +6,7 @@ tags: [java,groovy]
 toc: true
 ---
 
-原文地址：[The Apache Groovy programming language - Runtime and compile-time metaprogramming](http://www.groovy-lang.org/metaprogramming.html)
+原文地址：[Groovy - Runtime and compile-time metaprogramming](http://www.groovy-lang.org/metaprogramming.html)
 
 ## 1. 运行时元编程
 
