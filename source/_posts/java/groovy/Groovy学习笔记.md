@@ -1,7 +1,7 @@
 ---
 title: Groovy学习笔记
 date: 2017-04-14 08:38:54
-categories: [Java]
+categories: [Java,Groovy]
 tags: [java,groovy]
 ---
 
