@@ -9,7 +9,7 @@ tags: [java,spring]
 
 <!-- more -->
 
-Servlet3中，提供了新的注解，可以不依赖`web.xml`声明Servlet/过滤器/监听器。同时还提供了一个`ServletContainerInitializer`接口，这个接口能够让库代码加入到应用的启动环境中来。这个特性可以看看前一篇文章：？？。Spring就是利用了这个接口来实现零配置启动。
+Servlet3中，提供了新的注解，可以不依赖`web.xml`声明Servlet/过滤器/监听器。同时还提供了一个`ServletContainerInitializer`接口，这个接口能够让库代码加入到应用的启动环境中来。这个特性可以看看前一篇文章：[Servlet3学习笔记-注解和可拔插特性 | 木杉的博客](http://mushanshitiancai.github.io/2017/05/23/java/servlet/Servlet3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%8F%AF%E6%8B%94%E6%8F%92%E7%89%B9%E6%80%A7/)。Spring就是利用了这个接口来实现零配置启动。
 
 说明一下，这里的零配置指的是没有`web.xml`中的配置，而不是指Spring本身的配置。
 
