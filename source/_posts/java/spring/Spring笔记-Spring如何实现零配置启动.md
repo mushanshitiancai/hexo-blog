@@ -77,7 +77,7 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 
 首先可以看到spring-web中定义了`javax.servlet.ServletContainerInitializer`这个文件，其中指定了`org.springframework.web.SpringServletContainerInitializer`这个实现类：
 
-![](img/java/servlet/spring-servlet-initializer.png)
+![](/img/java/servlet/spring-servlet-initializer.png)
 
 实现类的代码如下：
 
