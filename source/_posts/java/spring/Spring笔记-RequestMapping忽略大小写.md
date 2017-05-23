@@ -1,5 +1,5 @@
 ---
-title: Spring技巧-RequestMapping忽略大小写
+title: Spring笔记-RequestMapping忽略大小写
 date: 2017-04-12 15:50:39
 categories: [Java,Spring]
 tags: [java,spring]
