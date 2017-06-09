@@ -10,6 +10,8 @@ tags: [java,spring]
 - 启动配置：Spring是集成到我们的应用中使用的，所以不同的应用有不同的方式来启动spring。最常见的场景是web应用，启动的配置在web.xml部署描述符中。对于其他的Java程序，可能通过代码调用的方式直接启动Spring，那么就没有启动配置了。
 - 容器配置：Spring容器的配置，一般的名字是applicationContext.xml，指挥Spring如何搜索，装配Bean。
 
+<!-- more -->
+
 在Java Web中使用Spring大致是这个结构：
 
 ![](/img/java/spring/xml-config.png)

@@ -1,5 +1,5 @@
 ---
-title: Spring整合RabbitMQ
+title: Spring笔记-整合RabbitMQ
 date: 2016-08-08 11:29:28
 categories: [Java,Spring]
 tags: [java,spring]
