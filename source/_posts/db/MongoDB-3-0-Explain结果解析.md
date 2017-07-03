@@ -9,8 +9,9 @@ tags: [db,mongodb]
 
 <!-- more -->
 
-![](img/2017-07-03-14-09-42.png)
+![](/img/2017-07-03-14-44-41.pngxx)
 
+![](/img/monge/test.png)
 
 ## 参考资料
 - [Explain Results — MongoDB Manual 3.4](https://docs.mongodb.com/manual/reference/explain-results/)

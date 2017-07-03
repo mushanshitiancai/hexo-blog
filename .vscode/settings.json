@@ -7,5 +7,7 @@
     "editor.fontFamily": "PingFang SC Menlo, Monaco, 'Courier New', monospace, 'Microsoft YaHei'",
     "pasteImage.path": "${projectRoot}/source/img",
     "pasteImage.basePath": "${projectRoot}/source",
-    "pasteImage.forceUnixStyleSeparator": true
+    "pasteImage.forceUnixStyleSeparator": true,
+    "pasteImage.prefix": "/",
+    "pasteImage.suffix": "xx"
 }
