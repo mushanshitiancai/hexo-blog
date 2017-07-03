@@ -1,7 +1,7 @@
 ---
-title: mongodb建立索引的dropDups参数的注意事项
+title: MongoDB建立索引的dropDups参数的注意事项
 date: 2016-11-01 17:45:37
-categories:
+categories: MongoDB
 tags: [db,mongodb]
 ---
 
