@@ -7,6 +7,8 @@ tags: [db,mongodb]
 
 备份和恢复操作是操作数据库时经常使用的操作。MongoDB提供了mongodump/mongorestore来进行备份和恢复数据。
 
+<!--more-->
+
 ## 备份数据
 
 ### 备份数据库
