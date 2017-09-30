@@ -88,7 +88,7 @@ JavaME游戏，还没有截图
 ## 大学时代作品
 
 微软编程之美挑战赛
-![](/img/old-project/microsoft-jam.png)
+![](/img/old-project/microsoft-jam.jpg)
 
 无线画板（三星Span参赛项目）
 ![](/img/old-project/wireless-board/wireless-board-gallery.png)
