@@ -60,6 +60,16 @@ date: 2016-06-14 14:39:25
 - 最喜欢的语言：Java
 - 最喜欢的IDE：JetBrains系列IDE
 
-![](2017-06-30-13-38-46.png)
-![](image\2017-06-30-14-16-07.png)
-![](..\..\..\..\..\nd\�ܱ�\2017-06-30-16-43-23.png)
+## 初高中时代作品
+
+那个时候真的是有激情，然后上了大学后就一路下滑了，唉。。。
+
+![](/img/old-project/tetris.png)
+
+![](/img/old-project/snake.png)
+
+![](/img/old-project/box.png)
+
+![](/img/old-project/ball.png)
+
+![](/img/old-project/paopao.png)
