@@ -64,12 +64,46 @@ date: 2016-06-14 14:39:25
 
 那个时候真的是有激情，然后上了大学后就一路下滑了，唉。。。
 
+俄罗斯方块
 ![](/img/old-project/tetris.png)
 
+贪吃蛇
 ![](/img/old-project/snake.png)
 
+推箱子
 ![](/img/old-project/box.png)
 
+弹球
 ![](/img/old-project/ball.png)
 
+泡泡龙
 ![](/img/old-project/paopao.png)
+
+彩色连珠
+![](/img/old-project/color-ball.png)
+
+躲子弹
+JavaME游戏，还没有截图
+
+## 大学时代作品
+
+微软编程之美挑战赛
+![](/img/old-project/microsoft-jam.png)
+
+无线画板（三星Span参赛项目）
+![](/img/old-project/wireless-board/wireless-board-gallery.png)
+![](/img/old-project/wireless-board/wireless-board-main.png)
+![](/img/old-project/wireless-board/wireless-board-main2.png)
+![](/img/old-project/wireless-board/wireless-board-panel.png)
+![](/img/old-project/wireless-board/wireless-board-setting.png)
+![](/img/old-project/wireless-board/wireless-board-title.png)
+
+天天向上课程表
+![](/img/old-project/class-table/class-table-title.png)
+![](/img/old-project/class-table/class-table-setting.png)
+![](/img/old-project/class-table/class-table-main.png)
+
+谁动了我的蛋蛋（谷歌安卓大学生挑战赛西南赛区三等奖）
+![](/img/old-project/egg/egg1.png)
+![](/img/old-project/egg/egg2.png)
+
