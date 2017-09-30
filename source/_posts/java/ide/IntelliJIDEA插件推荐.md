@@ -15,3 +15,6 @@ tags: [java,idea]
 
 [GenerateAllSetter :: JetBrains Plugin Repository](https://plugins.jetbrains.com/plugin/9360-generateallsetter)
 
+## 生成序列图插件
+
+[SequenceDiagram :: JetBrains Plugin Repository](https://plugins.jetbrains.com/plugin/8286-sequencediagram)

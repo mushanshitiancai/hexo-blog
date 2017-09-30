@@ -7,6 +7,14 @@ tags: test
 
 ab是Apache服务器自带的一个压力测试工具，用户测试HTTP服务器的性能。
 
+<!-- more -->
+
+## 安装
+
+ab是附带在Apache服务器中的一个工具，所以我们要安转Apache。Windows下安装可以参考[如何从Apache官网下载windows版apache服务器](https://jingyan.baidu.com/article/29697b912f6539ab20de3cf8.html)
+
+## 使用
+
 最简单的用法：
 
     ab -n 10 -c 2 http://www.baidu.com/
