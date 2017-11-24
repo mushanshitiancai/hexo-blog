@@ -1,5 +1,5 @@
 ---
-title: 微框架Spring Boot介绍与入门
+title: Spring Boot介绍与入门
 date: 2016-03-04 08:38:29
 categories: [Java,Spring]
 tags: [java,spring]
