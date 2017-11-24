@@ -164,6 +164,8 @@ public void test_loadUseOptional() {
 
 如果你的场景中认为null是不存在的，那么你可以在load函数中抛出异常，这个异常会通过get抛出。
 
+另外还有一个问题，如果是key==null呢？答案是直接抛出`java.lang.NullPointerException`。Guava对于null是很不待见的。
+
 ## 参考资料
 - [Google Guava] 3-缓存 | 并发编程网 – ifeve.com
 http://ifeve.com/google-guava-cachesexplained/
