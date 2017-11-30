@@ -21,6 +21,8 @@ PUT /{bucketname}/{objectname}?partNumber={partNumber}&uploadId={uploadId}
 
 传入`partNumber`和`uploadId`是一个接口，没有传入这两个参数是另外一个接口，那Spring中要如何进行路由设置呢？
 
+<!--more-->
+
 一般我们设置路由都是`@RequestMapping(value = "/xx", method = RequestMethod.GET)`。然后在方法签名中可以通过`@RequestParam`注入参数。
 
 但是直接通过注入不同的参数来实现区分是不行的，比如：
