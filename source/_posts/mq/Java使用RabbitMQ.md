@@ -1,7 +1,7 @@
 ---
 title: Java使用RabbitMQ
 date: 2016-08-08 15:00:43
-categories:
+categories: [RabbitMQ]
 tags: [architecture,mq]
 ---
 
