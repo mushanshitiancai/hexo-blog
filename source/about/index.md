@@ -37,7 +37,7 @@ date: 2016-06-14 14:39:25
   - 2017年6月23日 现在接触的业务的数据量是亿级别的，希望可以学到一些大数据下的数据库调优技巧
 - 推广博客
   - 2017年6月28日 虽然现在博客还比较水，但是也想被更多的人看到用到。但是因为是在github上托管，基本没有流量，得想想办法导入点流量进来
-  - 2017年12月19日 默默给我的博客加上打赏了😁
+  - 2017年12月19日 默默给我的博客加上打赏了
 - 坚持维护目前开源的两个vscode插件
   - 2017年7月4日 我的两个缺点 1. 做出功能了就不想再碰那个代码了 2. 拖延症。导致虽然有人提issue和mr我都懒得管，一拖就是半年了。。。趁这次全部更新一下。以小见大，这么简单的插件都有这么多事儿，一个大的开源项目维护起来是多么需要毅力。
   - 2017年9月7日 今天在paste image的issue中有人提到了[markdown-paste-image](https://github.com/telesoho/vscode-markdown-paste-image)，说什么功能类似，一看，妈的，就是fork我的项目的，而且下载量竟然也都2k了。。。他的修改点主要是在插入前会有一个输入框来修改路径。这的确降低了使用门槛。有空得吸纳过来（猴年马月）
@@ -70,13 +70,14 @@ date: 2016-06-14 14:39:25
   - 接盘迁移服务（亿级别服务的在线迁移，其实还是很有挑战的，但是坑也深。花了大量的时间用于测试前人的多次提测的代码，依然发现不少问题。。）
   - 学习RabbitMQ（AMQP的使用还是有点复杂的，尤其在考虑其连接，多线程的时候，不知道其实现，就容易懵逼，不像数据库那样，模型简单，AMQP的模型还是比较复杂的）
   - 协调接入阿里CDN
-
   - [Guava LoadingCache不能缓存null值 | 木杉的博客](http://mushanshitiancai.github.io/2017/11/24/java/framework/Guava-LoadingCache%E4%B8%8D%E8%83%BD%E7%BC%93%E5%AD%98null%E5%80%BC/)
   - [Spring笔记-异常处理 | 木杉的博客](http://mushanshitiancai.github.io/2017/11/27/java/spring/Spring%E7%AC%94%E8%AE%B0-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/)
   - [Spring笔记-根据URL参数进行路由 | 木杉的博客](http://mushanshitiancai.github.io/2017/11/30/java/spring/Spring%E7%AC%94%E8%AE%B0-%E6%A0%B9%E6%8D%AEURL%E5%8F%82%E6%95%B0%E8%BF%9B%E8%A1%8C%E8%B7%AF%E7%94%B1/)
   - [RabbitMQ消费者是消费一条接收一条还是会被不断推送消息？ | 木杉的博客](http://mushanshitiancai.github.io/2017/12/01/mq/RabbitMQ%E6%B6%88%E8%B4%B9%E8%80%85%E6%98%AF%E6%B6%88%E8%B4%B9%E4%B8%80%E6%9D%A1%E6%8E%A5%E6%94%B6%E4%B8%80%E6%9D%A1%E8%BF%98%E6%98%AF%E4%BC%9A%E8%A2%AB%E4%B8%8D%E6%96%AD%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%EF%BC%9F/)
 
 - 2017年12月
+  - 
+
 
 ## 最 
 
