@@ -7,6 +7,8 @@ tags: [java]
 
 很多时候Java的功能无法满足需求的时候，我们可以调用命令行或者第三方程序来实现对应的功能。Java提供了启动子进程并设置执行程序的能力，我们看一下怎么使用。
 
+<!--more-->
+
 ```java
 public static void main(String[] args) throws Exception {
     String command = "dir";
