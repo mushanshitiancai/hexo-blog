@@ -1,5 +1,5 @@
 ---
-title: IDEA新插件JVM Debugger Memory View
+title: IntelliJ IDEA新插件JVM Debugger Memory View
 date: 2016-11-28 09:48:01
 categories: [Java]
 tags: [java,idea]

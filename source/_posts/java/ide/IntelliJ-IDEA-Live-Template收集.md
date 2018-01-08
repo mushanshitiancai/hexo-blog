@@ -1,5 +1,5 @@
 ---
-title: IntelliJIDEA Live Template收集
+title: IntelliJ IDEA Live Template收集
 date: 2017-06-26 12:00:00
 categories: [Java]
 tags: [java,idea]

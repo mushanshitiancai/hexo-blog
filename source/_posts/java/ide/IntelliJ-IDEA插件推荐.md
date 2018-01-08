@@ -1,5 +1,5 @@
 ---
-title: IntelliJIDEA插件推荐
+title: IntelliJ IDEA插件推荐
 date: 2016-08-16 10:31:44
 categories: [Java]
 tags: [java,idea]
