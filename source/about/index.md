@@ -18,12 +18,11 @@ date: 2016-06-14 14:39:25
 
 ## 我的目标
 
-2016年：
+### 2016年：
 - 转型Java -> 成功
 - 实现自己的笔记软件并在MAS上架 -> 花了一个多月学习swift，放弃。随后研究electron+react，目前进度10% -> 2017年6月23日 放弃
 
-2017年：
-
+### 2017年：
 技术：
 
 - 阅读Spring源码
@@ -60,27 +59,13 @@ date: 2016-06-14 14:39:25
   - 2017年6月23日 大学没舍得向家里要钱学，现在慢慢学吧
   - 2017年12月19日 科目二90分过，还是有点紧张的
 
+### 2018年
+
+- 提升博客中代码阅读的体验。同富大哥提出的，说如果文章中的代码阅读可以向在IDE中一样有高亮就好了。觉得有道理。
+
 ## 总结
 
 我总结我最大的一个毛病就是不喜欢总结。
-
-2017年11月：
-- 开发上线一键降级工具
-- 预研，知道组内人员迁移项目与工作流到Gerrit
-- 接盘迁移服务（亿级别服务的在线迁移，其实还是很有挑战的，但是坑也深。花了大量的时间用于测试前人的多次提测的代码，依然发现不少问题。。）
-- 学习RabbitMQ（AMQP的使用还是有点复杂的，尤其在考虑其连接，多线程的时候，不知道其实现，就容易懵逼，不像数据库那样，模型简单，AMQP的模型还是比较复杂的）
-- 协调接入阿里CDN
-
-博客：
-- [Guava LoadingCache不能缓存null值 | 木杉的博客](http://mushanshitiancai.github.io/2017/11/24/java/framework/Guava-LoadingCache%E4%B8%8D%E8%83%BD%E7%BC%93%E5%AD%98null%E5%80%BC/)
-- [Spring笔记-异常处理 | 木杉的博客](http://mushanshitiancai.github.io/2017/11/27/java/spring/Spring%E7%AC%94%E8%AE%B0-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/)
-- [Spring笔记-根据URL参数进行路由 | 木杉的博客](http://mushanshitiancai.github.io/2017/11/30/java/spring/Spring%E7%AC%94%E8%AE%B0-%E6%A0%B9%E6%8D%AEURL%E5%8F%82%E6%95%B0%E8%BF%9B%E8%A1%8C%E8%B7%AF%E7%94%B1/)
-- [RabbitMQ消费者是消费一条接收一条还是会被不断推送消息？ | 木杉的博客](http://mushanshitiancai.github.io/2017/12/01/mq/RabbitMQ%E6%B6%88%E8%B4%B9%E8%80%85%E6%98%AF%E6%B6%88%E8%B4%B9%E4%B8%80%E6%9D%A1%E6%8E%A5%E6%94%B6%E4%B8%80%E6%9D%A1%E8%BF%98%E6%98%AF%E4%BC%9A%E8%A2%AB%E4%B8%8D%E6%96%AD%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%EF%BC%9F/)
-
-2017年12月：
-- 打磨迁移服务
-
-
 
 ## 最 
 
