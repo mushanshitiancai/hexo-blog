@@ -7,6 +7,8 @@ tags: [gm,graphicsmagick]
 
 GraphicsMagick是非常强大的图片处理工具。支持超过88中图片格式，包含 DPX, GIF, JPEG, JPEG-2000, PNG, PDF, PNM, TIFF这些常用的格式。图片分享网站Flickr和电商Etsy这两家公司用的就是
 
+<!--more-->
+
 ## 安装
 
 windows可以从这个FTP下载可执行安装程序：ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/windows/
