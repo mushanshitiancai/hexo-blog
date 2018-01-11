@@ -17,7 +17,7 @@ ffmpeg的map参数可以指定输入流和输出流的映射关系。
 
 `input_file_id`指定输入文件索引，从0开始，比如0表示第一个输入文件，1表示第二个输入文件。
 
-`stream_specifier`指定对应的文件中具体的流。可以参考：
+`stream_specifier`指定对应的文件中具体的流。可以参考：[FFmpeg笔记-Stream specifiers | 木杉的博客](http://mushanshitiancai.github.io/2018/01/10/tools/FFmpeg%E7%AC%94%E8%AE%B0-Stream-specifiers/)
 
 `input_file_id`前面的负号表示从已经建立的map关系中去掉这个映射。
 

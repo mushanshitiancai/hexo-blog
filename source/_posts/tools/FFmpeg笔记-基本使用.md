@@ -88,7 +88,7 @@ ffmpeg命令完整的说明参考：
 - [ffmpeg Documentation](http://ffmpeg.org/ffmpeg.html)
 - [ffmpeg参数中文详细解释](http://blog.csdn.net/leixiaohua1020/article/details/12751349)
 
-ffmpeg的参数太多了，我们还是通过常用命令来学习会比较好：
+ffmpeg的参数太多了，我们还是通过常用命令来学习会比较好。
 
 ### ffmpeg例子
 
