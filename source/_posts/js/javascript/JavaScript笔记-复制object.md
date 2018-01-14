@@ -1,7 +1,8 @@
 ---
-title: js中复制object
+title: JavaScript笔记-复制object
 date: 2016-03-31 17:40:22
-tags: js
+categories: [JavaScript]
+tags: [javascript,js]
 ---
 
 es6中，可以使用`Object.assign`来复制对象：
@@ -35,7 +36,7 @@ console.log(b); // { '1': 1, '2': [ 1, 2, 99 ] }
 
     var newObject = _.clone(oldObject);
 
-但是我跟喜欢用`lodash`，他的API和`underscore`基本一样。
+还可以用`lodash`，他的API和`underscore`基本一样。
 
 ```
 var newObject = _.clone(oldObject);
