@@ -1,7 +1,8 @@
 ---
-title: 【TODO】编写基于jQuery UI Widget Factory的插件
+title: jQuery笔记-编写基于jQuery UI Widget Factory的插件
 date: 2016-04-02 21:25:48
-tags: [js,jquery]
+categories: [JavaScript]
+tags: [javascript,js,jquery]
 ---
 
 前一篇文章([编写jQuery插件](http://mushanshitiancai.github.io/2016/04/02/js/%E7%BC%96%E5%86%99jquery%E6%8F%92%E4%BB%B6/))中我们介绍了如何编写jQuery插件。其中所讲解到的插件都是简单的，无UI的，无状态的插件。如果需要编写带UI的，有状态的插件，那么我们需要自己管理状态，这是比较麻烦的。jQuery UI提供了一个工厂方法帮助我们管理状态与触发回调。这里我们看看如何使用这个工厂方法。

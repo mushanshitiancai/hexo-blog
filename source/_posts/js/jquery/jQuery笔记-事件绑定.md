@@ -1,7 +1,8 @@
 ---
-title: jQuery事件绑定
+title: jQuery笔记-事件绑定
 date: 2016-04-01 22:31:26
-tags: [js,jquery]
+categories: [JavaScript]
+tags: [javascript,js,jquery]
 ---
 
 jquery事件绑定弄了好几次老是忘记。记录一下。

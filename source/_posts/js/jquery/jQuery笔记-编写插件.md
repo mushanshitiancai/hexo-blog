@@ -1,7 +1,8 @@
 ---
-title: 编写jQuery插件
+title: jQuery笔记-编写插件
 date: 2016-04-02 11:49:39
-tags: [js,jquery]
+categories: [JavaScript]
+tags: [javascript,js,jquery]
 ---
 
 翻译了jQuery插件开发的两篇文章：
