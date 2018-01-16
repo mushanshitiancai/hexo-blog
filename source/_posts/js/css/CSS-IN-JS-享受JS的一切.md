@@ -1,8 +1,8 @@
 ---
 title: 'CSS IN JS,享受JS的一切'
 date: 2016-12-21 14:23:54
-categories:
-tags: [js,css]
+categories: [JavaScript]
+tags: [css]
 ---
 
 [React: CSS in JS][React: CSS in JS]，这个PPT是2014年11月一个Facebook的员工发布的PPT。一切都从这个PPT说起。

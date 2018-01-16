@@ -25,7 +25,7 @@ tags: [javascript,js,jquery]
 
 ## 新建插件
 
-```
+```js
 $.widget( "nmk.progressbar", {
  
     _create: function() {
@@ -40,7 +40,9 @@ widget函数接受一个插件名name和一个包含插件逻辑的对象prototy
 
 注意，插件名需要使用命名空间，但是使用的时候不需要命名空间。
 
-    $( "<div />" ).appendTo( "body" ).progressbar({ value: 20 });
+```js
+$( "<div />" ).appendTo( "body" ).progressbar({ value: 20 });
+```
 
 ## prototype参数
 prototype对象规定了一些你需要实现（可选）的变量：
@@ -56,7 +58,7 @@ prototype对象中，包含了一些现成对象：
 
 上面的例子没有定义默认options，那么默认options为空对象。你也可以显示指定默认配置：
 
-```
+```js
 $.widget( "nmk.progressbar", {
  
     // Default options.
