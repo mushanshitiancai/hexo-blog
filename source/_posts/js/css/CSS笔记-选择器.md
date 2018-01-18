@@ -49,21 +49,19 @@ CSS选择器备忘。
 
 选择子元素的伪类：
 
-child系列：
+1. child系列：
+    - `:only-child` 选择作为唯一子元素出现的元素
+    - `:first-child` 选择作为子元素出现的第一个元素
+    - `:last-child` 选择作为子元素出现的最后一个元素
+    - `:nth-child(n)` 作为第n个子元素出现的元素（**从1开始计数**）
+    - `:nth-last-child(n)` 作为倒数第n个子元素出现的元素
 
-- `:only-child` 选择作为唯一子元素出现的元素
-- `:first-child` 选择作为子元素出现的第一个元素
-- `:last-child` 选择作为子元素出现的最后一个元素
-- `:nth-child(n)` 作为第n个子元素出现的元素（**从1开始计数**）
-- `:nth-last-child(n)` 作为倒数第n个子元素出现的元素
-
-of-type系列，和child系列的区别是只计算同类元素：
-
-- `:only-of-type` 选择作为唯一子元素出现的元素
-- `:first-of-type` 选择作为子元素出现的第一个元素
-- `:last-of-type` 选择作为子元素出现的最后一个元素
-- `:nth-of-type(n)` 作为第n个子元素出现的元素
-- `:nth-last-of-type(n)` 作为倒数第n个子元素出现的元素
+2. of-type系列，和child系列的区别是只计算同类元素：
+    - `:only-of-type` 选择作为唯一子元素出现的元素
+    - `:first-of-type` 选择作为子元素出现的第一个元素
+    - `:last-of-type` 选择作为子元素出现的最后一个元素
+    - `:nth-of-type(n)` 作为第n个子元素出现的元素
+    - `:nth-last-of-type(n)` 作为倒数第n个子元素出现的元素
 
 其他：
 - `:empty` 选择不包含子元素的元素
