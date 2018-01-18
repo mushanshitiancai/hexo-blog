@@ -25,20 +25,20 @@ jQuery常用方法备忘。
 
 ## 根据DOM关系获取包装集
 ### 子级
-- 获取直接子元素 `children()`
-- 获取所有子元素，包含文本节点 `contents()`
-- 过滤所有子元素 `find(selector)`：和`children()`的区别是`children()`只获取直接子元素，而`find()`会在所有子元素上过滤，同时`find()`不指定参数返回空，`children()`不指定参数返回所有子元素
+- `children()` 获取直接子元素
+- `contents()` 获取所有子元素，包含文本节点 
+- `find(selector)` 过滤所有子元素。和`children()`的区别是`children()`只获取直接子元素，而`find()`会在所有子元素上过滤，同时`find()`不指定参数返回空，`children()`不指定参数返回所有子元素
 
 ### 同级
-- 获取后面紧邻的元素 `next()`
-- 获取后面所有元素 `nextAll()`
-- 获取前面紧邻的元素 `prev()`
-- 获取前面所有元素 `prevAll()`
-- 获取同级的所有元素 `siblings()`
+- `next()` 获取后面紧邻的元素
+- `nextAll()` 获取后面所有元素
+- `prev()` 获取前面紧邻的元素
+- `prevAll()` 获取前面所有元素
+- `siblings()` 获取同级的所有元素
 
 ### 父级
-- 获取直接父元素 `parent()`
-- 获取所有父元素 `parents()`
+- `parent()` 获取直接父元素
+- `parents()` 获取所有父元素
 
 注：以上方法除了`contents()`都可以传入字符串参数用于过滤
 
@@ -54,46 +54,46 @@ jQuery常用方法备忘。
 ## 修改元素样式
 
 ### Class相关
-- 添加类到元素 `addClass(names)`
-- 删除元素上的类 `removeClass(names)`
-- 开关类名 `toggleClass(name)`
-- 判断是否包含类 `hasClass(name)`
+- `addClass(names)` 添加类到元素
+- `removeClass(names)` 删除元素上的类
+- `toggleClass(name)` 开关类名
+- `hasClass(name)` 判断是否包含类
 
 ### CSS相关
-- 设置元素CSS样式 `css(name,value)`
-- 批量设置元素CSS样式 `css(properties)`
-- 获取元素CSS样式 `css(name)`
+- `css(name,value)` 设置元素CSS样式
+- `css(properties)` 批量设置元素CSS样式
+- `css(name)` 获取元素CSS样式
 
-- 设置宽度 `width(value)`
-- 设置高度 `height(value)`
-- 获取宽度 `width()`
-- 获取高度 `height()`
+- `width(value)` 设置宽度
+- `height(value)` 设置高度
+- `width()` 获取宽度
+- `height()` 获取高度
 
 ## 操作元素内容
 
 ### 获取设置HTML内容
-- 获取第一个元素的html内容 `html()`
-- 设置所有元素的html内容 `html(text)`
+- `html()` 获取第一个元素的html内容
+- `html(text)` 设置所有元素的html内容
 
 ### 获取设置文本内容
-- 获取所有元素的文本内容 `text()`
-- 设置所有元素的文本内容 `text(content)`
+- `text()` 获取所有元素的文本内容
+- `text(content)` 设置所有元素的文本内容
 
 ### 删除元素
-- 删除元素 `remove()`：被删除的元素从DOM上**脱离**，并**返回**。
-- 清空内容 `empty()`
+- `remove()` 删除元素。被删除的元素从DOM上**脱离**，并**返回**。
+- `empty()` 清空内容
 
 例子：替换元素 `$('.toReplace').after('<p>new</p>').remove()`
 
 ### 在元素前后插入内容
-- 在最后一个子元素后追加内容 `append(content)`：content可以是HTML字符串，元素，包装集
-- 将内容追加到目标的最后一个子元素后 `appendTo(target)`：target可以是选择器字符串，元素，包装集
-- 在第一个子元素前插入内容 `prepend(content)`
-- 将内容插入到目标第一个子元素前 `prependTo(target)`
-- 在元素后追加内容 `after(content)`
-- 将内容追加到目标元素后 `insertAfter(target)`
-- 在元素前插入内容 `before(content)`
-- 将内容插入到目标元素前 `insertBefore(target)`
+- `append(content)` 在最后一个子元素后追加内容。content可以是HTML字符串，元素，包装集
+- `appendTo(target)` 将内容追加到目标的最后一个子元素后。target可以是选择器字符串，元素，包装集
+- `prepend(content)` 在第一个子元素前插入内容
+- `prependTo(target)` 将内容插入到目标第一个子元素前
+- `after(content)` 在元素后追加内容
+- `insertAfter(target)` 将内容追加到目标元素后
+- `before(content)` 在元素前插入内容
+- `insertBefore(target)` 将内容插入到目标元素前
 
 关于操作元素是移动还是复制的逻辑：
 
@@ -102,12 +102,12 @@ jQuery常用方法备忘。
 2. `$(".target")`包装集包含多个元素，则`.source`选中的元素会**克隆**到`.target`选中的元素下，除了最后一个。`.source`选中的元素会**移动**到`.target`包装集的最后一个元素中
 
 ### 包裹元素
-- 用指定的内容包裹选中的元素 `wrap(wrapper)`：wrapper可以是字符串，元素，包装集，函数
-- 用指定的内容包裹全部选中的元素 `wrapAll(wrapper)`
-- 用指定的内容包裹选中元素的内容 `wrapInner(wrapper)`
+- `wrap(wrapper)` 用指定的内容包裹选中的元素。wrapper可以是字符串，元素，包装集，函数
+- `wrapAll(wrapper)` 用指定的内容包裹全部选中的元素
+- `wrapInner(wrapper)` 用指定的内容包裹选中元素的内容
 
 ### 克隆元素
-- `clone(copyHandlers)`:copyHandlers为布尔值，表示是否复制事件处理
+- `clone(copyHandlers)` copyHandlers为布尔值，表示是否复制事件处理
 
 ## jQuery版本的选择
 
