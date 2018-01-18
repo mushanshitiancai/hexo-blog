@@ -111,7 +111,7 @@ jQuery常用方法备忘。
 
 ## jQuery版本的选择
 
-[jQuery选择什么版本 1.x? 2.x? 3.x? - osfipin - 博客园](https://www.cnblogs.com/osfipin/p/6211468.html)
+[jQuery选择什么版本 1.x? 2.x? 3.x?](https://www.cnblogs.com/osfipin/p/6211468.html)
 
 ## 参考资料
 - 《jQuery实战》
