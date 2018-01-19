@@ -225,9 +225,13 @@ public @interface Range {
 
 Bean Validation还有一些高级特性，比如组，组序列可以参考：[Bean Validation 技术规范特性概述](https://www.ibm.com/developerworks/cn/java/j-lo-beanvalid/)
 
+## 与Spring结合
+
+参考：[Spring3.1 对Bean Validation规范的新支持(方法级别验证) - CSDN博客](http://blog.csdn.net/u014351782/article/details/51729181)
+
 ## Bean Validation 2.0
 
-上面说的都是Bean Validation 1.0和1.1。这两个分别是在JavaEE6和JavaEE7中的。对应的JSR是JSR 303。
+上面说的都是Bean Validation 1.0和1.1。这两个分别是在JavaEE6和JavaEE7中的。对应的JSR是JSR 303和JSR 349。
 
 在2017年8月，[Bean Validation 2.0](http://beanvalidation.org/news/2017/08/07/bean-validation-2-0-is-a-spec/)发布了。
 
