@@ -123,6 +123,12 @@ Hibernate除了实现标准的constraint，还实现了一些扩展constraint。
 
 - `@ScriptAssert` 直接指定脚本进行校验，算是最灵活的了
 
+## Object Graph验证
+
+Object Graph是指对象的拓扑结构，比如对象的引用关系。Bean Validation支持Object Graph验证。
+
+默认如果A对象引用B对象是不会对B对象进行校验的。需要在B对象的字段或者getter使用`@Valid`注解才行。
+
 ## 自定义Constraint
 
 虽然Bean Validation规范提供了内置的constraint，但是对于实际使用来说是根本不够用的，业务的规则千奇百怪，是需要自己自定义constraint的。
@@ -215,6 +221,10 @@ public @interface Range {
 
 通过这种灵活的方式，我们可以利用现有的constraint注解，极大的简化了甚至可以不用写校验逻辑实现类了。
 
+## 高级特性
+
+Bean Validation还有一些高级特性，比如组，组序列可以参考：[Bean Validation 技术规范特性概述](https://www.ibm.com/developerworks/cn/java/j-lo-beanvalid/)
+
 ## Bean Validation 2.0
 
 上面说的都是Bean Validation 1.0和1.1。这两个分别是在JavaEE6和JavaEE7中的。对应的JSR是JSR 303。
@@ -271,3 +281,4 @@ Bean Validation的新功能：
 - [JSR 303 - Bean Validation 介绍及最佳实践](https://www.ibm.com/developerworks/cn/java/j-lo-jsr303/)
 - [Java Bean Validation Basics | Baeldung](http://www.baeldung.com/javax-validation)
 - [遇到Caused by: java.lang.NoClassDefFoundError: javax/validation/ParameterNameProvider - c3tc3tc3t - 博客园](http://www.cnblogs.com/or2-/p/3519111.html)
+- [Bean Validation 技术规范特性概述](https://www.ibm.com/developerworks/cn/java/j-lo-beanvalid/)
