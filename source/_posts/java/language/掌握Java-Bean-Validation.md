@@ -174,6 +174,47 @@ public class UUIDValidator implements ConstraintValidator<UUID, String> {
 
 因为一个constraint注解是可以作用于多种数据类型上的，比如`@Size`即可用于String上，也可以用于集合上，如何做到的呢？就是为一个constraint注解实现多个校验规则实现类，并指定不同的`T`参数。
 
+### 组合constraint
+
+上面介绍的是常规的constraint自定义方式。其实还可以利用现有的constraint注解的功能，实现“继承”校验规则。具体看例子：
+
+```java
+@Documented
+@Constraint(validatedBy = { })
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Retention(RUNTIME)
+@Min(0)
+@Max(Long.MAX_VALUE)
+@ReportAsSingleViolation
+public @interface Range {
+	@OverridesAttribute(constraint = Min.class, name = "value") long min() default 0;
+
+	@OverridesAttribute(constraint = Max.class, name = "value") long max() default Long.MAX_VALUE;
+
+	String message() default "{org.hibernate.validator.constraints.Range.message}";
+
+	Class<?>[] groups() default { };
+
+	Class<? extends Payload>[] payload() default { };
+
+	/**
+	 * Defines several {@code @Range} annotations on the same element.
+	 */
+	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+	@Retention(RUNTIME)
+	@Documented
+	public @interface List {
+		Range[] value();
+	}
+}
+```
+
+这是Hibernate扩展的`@Range`，可以发现这个注解上使用了`@Min(0)`和`@Max(Long.MAX_VALUE)`这两个注解，constraint注解还可以用在constraint注解上的，实现的效果是组合这些已有的注解的校验能力。也就是说通过添加这两个注解，`@Range`拥有了“必须大于等于0且小于等于Long.MAX_VALUE”的校验能力。
+
+但是`@Range`注解应该要有能力指定最小值和最大值，但是如果通过组合constraint注解的方式，其入参是写死的，所以在`@Range`的实现中，使用了`@OverridesAttribute(constraint = Min.class, name = "value") long min() default 0;`的写法，意思是`@Range`的min字段是用于覆盖`@Min`的value字段的。
+
+通过这种灵活的方式，我们可以利用现有的constraint注解，极大的简化了甚至可以不用写校验逻辑实现类了。
+
 ## Bean Validation 2.0
 
 上面说的都是Bean Validation 1.0和1.1。这两个分别是在JavaEE6和JavaEE7中的。对应的JSR是JSR 303。
