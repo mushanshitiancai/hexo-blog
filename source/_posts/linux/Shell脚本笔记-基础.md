@@ -1,7 +1,8 @@
 ---
-title: shell script学习笔记
+title: Shell脚本笔记-基础
 date: 2016-02-22 16:13:23
-tags: linux
+categories: [Linux]
+tags: [linux,shell]
 ---
 
 ![](/img/shell/第11章认识与学习shell.png)

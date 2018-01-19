@@ -1,11 +1,30 @@
 ---
-title: shell实例
+title: Shell脚本笔记-案例
 date: 2016-03-29 16:22:39
+categories: [Linux]
 tags: [linux,shell]
 ---
 
 ## 收集箱
 去掉第一行：`tail -n +2 file`
+
+## 文件/目录操作
+### 获取文件名和扩展名
+
+```sh
+filename=$(basename "$fullfile")
+extension="${filename##*.}"
+filename="${filename%.*}"
+```
+
+### 遍历目录下的文件
+
+```sh
+for entry in "$search_dir"/*
+do
+  echo "$entry"
+done
+```
 
 ## 表格数据处理
 最经典的成绩表：

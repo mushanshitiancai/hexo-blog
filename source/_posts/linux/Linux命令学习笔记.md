@@ -1,6 +1,7 @@
 ---
 title: Linux命令学习笔记
 date: 2016-01-23 22:01:18
+categories: [Linux]
 tags: linux
 ---
 

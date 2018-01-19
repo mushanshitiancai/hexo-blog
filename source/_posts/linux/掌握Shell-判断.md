@@ -1,6 +1,7 @@
 ---
-title: 掌握Shell-判断
+title: Shell脚本笔记-判断语句
 date: 2016-04-26 17:15:26
+categories: [Linux]
 tags: [linux,shell]
 ---
 

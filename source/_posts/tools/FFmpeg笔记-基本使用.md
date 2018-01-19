@@ -190,5 +190,7 @@ fps过滤器的文档：[fps Documentation](http://ffmpeg.org/ffmpeg-all.html#fp
 网上随便找的能下载到小容量视频并且多种格式的网站：
 
 - [Download Sample Videos / Dummy Videos For Demo Use](http://www.sample-videos.com/)
+- [Sample WebM, Ogg, and MP4 Video Files for HTML5 | TechSlides](http://techslides.com/sample-webm-ogg-and-mp4-video-files-for-html5)
 - [video comparison sample clips](http://users.wfu.edu/yipcw/atg/vid/)
 - [Video Download MP4, HD MP4, Full HD, 3GP Format And Watch - HDvidz.in](http://hdvidzpro.me/video/)
+- [Internet Archive: Digital Library of Free Books, Movies, Music & Wayback Machine](https://archive.org/)
