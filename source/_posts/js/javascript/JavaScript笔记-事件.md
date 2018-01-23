@@ -191,6 +191,10 @@ DOM3级事件规定了一下几类事件：
 3. blur 在失去焦点的元素上触发;
 4. focus 在获得焦点的元素上触发;
 
+`focusin/focusout`相较于`focus/blur`，有两个优点：
+1. `focusin/focusout`会冒泡，`focus/blur`不会
+2. `focusin/focusout`的`FocusEvent.relatedTarget`字段会设置为前一个聚焦的元素/下一个聚焦的元素
+
 ### 鼠标与滚轮事件
 
 - `click` 按下鼠标左键或者回车键触发
@@ -219,21 +223,55 @@ DOM3级事件规定了一下几类事件：
 
 鼠标事件产生的对象是`MouseEvent`对象。有一些有用的属性：
 
-| 属性名          | 说明                              |
-| --------------- | --------------------------------- |
-| clientX/clientY | 以浏览器左上角为原点的鼠标点击位置 |
-| pageX/pageY     | 以页面左上角为原点的鼠标点击位置   |
-| screenX/screenY | 以屏幕左上角为原点的鼠标点击位置   |
-| offsetX/offsetY | 以元素左上角为原点的鼠标点击位置   |
-| shiftKey        | 事件发生时，shift键是否按下       |
-| ctrlKey         | 事件发生时，ctrl键是否按下        |
-| altKey          | 事件发生时，alt键是否按下         |
-| metaKey         | 事件发生时，meta键是否按下        |
+| 属性名          | 说明                                |
+| --------------- | ----------------------------------- |
+| x/y             | clientX/clientY的别名               |
+| clientX/clientY | 以浏览器左上角为原点的鼠标点击位置   |
+| pageX/pageY     | 以页面左上角为原点的鼠标点击位置     |
+| screenX/screenY | 以屏幕左上角为原点的鼠标点击位置     |
+| offsetX/offsetY | 以元素左上角为原点的鼠标点击位置     |
+| shiftKey        | 事件发生时，shift键是否按下         |
+| ctrlKey         | 事件发生时，ctrl键是否按下          |
+| altKey          | 事件发生时，alt键是否按下           |
+| metaKey         | 事件发生时，meta键是否按下          |
+| button          | 鼠标按下的按键值，具体见下表         |
+| buttons         | 鼠标按下的所有按键组合值，具体见下表 |
+| detail          | 鼠标在该位置上连续点击几次           |
 
 如果网页没有滚动，那么`clientX/clientY`和`pageX/pageY`是相等的。
 
-鼠标事件实验：http://jsbin.com/soqocumeva/1/edit?html,js,output
+button属性的取值：
 
+- 0 左键
+- 1 中键
+- 2 右键
+- 3 鼠标后退键
+- 4 鼠标前进键
+
+但是如果同时按下多个按键怎么办呢？可以用buttons字段：
+
+- 0 没有按键
+- 1 左键
+- 2 中键
+- 4 右键
+- 8 鼠标后退键
+- 16 鼠标前进键
+
+这些按键的或(|)运算得出button的取值，所以可以通过buttons值算出当前有哪些按键按下。
+
+如果事件是`mouseenter`，`mouseleave`，`mouseover`，`mouseout`，`MouseEvent.relatedTarge`会设置为响应的相关对象：
+
+| 事件       | target属性    | relatedTarge属性 |
+| ---------- | ------------- | ---------------- |
+| mouseenter | 鼠标进入的元素 | 鼠标离开的元素    |
+| mouseleave | 鼠标离开的元素 | 鼠标进入的元素    |
+| mouseover  | 鼠标进入的元素 | 鼠标离开的元素    |
+| mouseout   | 鼠标离开的元素 | 鼠标进入的元素    |
+
+
+
+
+鼠标事件实验：http://jsbin.com/soqocumeva/1/edit?html,js,output
 
 ## 参考资料
 - [DOM0, DOM1, DOM2, DOM3 - CSDN博客](http://blog.csdn.net/pxy_lele/article/details/49755071/)
