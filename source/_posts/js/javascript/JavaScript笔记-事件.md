@@ -36,6 +36,7 @@ toc: true
 
 - 所有浏览器都支持
 - 会一直冒泡到window对象（图片只画到了document对象）
+- 不是所有事件都会冒泡
 
 事件捕获是这样的：
 
@@ -178,7 +179,55 @@ DOM3级事件规定了一下几类事件：
 
 ### 焦点事件
 
-TODO
+- `focus` 在元素获得焦点时触发。不冒泡
+- `blur` 在元素失去焦点时触发。不冒泡
+- `focusin` 在元素获得焦点时触发。冒泡
+- `focusout` 在元素失去焦点时触发。冒泡
+
+在焦点从一个元素到另外一个元素上时，事件触发顺序如下：
+
+1. focusout 在失去焦点的元素上触发;
+2. focusin 在获得焦点的元素上触发;
+3. blur 在失去焦点的元素上触发;
+4. focus 在获得焦点的元素上触发;
+
+### 鼠标与滚轮事件
+
+- `click` 按下鼠标左键或者回车键触发
+- `dbclick` 双击鼠标左键触发
+- `mousedown` 按键任意鼠标按键触发
+- `mouseup` 释放鼠标按键时触发
+- `mouseenter` 在鼠标首次移动到元素范围内触发。不冒泡
+- `mouseleave` 在鼠标移动到元数据范围外触发。不冒泡
+- `mouseover` 在鼠标首次移动到元素范围内触发
+- `mouseout` 在鼠标从一个元素移动到另外一个元素（可以是子元素）时触发
+- `mousemove` 当鼠标在元素内移动时重复触发。
+
+除了`mouseenter`和`mouseleave`都会冒泡，也可以被取消。
+
+只有在同一个元素上触发了`mousedown`和`mouseup`事件才会触发`click`事件。如果其中一个被取消，就不会触发`click`事件。只有两次连续触发`click`事件才会触发`dbclick`事件。`mousedown`和`mouseup`事件不受其他事件影响。
+
+`dbclick`完整的触发顺序如下：
+
+1. mousedown 
+2. mouseup 
+3. click
+4. mousedown 
+5. mouseup
+6. click
+7. dblclick
+
+鼠标事件产生的对象是`MouseEvent`对象。有一些有用的属性：
+
+| 属性名          | 说明                              |
+| --------------- | --------------------------------- |
+| clientX/clientY | 以浏览器左上角为原点的鼠标点击位置 |
+| pageX/pageY     | 以页面左上角为原点的鼠标点击位置   |
+| screenX/screenY | 以屏幕左上角为原点的鼠标点击位置   |
+
+如果网页没有滚动，那么`clientX/clientY`和`pageX/pageY`是相等的。
+
+鼠标事件实验：http://jsbin.com/soqocumeva/1/edit?html,js,output
 
 ## 参考资料
 - [DOM0, DOM1, DOM2, DOM3 - CSDN博客](http://blog.csdn.net/pxy_lele/article/details/49755071/)
