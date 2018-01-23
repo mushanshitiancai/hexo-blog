@@ -224,10 +224,16 @@ DOM3级事件规定了一下几类事件：
 | clientX/clientY | 以浏览器左上角为原点的鼠标点击位置 |
 | pageX/pageY     | 以页面左上角为原点的鼠标点击位置   |
 | screenX/screenY | 以屏幕左上角为原点的鼠标点击位置   |
+| offsetX/offsetY | 以元素左上角为原点的鼠标点击位置   |
+| shiftKey        | 事件发生时，shift键是否按下       |
+| ctrlKey         | 事件发生时，ctrl键是否按下        |
+| altKey          | 事件发生时，alt键是否按下         |
+| metaKey         | 事件发生时，meta键是否按下        |
 
 如果网页没有滚动，那么`clientX/clientY`和`pageX/pageY`是相等的。
 
 鼠标事件实验：http://jsbin.com/soqocumeva/1/edit?html,js,output
+
 
 ## 参考资料
 - [DOM0, DOM1, DOM2, DOM3 - CSDN博客](http://blog.csdn.net/pxy_lele/article/details/49755071/)
