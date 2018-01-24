@@ -269,7 +269,7 @@ button属性的取值：
 | mouseout   | 鼠标离开的元素 | 鼠标进入的元素    |
 
 
-TODO。。。
+TODO。。。。
 
 鼠标事件实验：http://jsbin.com/soqocumeva/1/edit?html,js,output
 
