@@ -9,32 +9,32 @@ jQuery常用方法备忘。
 
 <!-- more -->
 
-## jQuery包装集基本操作
+## jQuery包装集基本操作
 - `size()` 返回包装集大小
 - `get(index)` 返回包装集中对应下标的元素，如果没有传index，则将所有元素以数组形式返回
 - `index(element)` 返回对应的element在包装集中的下标
-- `add(expression)` 添加元素到包装集，expression可以是（选择器字符串，HTML字符串，元素，元素数组）
-- `not(expression)` 去掉包装集中元素，expression可以是（选择器字符串，元素，元素数组）
-- `filter(expression)` 过滤选择器元素，expression可以是（选择器字符串，函数）
+- `add(expression)` 添加元素到包装集，expression可以是（选择器字符串，HTML字符串，元素，元素数组）
+- `not(expression)` 去掉包装集中元素，expression可以是（选择器字符串，元素，元素数组）
+- `filter(expression)` 过滤选择器元素，expression可以是（选择器字符串，函数）
 - `slice(begin,end)` 返回子包装集，左闭右开
 - `is(selector)` 如果包含匹配选择器的元素，返回true
 
 ### 链式操作相关方法
-- `end()` 回退到jQuery命令链的前一个包装集
+- `end()` 回退到jQuery命令链的前一个包装集
 - `andSelf()` 合并命令链最近产生的两个包装集
 
-## 根据DOM关系获取包装集
+## 根据DOM关系获取包装集
 ### 子级
 - `children()` 获取直接子元素
 - `contents()` 获取所有子元素，包含文本节点 
-- `find(selector)` 过滤所有子元素。和`children()`的区别是`children()`只获取直接子元素，而`find()`会在所有子元素上过滤，同时`find()`不指定参数返回空，`children()`不指定参数返回所有子元素
+- `find(selector)` 过滤所有子元素。和`children()`的区别是`children()`只获取直接子元素，而`find()`会在所有子元素上过滤，同时`find()`不指定参数返回空，`children()`不指定参数返回所有子元素
 
 ### 同级
-- `next()` 获取后面紧邻的元素
-- `nextAll()` 获取后面所有元素
-- `prev()` 获取前面紧邻的元素
-- `prevAll()` 获取前面所有元素
-- `siblings()` 获取同级的所有元素
+- `next()` 获取后面紧邻的元素
+- `nextAll()` 获取后面所有元素
+- `prev()` 获取前面紧邻的元素
+- `prevAll()` 获取前面所有元素
+- `siblings()` 获取同级的所有元素
 
 ### 父级
 - `parent()` 获取直接父元素
@@ -42,9 +42,9 @@ jQuery常用方法备忘。
 
 注：以上方法除了`contents()`都可以传入字符串参数用于过滤
 
-## 修改元素特性和属性
+## 修改元素特性和属性
 
-先看看属性和特性的区别：[DOM对象属性(property)与HTML标签特性(attribute)](http://blog.csdn.net/html5_/article/details/39156593)
+先看看属性和特性的区别：[DOM对象属性(property)与HTML标签特性(attribute)](http://blog.csdn.net/html5_/article/details/39156593)
 
 - `attr(name)` 获取包装集中第一个元素的**特性**值
 - `attr(name,value)` 设置特性值
@@ -57,7 +57,7 @@ jQuery常用方法备忘。
 - `addClass(names)` 添加类到元素
 - `removeClass(names)` 删除元素上的类
 - `toggleClass(name)` 开关类名
-- `hasClass(name)` 判断是否包含类
+- `hasClass(name)` 判断是否包含类
 
 ### CSS相关
 - `css(name,value)` 设置元素CSS样式
@@ -73,11 +73,11 @@ jQuery常用方法备忘。
 
 ### 获取设置HTML内容
 - `html()` 获取第一个元素的html内容
-- `html(text)` 设置所有元素的html内容
+- `html(text)` 设置所有元素的html内容
 
 ### 获取设置文本内容
 - `text()` 获取所有元素的文本内容
-- `text(content)` 设置所有元素的文本内容
+- `text(content)` 设置所有元素的文本内容
 
 ### 删除元素
 - `remove()` 删除元素。被删除的元素从DOM上**脱离**，并**返回**。
