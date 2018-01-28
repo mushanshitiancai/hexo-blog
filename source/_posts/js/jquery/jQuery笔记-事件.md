@@ -121,4 +121,4 @@ triggerHandler方法只会触发元素上绑定的所有事件处理函数，而
 - [.on() | jQuery API Documentation](https://api.jquery.com/on/)
 - [.trigger() | jQuery API Documentation](https://api.jquery.com/trigger/)
 - [jQuery事件与事件对象 - Localhost - 博客园](http://www.cnblogs.com/oneword/archive/2010/11/22/1884413.html)
-- ✨[解密jQuery事件核心 - 绑定设计（一） - 【Aaron】 - 博客园](http://www.cnblogs.com/aaronjs/p/3444874.html)
+- [解密jQuery事件核心 - 绑定设计（一） - 【Aaron】 - 博客园](http://www.cnblogs.com/aaronjs/p/3444874.html)
