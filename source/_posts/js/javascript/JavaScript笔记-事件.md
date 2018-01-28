@@ -268,10 +268,69 @@ button属性的取值：
 | mouseover  | 鼠标进入的元素 | 鼠标离开的元素    |
 | mouseout   | 鼠标离开的元素 | 鼠标进入的元素    |
 
-
-TODO。。。。
-
 鼠标事件实验：http://jsbin.com/soqocumeva/1/edit?html,js,output
+
+## 键盘与文本事件
+
+键盘事件：
+
+- `keydown` 按下任意按键触发，按住不放重复触发
+- `keypress` 按键字符按键触发，按住不放重复触发
+- `keyup` 释放按键触发
+
+按下字符按键，事件触发顺序：
+
+1. keydown
+2. keypress
+3. （文本框发生变化）
+4. keyup
+
+按下非字符按键，不会触发keypress事件。
+
+键盘事件产生的事件对象是`KeyboardEvent`，有用的属性有：
+
+| 属性名   | 说明                                      |
+| -------- | ----------------------------------------- |
+| key      | 按键的值，比如a，A,Shift                  |
+| code     | 按键的名称，比如KeyA,ShiftLeft            |
+| keyCode  | 按键码，与ASCII的小写编码相同。用code替代 |
+| charCode | 字符编码。keypress事件才有。用key替代     |
+| shiftKey | 事件发生时，shift键是否按下               |
+| ctrlKey  | 事件发生时，ctrl键是否按下                |
+| altKey   | 事件发生时，alt键是否按下                 |
+| metaKey  | 事件发生时，meta键是否按下                |
+| repeat   | 是否是按住而触发的                        |
+
+可以用`String.fromCharCode()`将charCode转为实际的字符。
+
+只有一个文本事件：
+
+- `textInput` 在文本插入**可编辑区域**前触发
+
+textInput事件产生的是`TextEvent`对象
+
+## 输入法事件
+
+标准名称是复合事件(composition event)，处理的是IME相关的事件。
+
+- `compositionstart` IME打开时触发
+- `compositionupdate` 在IME中输入新字符时触发
+- `compositionend` 在IME关闭时触发
+
+产生的事件是`CompositionEvent`，包含一个`data`字段
+
+- `compositionstart`时，`data`为正在编辑的字段，比如选中的字段
+- `compositionupdate`时，`data`为最新输入的字符串，比如`hao`
+- `compositionend`时，`data`为最终输入的字符串，比如`好`
+
+## 其他有用的事件
+
+- `contextmenu`
+    在打开上下文菜单时触发。产生的是`MouseEvent`。
+    可以用`event.preventDefalut()`取消默认的菜单。
+
+事件实验：http://jsbin.com/soqocumeva/9/edit?html,js,output
 
 ## 参考资料
 - [DOM0, DOM1, DOM2, DOM3 - CSDN博客](http://blog.csdn.net/pxy_lele/article/details/49755071/)
+- 《JavaScript高级程序设计》
