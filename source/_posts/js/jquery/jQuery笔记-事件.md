@@ -116,7 +116,6 @@ triggerHandler方法只会触发元素上绑定的所有事件处理函数，而
 注意：
 1. 除了window对象，在其他的任何对象上调用trigger，如果没有调用`event.preventDefault()`，会调用这个对象上和方法同名的方法，比如`.triggerHandler( "submit" )`会尝试调用`submit`方法。而`triggerHandler`不会这么做
 2. trigger和triggerHandler，都会尝试调用对象上on前缀的和evnet同名的方法。 
-
 ## 参考资料
 - [.on() | jQuery API Documentation](https://api.jquery.com/on/)
 - [.trigger() | jQuery API Documentation](https://api.jquery.com/trigger/)
