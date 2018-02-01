@@ -131,6 +131,9 @@ ffmpeg -i "#src#" -y -s 1920x1080 -vcodec libx264 -c:a libvo_aacenc -b:a 48k -ar
 - `-movflags faststart`：把MOV/MP4文件的索引信息放到文件前面以支持边下边播
 - `-map 0:v:0`：选择输入文件的第一个视频流输出
 - `-map 0:a?`：选择输入文件的音频流输出，如果没有不报错
+- `qscale <数值>` 以<数值>质量为基础的VBR，取值0.01-255，越小质量越好 
+
+在mp4转ogv的时候，如果没有指定`-qscale 4`，转出来的视频画面比较差，有很多噪点，而且有卡顿。
 
 #### 视频截图
 
@@ -184,6 +187,7 @@ fps过滤器的文档：[fps Documentation](http://ffmpeg.org/ffmpeg-all.html#fp
 - [mp4格式文件转码后处理（qt-faststart工具介绍） - 杂食菜熊的Blog](http://xdsnet.github.io/index.html?name=%E6%9D%82%E8%B0%88:mp4%E6%A0%BC%E5%BC%8F%E6%96%87%E4%BB%B6%E8%BD%AC%E7%A0%81%E5%90%8E%E5%A4%84%E7%90%86)
 - [ffmpeg 官方文档 上篇 （译） - 直播技术知识库](http://lib.csdn.net/article/liveplay/45723)
 - [Chinese_Font_从视频中每X秒创建一个缩略图 – FFmpeg](https://trac.ffmpeg.org/wiki/Chinese_Font_%E4%BB%8E%E8%A7%86%E9%A2%91%E4%B8%AD%E6%AF%8FX%E7%A7%92%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BC%A9%E7%95%A5%E5%9B%BE)
+- [FFMpeg的码率控制 - CBR or VBR - CSDN博客](http://blog.csdn.net/wishfly/article/details/51087801)
 
 ### 测试视频下载地址
 
