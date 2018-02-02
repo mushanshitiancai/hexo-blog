@@ -1,5 +1,5 @@
 ---
-title: logback在运行时获取日志文件的路径
+title: Java日志-Logback在运行时获取日志文件的路径
 date: 2016-09-28 10:27:41
 categories: [Java]
 tags: [java,log]

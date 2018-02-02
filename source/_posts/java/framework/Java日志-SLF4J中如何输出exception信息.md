@@ -1,8 +1,8 @@
 ---
-title: slf4j中如何输出exception信息
+title: Java日志-SLF4J中如何输出exception信息
 date: 2016-10-11 11:10:17
 categories: [Java]
-tags: java
+tags: [java,log]
 ---
 
 在代码中看到了类似的句子：
