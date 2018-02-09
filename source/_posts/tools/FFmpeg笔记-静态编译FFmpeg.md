@@ -9,7 +9,7 @@ tags: [ffmpeg]
 
 <!--more-->
 
-以下步骤参考：[CompilationGuide/Centos – FFmpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Centos)，只在少数步骤有一点调整。
+以下步骤参考：[CompilationGuide/Centos – FFmpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Centos)，只在少数步骤有一点调整。原文没有编译libtheora，这里添加上了。
 
 编译机器：
 
@@ -148,6 +148,19 @@ make
 make install
 ```
 
+安装libtheora编码器：
+
+```
+cd ~/ffmpeg_sources
+curl -O -L http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.gz
+tar xzvf 	libtheora-1.1.1.tar.gz
+cd 	libtheora-1.1.1
+./configure --prefix="$HOME/ffmpeg_build" --with-ogg="$HOME/ffmpeg_build" --disable-shared
+make
+make install
+```
+
+
 安装libvpx编码器：
 
 ```
@@ -188,6 +201,7 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./conf
   --enable-libfreetype \
   --enable-libmp3lame \
   --enable-libopus \
+  --enable-libtheora \
   --enable-libvorbis \
   --enable-libvpx \
   --enable-libx264 \
@@ -215,3 +229,4 @@ yum install -y  freetype-devel
 ## 参考资料
 - [CompilationGuide/Generic – FFmpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Generic)
 - [CompilationGuide/Centos – FFmpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Centos)
+- [libtheora-1.1.1](http://www.linuxfromscratch.org/blfs/view/cvs/multimedia/libtheora.html)
