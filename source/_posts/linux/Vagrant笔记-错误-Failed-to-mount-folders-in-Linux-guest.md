@@ -1,6 +1,7 @@
 ---
-title: Vagrant错误解决:Failed to mount folders in Linux guest
+title: Vagrant笔记-错误:Failed to mount folders in Linux guest
 date: 2016-05-17 15:08:11
+categories: [Linux]
 tags: [linux,vagrant]
 ---
 

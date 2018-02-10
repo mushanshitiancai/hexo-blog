@@ -1,17 +1,26 @@
 ---
-title: 安装配置vagrant
+title: Vagrant笔记-安装配置
 date: 2016-04-10 09:23:55
+categories: [Linux]
 tags: [linux,vagrant]
 toc: true
 ---
 
-Vagrant是一个虚拟机管理工具，极大的方便我们使用虚拟机。以前那种打开virtual box/VMware，然后加载镜像，安装捣腾半天的时代过去了。通过Vagrant可以使用别人打包好的box，自己调教好的系统也可以打包给别人使用。
+Vagrant是一个用于构建及配置虚拟开发环境的软件，基于Ruby，主要以命令行的方式运行，极大的方便我们使用虚拟机。
+
+Vagrant主要使用Oracle的开源VirtualBox虚拟化系统，与Chef，Salt，Puppet等环境配置管理软件搭配使用， 可以实行快速虚拟开发环境的构建。
+
+早期以VirtualBox为对象，1.1以后的版本中开始对应VMware等虚拟化软件，包括Amazon EC2之类服务器环境的对应。
+
+以前那种打开VirtualBox/VMware，然后加载镜像，安装捣腾半天的时代过去了。通过Vagrant可以使用别人打包好的box，自己调教好的系统也可以打包给别人使用。
+
+<!-- more -->
 
 ## 安装Vagrant与box
 
-1. 下载安装Vagrant
+0. 下载安装VirtualBox。[Downloads – Oracle VM VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
-    从[Download Vagrant - Vagrant](https://www.vagrantup.com/downloads.html)下载安装
+1. 下载安装Vagrant。[Download Vagrant - Vagrant](https://www.vagrantup.com/downloads.html)
 
 2. 下载box
 
@@ -182,3 +191,6 @@ static IP) for NFS to work.
 - [ubuntu - How to share a folder created inside vagrant? - Stack Overflow](http://stackoverflow.com/questions/19231895/how-to-share-a-folder-created-inside-vagrant)
 - [Vagrant - NFS shared folders for Mac/Linux hosts, Samba shares for Windows | Midwestern Mac, LLC](http://www.midwesternmac.com/blogs/jeff-geerling/vagrant-nfs-shared-folders)
 
+
+
+[Vagrant 1.5 and Vagrant Cloud](https://www.hashicorp.com/blog/vagrant-1-5-and-vagrant-cloud.html)
