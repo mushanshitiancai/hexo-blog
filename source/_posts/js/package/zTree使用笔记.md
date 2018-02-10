@@ -121,9 +121,6 @@ data.nodeChildren: function (setting, node, newChildren) {
 - `newNodes` 新添加的节点数据，传入后会被拷贝
 - `isSilent` 是否静默添加节点，如果为true，不会展开节点。默认为false（可选）
 
-问题：这里的parentNode传入的不是zTree中维护的树节点会是什么效果？
-TODO
-
 ## 如何更新一个树节点？
 
 更新节点是一个比较泛的操作。
