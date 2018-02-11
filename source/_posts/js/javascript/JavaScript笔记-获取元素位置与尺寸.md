@@ -6,6 +6,8 @@ tags: [javascript,js]
 toc: true
 ---
 
+<!-- more -->
+
 ## 获取窗口尺寸
 
 网页区域大小：

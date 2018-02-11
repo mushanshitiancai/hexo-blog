@@ -1,7 +1,7 @@
 ---
-title: git使用笔记
+title: Git笔记-问题收集
 date: 2016-03-18 17:13:44
-tags: linux
+tags: [linux,git]
 ---
 
 ## mac下git显示中文被转义

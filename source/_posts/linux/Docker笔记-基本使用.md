@@ -2,7 +2,7 @@
 title: Docker笔记-基本使用
 date: 2018-02-10 08:13:09
 categories: [Docker]
-tags: [docker]
+tags: [docker,linux]
 toc: true
 ---
 
