@@ -23,7 +23,7 @@ Docker是一个可以让开发或运维在容器中开发，发布，运行应�
 
 容器和虚拟机都是虚拟化技术，不过两者的虚拟层面是不一样的，可以看这张图：
 
-![](https://www.docker.com/sites/default/files/Container%402x.png)
+![](/img/docker/container-and-vm.png)
 
 容器直接运行在宿主操作系统上，各个容器共享操作系统中的资源。
 
@@ -42,6 +42,8 @@ Docker是一个可以让开发或运维在容器中开发，发布，运行应�
 下载[Install Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
 
 启动过程中会体现你电脑还没开启Hyper-V是否开启。点击OK重启电脑开启。开启Hyper-V后，VirtualBox就无法运行了。
+
+![](/img/docker/open-hyper-v.png)
 
 如果手上的Windows不满足的话，而已使用VirtualBox方案：[Docker Toolbox](https://docs.docker.com/toolbox/overview/)
 
@@ -205,8 +207,8 @@ dorowu/ubuntu-desktop-lxde-vnc                            Ubuntu with openssh-se
 - 获取容器详细信息：`docker inspect {container name/id}`
 
 自动重启容器：
-- 任何退出都自动重启：`docker run --restart=always --name xxx -d ubuntu /bin/bash -c "command"`
-- 错误退出时（退出码非零）自动重启：`docker run --restart=on-failure:5 --name xxx -d ubuntu /bin/bash -c "command"`
+- `docker run --restart=always --name xxx -d ubuntu /bin/bash -c "command"` 任何退出都自动重启
+- `docker run --restart=on-failure:5 --name xxx -d ubuntu /bin/bash -c "command"` 错误退出时（退出码非零）自动重启
 
 ### 镜像命令
 
