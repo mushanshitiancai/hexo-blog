@@ -1,8 +1,8 @@
 ---
-title: 不用IDE搭建一个servlet程序
+title: Servlet笔记-不用IDE搭建一个servlet程序
 date: 2016-03-18 22:33:47
 categories: [Java]
-tags: java
+tags: [java,servlet]
 ---
 
 虽然可以使用eclispe或者intellijIDEA快速搭建一个java servlet程序，但是还是值得纯手动搭建一个的，这有助于理解java web工程的基本结构。
