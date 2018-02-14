@@ -1,6 +1,6 @@
 ---
 title: Tomcat笔记-IDE中调试Tomcat源码
-date: 2018-02-13 17:06:53
+date: 2018-02-13 17:00:53
 categories: [Tomcat]
 tags: [tomcat,java]
 ---
@@ -17,11 +17,11 @@ tags: [tomcat,java]
 <dependency>
     <groupId>org.apache.tomcat.embed</groupId>
     <artifactId>tomcat-embed-core</artifactId>
-    <version>8.5.27</version>
+    <version>7.0.84</version>
 </dependency>
 ```
 
-`8.5.27`换成你用来运行项目的tomcat的版本。然后你在Tomcat的代码中设置断点，启动服务就会到断点上了。
+`7.0.84`换成你用来运行项目的tomcat的版本。然后你在Tomcat的代码中设置断点，启动服务就会到断点上了。
 
 ## 参考资料
 - [调试跟进 tomcat 源码](http://alphahinex.github.io/2015/10/14/how-to-debug-into-tomcat-sources)
