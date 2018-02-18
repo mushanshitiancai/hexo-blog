@@ -10,7 +10,7 @@ jQuery常用方法备忘。
 <!-- more -->
 
 ## jQuery包装集基本操作
-- `size()` 返回包装集大小
+- `length` 返回包装集大小
 - `get(index)` 返回包装集中对应下标的元素，如果没有传index，则将所有元素以数组形式返回
 - `index(element)` 返回对应的element在包装集中的下标
 - `add(expression)` 添加元素到包装集，expression可以是（选择器字符串，HTML字符串，元素，元素数组）
