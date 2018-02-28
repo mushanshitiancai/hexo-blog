@@ -44,6 +44,8 @@ $ curl -H 'Host: 111.111.11.11'-H 'Accept-Language: es' http://test.com
 - `-F, --form <name=content>` 设置表单内容，可以让curl发送和网页中表单一样的请求体，可以用来上传文件，
 `Content-Type`头部会被设置为`multipart/form-data`。
 
+需要注意，`--data`系列参数和`-F`参数都会让请求方法变为POST。
+
 设置请求体是curl中比较复杂的操作，这里做了几个实验：
 
 `test.txt`的内容为：
@@ -56,7 +58,7 @@ $ curl -H 'Host: 111.111.11.11'-H 'Accept-Language: es' http://test.com
 `@`开头加文件名会让curl使用文件内容。`--data`默认会去掉回车和换行：
 
 ```
-$ curl -v -X POST --data "@test.txt" 'http://localhost:8080/upload'
+$ curl --data "@test.txt" 'http://localhost:8080/upload'
 
 POST /upload HTTP/1.1
 Host: localhost:8080
@@ -71,7 +73,7 @@ Content-Type: application/x-www-form-urlencoded
 `--data-binary`不会去掉文件中的回车和换行:
 
 ```
-$ curl -v -X POST --data-binary "@test.txt" 'http://localhost:8080/upload'
+$ curl --data-binary "@test.txt" 'http://localhost:8080/upload'
 
 POST /upload HTTP/1.1
 Host: localhost:8080
@@ -87,7 +89,7 @@ Content-Type: application/x-www-form-urlencoded
 `--data-raw`则不会去解析`@`:
 
 ```
-$ curl -v -X POST --data-raw "@test.txt" 'http://localhost:8080/upload'
+$ curl --data-raw "@test.txt" 'http://localhost:8080/upload'
 
 POST /upload HTTP/1.1
 Host: localhost:8080
@@ -102,7 +104,7 @@ Content-Type: application/x-www-form-urlencoded
 `--data`不会对参数进行url编码：
 
 ```
-$ curl -v -X POST --data "你" 'http://localhost:8080/upload'
+$ curl --data "你" 'http://localhost:8080/upload'
 
 POST /upload HTTP/1.1
 Host: localhost:8080
@@ -121,7 +123,7 @@ Content-Type: application/x-www-form-urlencoded
 `--data-urlencode`会对参数进行url编码：
 
 ```
-$ curl -v -X POST --data-urlencode "你" 'http://localhost:8080/upload'
+$ curl --data-urlencode "你" 'http://localhost:8080/upload'
 
 POST /upload HTTP/1.1
 Host: localhost:8080
