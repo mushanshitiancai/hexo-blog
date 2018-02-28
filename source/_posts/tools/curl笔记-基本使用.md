@@ -135,6 +135,12 @@ Content-Type: application/x-www-form-urlencoded
 %C4%E3
 ```
 
+一个常见的需求，我们怎么用curl发送JSON请求呢？
+
+```
+$ curl -H "Content-Type: application/json" -X POST -d '{"username":"xyz","password":"xyz"}' http://localhost:3000/api/login
+```
+
 ## 控制输出
 
 - 在输出中包含Header信息 `-i, --include`（和`-I`要区分开，后者是发起HEAD请求）
@@ -148,3 +154,4 @@ Content-Type: application/x-www-form-urlencoded
 ## 参考资料
 - [Linux系统入门学习：在curl中设置自定义的HTTP头_Linux教程_Linux公社-Linux系统门户网站](https://www.linuxidc.com/Linux/2015-02/114220.htm)
 - [curl - How To Use](https://curl.haxx.se/docs/manpage.html)
+- [How to POST JSON data with Curl from Terminal/Commandline to Test Spring REST? - Stack Overflow](https://stackoverflow.com/questions/7172784/how-to-post-json-data-with-curl-from-terminal-commandline-to-test-spring-rest)
