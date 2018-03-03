@@ -12,6 +12,8 @@ IndexedDB是一种可以让你在用户的浏览器内持久化存储数据的�
 
 <!-- more -->
 
+提示：IndexedDB提供的API是底层API，加上IndexedDB异步的设计，在使用上可能会比较麻烦，可以使用第三方对于IndexedDB API的封装库来简化代码，减少痛苦，比如[localForage](https://localforage.github.io/localForage/)，[dexie.js](http://www.dexie.org/)，[ZangoDB](https://github.com/erikolson186/zangodb)，[JsStore](http://jsstore.net/)等。
+
 ## 打开数据库（database）
 
 ```js
