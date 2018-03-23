@@ -21,7 +21,7 @@ URL和URN是URL的子集。URI可以是URL，URN或者两者都是。
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/URI_Euler_Diagram_no_lone_URIs.svg/320px-URI_Euler_Diagram_no_lone_URIs.svg.png)
 
 URI的格式为`URI协议名:内容`。
-比如一个HTTP协议的URI为：
+通用的URI格式为：`scheme:[//[user[:password]@]host[:port]][/path][?query][#fragment]`
 URN使用`urn`作为协议名。 
 
 ## 参考资料
