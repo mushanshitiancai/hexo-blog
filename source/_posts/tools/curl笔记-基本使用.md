@@ -144,6 +144,10 @@ $ curl -H "Content-Type: application/json" -X POST -d '{"username":"xyz","passwo
 ## 控制输出
 
 - 在输出中包含Header信息 `-i, --include`（和`-I`要区分开，后者是发起HEAD请求）
+- 只输出Header信息 
+    Linux：`curl -s -D - www.test.org -o /dev/null`
+    Windows：`curl -s -D - www.test.org -o $null`
+    另外一种做法：`curl -I -X GET www.test.org`
 
 ## 其他
 
