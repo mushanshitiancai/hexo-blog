@@ -29,6 +29,26 @@ MongoDB在进行查询时，会分析查询语句，得出可能的查询计划�
 
 ![](https://docs.mongodb.com/manual/_images/query-planner-diagram.bakedsvg.svg)
 
+## 旧版本
+
+MongoDB2.x对于查询计划的选择与缓存的机制与3.x有很大的区别。如果你手上使用的是旧版本的MongoDB还是需要了解一下的。
+
+1. 根据查询模式（Query pattern）判断是否存在CachedPlan，如果存在直接选择
+2. 如果没有缓存记录，查询优化器创建新查询计划并标记类型，如果类型为Optimal Plan则直接执行该Plan；如果不存在Optimal Plan，MongoDB会并发尝试可能的Helpful Plan以及不使用索引的基础查询。查询优化器会对比选择表现最好的查询计划继续执行，并将查询模式与最终查询计划的映射写入CachedPlan。
+
+与3.x的区别在于，对于查询计划，区分为`Optimal Plan`和`Helpful Plan`。如果是`Optimal Plan`会直接执行而不进行性能比较。如果有多个`Optimal Plan`会执行第一个。而3.x一视同仁，都会进行性能比较。
+
+缓存的查询计划在以下条件下会清空并重新评估： 
+- 集合收到1000次写操作 
+- 执行reindex 
+- 添加或删除索引 
+- mongod进程重启 
+- 查询时指定explain()
+
+这里与3.x的区别是如果没有1000次更新或者其他会导致查询计划缓存更新的操作的话，之后的查询都会使用这个查询计划，一旦这个查询计划其实是慢查询的话，就会导致数据库出现大量慢查询。而3.x即使命中了缓存，也依然会进行性能评估，如果评估不通过，这个缓存会被清理。
+
+参考：[MongoDB索引-查询优化器](https://blog.csdn.net/wentyoon/article/details/78853962)
+
 ## 清空Plan Cache
 
 新建索引，或者drop集合都会清空Plan Cache。
