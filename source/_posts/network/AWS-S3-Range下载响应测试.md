@@ -48,30 +48,30 @@ Content-Type: binary/octet-stream
 
 | Range头部                  |  格式合法  |响应码       | 响应体                     |  Content-Range                 |
 |----------------------------|----------|------------|----------------------------|--------------------------------|
-| Range:                     | 不合法    |   200      |  返回全部内容               |                                |
-| Range: a                   | 不合法    |   200      |  返回全部内容               |                                |
-| Range: 0                   | 不合法    |   200      |  返回全部内容               |                                |
-| Range: bytes               | 不合法    |   200      |  返回全部内容               |                                |
-| Range: bytes a             | 不合法    |   200      |  返回全部内容               |                                |
-| Range: bytes 1             | 不合法    |   200      |  返回全部内容               |                                |
-| Range: bytes=1             | 不合法    |   200      |  返回全部内容               |                                |
-| Range: bytes=-             | 不合法    |   200      |  返回全部内容               |                                |
-| Range: bytes=1-10-         | 不合法    |   200      |  返回全部内容               |                                |
-| Range: bytes=1-10a         | 不合法    |   200      |  返回全部内容               |                                |
-| Range: bytes=1--           | 不合法    |   200      |  返回全部内容               |                                |
-| Range: bytes=1--1          | 不合法    |   200      |  返回全部内容               |                                |
-| Range: bytes=10-1          | **不合法**|   200      |  返回全部内容               |                                |
+| Range:                     | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: a                   | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: 0                   | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: bytes               | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: bytes a             | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: bytes 1             | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: bytes=1             | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: bytes=-             | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: bytes=1-10-         | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: bytes=1-10a         | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: bytes=1--           | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: bytes=1--1          | 不合法    |   200      |  返回全部内容               | 无                             |
+| Range: bytes=10-1          | **不合法**|   200      |  返回全部内容               | 无                             |
 | Range: bytes=0-            | 合法      | **206**    |  返回全部内容               | bytes 0-${len-1}/${len}        |
 | Range: bytes=1-            | 合法      | **206**    |  返回第一个字节到最后一个字节 | bytes 1-${len-1}/${len}        |
-| Range: bytes={len}-        | 合法      | **416**    |  InvalidRange错误信息       |                                |
+| Range: bytes={len}-        | 合法      | **416**    |  InvalidRange错误信息       | 无                              |
 | Range: bytes=-10           | 合法      | **206**    |  返回最后10个字节           | bytes ${len-10}-${len-1}/${len} |
 | Range: bytes=-{len}        | 合法      | **206**    |  返回全部内容               | bytes 0-${len-1}/${len}        |
 | Range: bytes=-{len+1}      | 合法      | **206**    |  返回全部内容               | bytes 0-${len-1}/${len}        |
 | Range: bytes=1-10          | 合法      | **206**    |  返回第一个字节到第10个字节  | bytes 1-10/${len}               |
 | Range: bytes=0-{len+1}     | 合法      | **206**    |  返回全部内容               |bytes 0-${len-1}/${len}           |
 | Range: bytes={len-1}-{len} | 合法      | **206**    |  返回最后一个字节            |bytes ${len - 1}-${len - 1}/${len} |
-| Range: bytes={len}-{len+1} | 合法      | **416**    | InvalidRange错误信息       |                                    |
-| Range: bytes=1-2,3-4       | 合法      | **200**    | 返回全部内容(说明S3不支持多段范围请求)  |                          |
+| Range: bytes={len}-{len+1} | 合法      | **416**    | InvalidRange错误信息       |  无                                 |
+| Range: bytes=1-2,3-4       | 合法      | **200**    | 返回全部内容(说明S3不支持多段范围请求)  | 无                        |
 
 
 总结：
