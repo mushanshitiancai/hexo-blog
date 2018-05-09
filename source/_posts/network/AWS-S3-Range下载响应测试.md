@@ -46,32 +46,32 @@ Content-Type: binary/octet-stream
 
 测试结果：
 
-| Range头部                  |  格式合法  |响应码    | Content-Range | 响应体                     |
-|----------------------------|----------|------------|------------|----------------------------|
-| Range:                     | 不合法    |   200     |             |  返回全部内容               |
-| Range: a                   | 不合法    |   200     |             |  返回全部内容               |
-| Range: 0                   | 不合法    |   200     |             |  返回全部内容               |
-| Range: bytes               | 不合法    |   200     |             |  返回全部内容               |
-| Range: bytes a             | 不合法    |   200     |             |  返回全部内容               |
-| Range: bytes 1             | 不合法    |   200     |             |  返回全部内容               |
-| Range: bytes=1             | 不合法    |   200     |             |  返回全部内容               |
-| Range: bytes=-             | 不合法    |   200     |             |  返回全部内容               |
-| Range: bytes=1-10-         | 不合法    |   200     |             |  返回全部内容               |
-| Range: bytes=1-10a         | 不合法    |   200     |             |  返回全部内容               |
-| Range: bytes=1--           | 不合法    |   200     |             |  返回全部内容               |
-| Range: bytes=1--1          | 不合法    |   200     |             |  返回全部内容               |
-| Range: bytes=10-1          | **不合法**|   200     |             |  返回全部内容               |
-| Range: bytes=0-            | 合法      | **206**   |             |  返回全部内容               |
-| Range: bytes=1-            | 合法      | **206**   |             |  返回第一个字节到最后一个字节 |
-| Range: bytes={len}-        | 合法      | **416**   |             |  InvalidRange错误信息       |
-| Range: bytes=-10           | 合法      | **206**   |             |  返回最后10个字节           |
-| Range: bytes=-{len}        | 合法      | **206**   |             |  返回全部内容               |
-| Range: bytes=-{len+1}      | 合法      | **206**   |             |  返回全部内容               |
-| Range: bytes=1-10          | 合法      | **206**   |             |  返回第一个字节到第10个字节  |
-| Range: bytes=0-{len+1}     | 合法      | **206**   |             |  返回全部内容               |
-| Range: bytes={len-1}-{len} | 合法      | **206**   |             |  返回最后一个字节            |
-| Range: bytes={len}-{len+1} | 合法      | **416**   |             | InvalidRange错误信息       |
-| Range: bytes=1-2,3-4       | 合法      | **200**   |             | 返回全部内容(说明S3不支持多段范围请求)  |
+| Range头部                  |  格式合法  |响应码       | 响应体                     |  Content-Range                 |
+|----------------------------|----------|------------|----------------------------|--------------------------------|
+| Range:                     | 不合法    |   200      |  返回全部内容               |                                |
+| Range: a                   | 不合法    |   200      |  返回全部内容               |                                |
+| Range: 0                   | 不合法    |   200      |  返回全部内容               |                                |
+| Range: bytes               | 不合法    |   200      |  返回全部内容               |                                |
+| Range: bytes a             | 不合法    |   200      |  返回全部内容               |                                |
+| Range: bytes 1             | 不合法    |   200      |  返回全部内容               |                                |
+| Range: bytes=1             | 不合法    |   200      |  返回全部内容               |                                |
+| Range: bytes=-             | 不合法    |   200      |  返回全部内容               |                                |
+| Range: bytes=1-10-         | 不合法    |   200      |  返回全部内容               |                                |
+| Range: bytes=1-10a         | 不合法    |   200      |  返回全部内容               |                                |
+| Range: bytes=1--           | 不合法    |   200      |  返回全部内容               |                                |
+| Range: bytes=1--1          | 不合法    |   200      |  返回全部内容               |                                |
+| Range: bytes=10-1          | **不合法**|   200      |  返回全部内容               |                                |
+| Range: bytes=0-            | 合法      | **206**    |  返回全部内容               | bytes 0-${len-1}/${len}        |
+| Range: bytes=1-            | 合法      | **206**    |  返回第一个字节到最后一个字节 | bytes 1-${len-1}/${len}        |
+| Range: bytes={len}-        | 合法      | **416**    |  InvalidRange错误信息       |                                |
+| Range: bytes=-10           | 合法      | **206**    |  返回最后10个字节           | bytes ${len-10}-${len-1}/${len} |
+| Range: bytes=-{len}        | 合法      | **206**    |  返回全部内容               | bytes 0-${len-1}/${len}        |
+| Range: bytes=-{len+1}      | 合法      | **206**    |  返回全部内容               | bytes 0-${len-1}/${len}        |
+| Range: bytes=1-10          | 合法      | **206**    |  返回第一个字节到第10个字节  | bytes 1-10/${len}               |
+| Range: bytes=0-{len+1}     | 合法      | **206**    |  返回全部内容               |bytes 0-${len-1}/${len}           |
+| Range: bytes={len-1}-{len} | 合法      | **206**    |  返回最后一个字节            |bytes ${len - 1}-${len - 1}/${len} |
+| Range: bytes={len}-{len+1} | 合法      | **416**    | InvalidRange错误信息       |                                    |
+| Range: bytes=1-2,3-4       | 合法      | **200**    | 返回全部内容(说明S3不支持多段范围请求)  |                          |
 
 
 总结：
@@ -79,4 +79,5 @@ Content-Type: binary/octet-stream
 2. 合法的Range请求，都响应206（即使返回的内容是文件完整的内容）
 3. 如果Range的起点位置大于文件最后一个字节，则响应416
 4. 如果Range的终点位置大于文件最后一个字节，不会抛出异常，而是范围到最后一个字节为止
-5. AWS S3不支持多段范围请求
+5. 在响应416的情况下，S3不会响应头部Content-Range: bytes */47022（RFC中是建议（SHOULD而不是MUST，参考[资料](https://tools.ietf.org/html/rfc7233#section-4.4)）响应这个头部，以便于客户端知道文件的大小调整请求）
+6. AWS S3不支持多段范围请求
