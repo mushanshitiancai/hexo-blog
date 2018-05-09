@@ -3,6 +3,7 @@ title: 掌握Java-Bean Validation
 date: 2018-01-18 19:50:26
 categories: [Java,掌握Java]
 tags: [java]
+toc: true
 ---
 
 数据校验虽然简单，但是却是一个繁琐的事。我在无数的代码看到if判断参数，然后错了打日志抛异常，一片一片的这种代码，如果有点重复了，再弄出N个xxUtil来归纳代码。虽然这种做法可以达到效果，但是代码散乱，一个是编写麻烦，一个是不易阅读。
