@@ -530,4 +530,3 @@ as well.
 - [系统调用真正的效率瓶颈在哪里？ - 知乎](https://www.zhihu.com/question/32043825)
 - [使用 Java Native Interface 的最佳实践](http://www.ibm.com/developerworks/cn/java/j-jni/index.html)
 - [java - Why closing an Input Stream closes the associated File Descriptor as well, even the File Descriptor is shared among multiple streams ? - Stack Overflow](https://stackoverflow.com/questions/34980241/why-closing-an-input-stream-closes-the-associated-file-descriptor-as-well-even)
-
