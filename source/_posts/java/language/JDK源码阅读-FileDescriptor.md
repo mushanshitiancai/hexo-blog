@@ -166,19 +166,7 @@ int os::open(const char *path, int oflag, int mode) {
 }
 ```
 
-可以看到JVM最后使用`open64`这个方法打开文件，`open64`其实是一个宏定义，在unix环境下，最终使用的函数是`open`：
-
-`/jdk/src/solaris/native/sun/nio/fs/UnixNativeDispatcher.c`
-```cpp
-#define stat64 stat
-#define statvfs64 statvfs
-
-#define open64 open
-#define fstat64 fstat
-#define lstat64 lstat
-#define dirent64 dirent
-#define readdir64_r readdir_r
-```
+可以看到JVM最后使用`open64`这个方法打开文件，网上对于`open64`这个资料还是很少的，我找到的是[man page for open64 (all section 2) - Unix & Linux Commands](https://www.unix.com/man-page/All/2/open64/)，从中可以看出，`open64`是为了在32位环境打开大文件的系统调用，但是不是标志的一部分。
 
 这里的open不是我们以前学C语言时打开文件用的fopen函数，fopen是C标准库里的函数，而open不是，open是POSIX规范中的函数，是不带缓冲的I/O，不带缓冲的I/O相关的函数还有read，write，lseek，close，不带缓冲指的是这些函数都调用内核中的一个系统调用，而C标准库为了减少系统调用，使用了缓存来减少read，write的内存调用。（参考《UNIX环境高级编程》）
 
