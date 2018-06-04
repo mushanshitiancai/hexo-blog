@@ -53,6 +53,7 @@ private native void open0(String name) throws FileNotFoundException;
 // jdk/src/share/native/java/io/FileInputStream.c
 JNIEXPORT void JNICALL
 Java_java_io_FileInputStream_open0(JNIEnv *env, jobject this, jstring path) {
+    // 使用O_RDONLY只读模式打开文件
     fileOpen(env, this, path, fis_fd, O_RDONLY);
 }
 
