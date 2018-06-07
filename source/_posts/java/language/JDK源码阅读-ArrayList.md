@@ -982,6 +982,7 @@ public boolean isEmpty() {
 - ArrayList指定新建的长度为0，添加第一个元素后，长度为1，为正常增长结果
 - ArrayList通过数组存放数据，成员是elementData
 - ArrayList的增长方式是增加原来的一半
+- ArrayList的elementData长度增长曲线为：0,10,15,22,33,49,73,109...
 - elementData成员是transient的，不会被自动序列化
 - ArrayList序列化/反序列化的逻辑：size+size+每个元素
 - ArrayList的迭代器在迭代过程中如果发现数据源被修改，会快速失败，是通过modCount变量实现的
