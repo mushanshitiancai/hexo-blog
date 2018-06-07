@@ -107,6 +107,90 @@ private <T> List<T> executeFindMultiInternal(CollectionCallback<DBCursor> collec
 
 `DBCollection#find`则有更高的性能。
 
+## `DBCursor#next`对应一个网络请求吗
+
+`DBCursor`使用next获取下一条数据，那每次调用next都是网络请求MongoDB获取数据吗？那岂不是很慢？
+
+`DBCursor#next`最终调用`MongoBatchCursorAdapter#next`：
+
+```java
+public T next() {
+    if (!hasNext()) {
+        throw new NoSuchElementException();
+    }
+
+    if (curBatch == null) {
+        curBatch = batchCursor.next();
+    }
+
+    return getNextInBatch();
+}
+
+private T getNextInBatch() {
+    T nextInBatch = curBatch.get(curPos);
+    if (curPos < curBatch.size() - 1) {
+        curPos++;
+    } else {
+        curBatch = null;
+        curPos = 0;
+    }
+    return nextInBatch;
+}
+```
+
+`MongoBatchCursorAdapter#next`调用`QueryBatchCursor#next`得到结果List，在从中取出一个返回。
+
+```java
+@Override
+public List<T> next() {
+    if (closed) {
+        throw new IllegalStateException("Iterator has been closed");
+    }
+
+    if (!hasNext()) {
+        throw new NoSuchElementException();
+    }
+
+    List<T> retVal = nextBatch;
+    nextBatch = null;
+    return retVal;
+}
+```
+
+`QueryBatchCursor#next`中没有获取逻辑，而是直接返回`nextBatch`，这个`nextBatch`是在`hasNext`时就获取的了：
+
+```java
+@Override
+public boolean hasNext() {
+    if (closed) {
+        throw new IllegalStateException("Cursor has been closed");
+    }
+
+    if (nextBatch != null) {
+        return true;
+    }
+
+    if (limitReached()) {
+        return false;
+    }
+
+    while (serverCursor != null) {
+        getMore(); // 获取数据
+        if (nextBatch != null) {
+            return true;
+        }
+    }
+
+    return false;
+}
+```
+
+结论是在调用`com.mongodb.DBCursor#hasNext`时，MongoDB Driver就已经获取了一批数据（断点看是100条），然后调用`com.mongodb.DBCursor#next`返回这些结果，如果这一批使用完毕，则会再去获取一批。
+
+也就是说Cursor已经帮我们做了按批次获取的优化了，我们也就不需要自己来做这个麻烦事了。
+
+## 多线程
+
 PS. 还做了多线程全表扫描的对比：
 
 ```java
