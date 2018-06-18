@@ -254,3 +254,4 @@ public void close() throws IOException {
 - `FileOutputStream`关闭文件使用`close`系统调用
 - 使用`FileOutputStream#write(byte[], int, int)`写入的长度，len一定不能大于8192！因为在小于8192时，会直接利用栈空间的char数组，如果大于，则需要调用malloc申请内存，并且还需要free释放内存，这是非常消耗时间的。
 - 相比于直接使用系统调用，Java的写入会多一次拷贝！
+- `FileOutputStream#write`是无缓冲的，所以每次调用对对应一次系统调用，可能会有较低的性能，需要结合`BufferedOutputStream`提高性能

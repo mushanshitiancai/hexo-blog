@@ -499,6 +499,7 @@ public void close() throws IOException {
 - `FileInputStream`获取文件可读字节数使用`fstat`系统调用
 - 使用`FileInputStream#read(byte[], int, int)`读取的长度，len一定不能大于8192！因为在小于8192时，会直接利用栈空间的char数组，如果大于，则需要调用malloc申请内存，并且还需要free释放内存，这是非常消耗时间的。
 - 相比于直接使用系统调用，Java的读取文件会多一次拷贝！因为使用read读取文件内容到C空间的数组后，需要拷贝数据到JVM的堆空间的数组中
+- `FileInputStream#read`是无缓冲的，所以每次调用对对应一次系统调用，可能会有较低的性能，需要结合`BufferedInputStream`提高性能
 
 ## 参考资料
 - [JDK源码阅读-FileDescriptor](http://imushan.com/2018/05/29/java/language/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-FileDescriptor/)

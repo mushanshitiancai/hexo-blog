@@ -194,6 +194,7 @@ if (fd != -1) {
 那这个`fid`和`IO_fd_fdID`是哪里来的呢？在`/jdk/src/share/native/java/io/FileInputStream.c`的开头，可以看到这样的代码：
 
 ```c
+// jdk/src/share/native/java/io/FileInputStream.c
 jfieldID fis_fd; /* id for jobject 'fd' in java.io.FileInputStream */
 
 /**************************************************************
@@ -226,6 +227,7 @@ public class FileInputStream extends InputStream
 还有`jdk/src/solaris/native/java/io/FileDescriptor_md.c`开头：
 
 ```c
+// jdk/src/solaris/native/java/io/FileDescriptor_md.c
 /* field id for jint 'fd' in java.io.FileDescriptor */
 jfieldID IO_fd_fdID;
 
