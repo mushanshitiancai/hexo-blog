@@ -65,7 +65,7 @@ FileOutputStream outputStream = new FileOutputStream("/Users/mazhibin/b.txt");
 // 强制文件数据与元数据落盘
 outputStream.getChannel().force(true);
 
-// 强制文件数据落盘，不关系元数据是否落盘
+// 强制文件数据落盘，不关心元数据是否落盘
 outputStream.getChannel().force(false);
 ```
 
