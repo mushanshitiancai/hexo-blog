@@ -31,6 +31,13 @@ CURL命令行使用笔记。
 $ curl -H 'Host: 111.111.11.11'-H 'Accept-Language: es' http://test.com
 ```
 
+curl会默认携带一些Header，比如`Content-Type`，`User-Agent`，`Accept`，如果不想要这些头部，可以：
+
+```
+# 不要携带Content-Type头部
+$ curl -H 'Content-Type:' http://test.com
+```
+
 ## 设置请求体
 
 - `-d, --data <data>` 设置请求体。
