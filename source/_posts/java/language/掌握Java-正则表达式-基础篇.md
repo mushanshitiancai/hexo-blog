@@ -210,7 +210,7 @@ find只会返回是否找到，那我们怎么获得这次匹配到的子串内�
 
 ```
 Pattern pattern = Pattern.compile("\\d{6}((\\d{4})(\\d{2})(\\d{2}))[\\dX]{4}");
-Matcher matcher = pattern.matcher("350104199305015417");
+Matcher matcher = pattern.matcher("150144199305011417");
 
 while(matcher.find()){
     System.out.println(matcher.group());  //整个身份证号
@@ -221,7 +221,7 @@ while(matcher.find()){
 }
 
 //输出
-350104199305015417
+150144199305015417
 19930501
 1993
 05
