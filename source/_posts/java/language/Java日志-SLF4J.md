@@ -40,8 +40,8 @@ import org.slf4j.LoggerFactory;
 public class HelloWorld {      
     public static void main(String[] args) {    
         Logger logger = LoggerFactory.getLogger(HelloWorld.class);
-        String name = mushan;    
-        logger.info("Hello {}", mushan);  
+        String name = "mushan";    
+        logger.info("Hello {}", name);  
     }
 } 
 ```
@@ -55,6 +55,54 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 ```
 
 因为slf4j在classpath中没有找到任何一个slf4j binding，所以会提示一个错误信息，并提示会使用NOP logger，这个logger的行为就是忽略所有输出。
+
+## 绑定日志实现
+
+之前提到了slf4j支持很多日志实现，slf4j包含了一些日志实现的桥接库，称为`SLF4J bindings`，官方提供的binding有：
+
+- `slf4j-log4j12-1.8.0-beta2.jar`
+  log4j1.2.x的binding，应该是使用最广的了。需要引入log4j。
+Binding for log4j version 1.2, a widely used logging framework. You also need to place log4j.jar on your class path.
+- `slf4j-jdk14-1.8.0-beta2.jar`
+  JDK1.4提供的`java.util.logging`的binding
+- `slf4j-nop-1.8.0-beta2.jar`
+  NOP的binding，忽略所有日志
+- `slf4j-simple-1.8.0-beta2.jar`
+  简单日志实现，输出所有日志到System.err，只会输出大于等于INFO级别的日志。小程序可以用这个实现。
+- `slf4j-jcl-1.8.0-beta2.jar`
+  Jakarta Commons Logging日志库的binding，这个binding会代理所有的日志操作到JCL。JCL也是一个日志门面，但是目前已经被slf4j取代了。
+- `logback-classic-1.0.13.jar` (requires logback-core-1.0.13.jar)
+  这是slf4j的官方日志实现（其实log4j，slf4j，logback都是一家出品），logback就是按照slf4j的API直接实现的，所以不需要中间的binding。所以用这个官方实现，中间的损耗也是最小的。
+
+切换日志实现，只要使用不同的binding jar包即可。不同于JCL，slf4j没有使用类加载器，而是在binding中硬绑定具体的实现。所以classpath中同时只能存在一个实现的binding。所以slf4j没有JCL可能的类加载器问题和内存损耗问题。
+
+slf4j1.6之前，如果没有找到binding，slf4j会抛出`NoClassDefFoundError`异常，1.6之后，即使没有binding，slf4j也不会抛出异常，只是提示没有找到binding。所以对于库或者框架的作者来说，一定不要在项目中添加具体的slf4j binding，只要添加slf4j本身即可，让用户有机会选择具体的实现。
+
+slf4j，slf4j binding，日志实现之间的关系见下图：
+
+![](https://www.slf4j.org/images/concrete-bindings.png)
+
+所以官方推荐的使用方法是只要在pom引入具体的slf4j binding依赖即可，slf4j binding会引入slf4j-api和具体的日志实现的依赖，而且版本都不会有问题。手动引入这些当然也是可以，只是要注意这三者的版本兼容性。
+
+我们引入`slf4j-log4j12`依赖：
+
+```xml
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-log4j12</artifactId>
+    <version>1.7.25</version>
+</dependency>
+```
+
+再次运行结果：
+
+```
+log4j:WARN No appenders could be found for logger (com.mushan.blog.Main).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+```
+
+可以看到提示的是log4j没有配置的信息，slf4j已经成功使用log4j实现了。
 
 ## 关于参数
 
@@ -101,33 +149,6 @@ logger.debug("Set \\{} differs from {}", "3");
 ```
 
 这样会输出：`Set {} differs from 3`。
-
-## 绑定日志实现
-
-之前提到了slf4j支持很多日志实现，slf4j包含了一些日志实现的桥接库，称为`SLF4J bindings`，官方提供的binding有：
-
-- `slf4j-log4j12-1.8.0-beta2.jar`
-  log4j1.2.x的binding，应该是使用最广的了。需要引入log4j。
-Binding for log4j version 1.2, a widely used logging framework. You also need to place log4j.jar on your class path.
-- `slf4j-jdk14-1.8.0-beta2.jar`
-  JDK1.4提供的`java.util.logging`的binding
-- `slf4j-nop-1.8.0-beta2.jar`
-  NOP的binding，忽略所有日志
-- `slf4j-simple-1.8.0-beta2.jar`
-  简单日志实现，输出所有日志到System.err，只会输出大于等于INFO级别的日志。小程序可以用这个实现。
-- `slf4j-jcl-1.8.0-beta2.jar`
-  Jakarta Commons Logging日志库的binding，这个binding会代理所有的日志操作到JCL。JCL也是一个日志门面，但是目前已经被slf4j取代了。
-- `logback-classic-1.0.13.jar` (requires logback-core-1.0.13.jar)
-  这是slf4j的官方日志实现（其实log4j，slf4j，logback都是一家出品），logback就是按照slf4j的API直接实现的，所以不需要中间的binding。所以用这个官方实现，中间的损耗也是最小的。
-
-切换日志实现，只要使用不同的binding jar包即可。不同于JCL，slf4j没有使用类加载器，而是在binding中硬绑定具体的实现。所以classpath中同时只能存在一个实现的binding。所以slf4j没有JCL可能的类加载器问题和内存损耗问题。
-
-slf4j1.6之前，如果没有找到binding，slf4j会抛出`NoClassDefFoundError`异常，1.6之后，即使没有binding，slf4j也不会抛出异常，只是提示没有找到binding。所以对于库或者框架的作者来说，一定不要在项目中添加具体的slf4j binding，只要添加slf4j本身即可，让用户有机会选择具体的实现。
-
-slf4j，slf4j binding，日志实现之间的关系见下图：
-
-![](https://www.slf4j.org/images/concrete-bindings.png)
-
 
 ## SLF4J源码分析
 
