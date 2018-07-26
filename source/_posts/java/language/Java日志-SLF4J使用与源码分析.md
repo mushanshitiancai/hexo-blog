@@ -1,5 +1,5 @@
 ---
-title: Java日志-SLF4J
+title: Java日志-SLF4J使用与源码分析
 date: 2018-07-22 21:22:13
 categories: [Java,掌握Java]
 tags: [java]
