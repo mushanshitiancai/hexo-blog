@@ -242,6 +242,5 @@ public int read(ByteBuffer dst) throws IOException {
 在JavaIO时期，人们为了中断IO操作想了不少方法，核心操作就是关闭流，促使IO操作抛出异常，达到中断IO的效果。NIO中，将这个操作植入了`java.lang.Thread#interrupt`方法，免去用户自己编码特定代码的麻烦。使IO操作可以像其他可中断方法一样，在中断时抛出`ClosedByInterruptException`异常，业务程序捕获该异常即可对IO中断做出响应。
 
 ## 参考资料
-
 - [java - What does JavaLangAccess.blockedOn(Thread t, Interruptible b) do? - Stack Overflow](https://stackoverflow.com/questions/8544891/what-does-javalangaccess-blockedonthread-t-interruptible-b-do)
 - [Java NIO 那些躲在角落的细节](https://www.oschina.net/question/138146_26027)
