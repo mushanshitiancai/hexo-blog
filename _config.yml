@@ -70,5 +70,5 @@ theme: maupassant
 deploy:
   type: git
   repo: git@47.98.118.57:hexo.git
-    
+
 rss: /atom.xml #rss地址
