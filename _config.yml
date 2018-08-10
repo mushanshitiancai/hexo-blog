@@ -69,6 +69,6 @@ theme: maupassant
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:mushanshitiancai/mushanshitiancai.github.io.git
+  repo: git@47.98.118.57:hexo.git
     
 rss: /atom.xml #rss地址
